@@ -19,7 +19,9 @@ function Countdown() {
   const left = useCountdown();
 
   if (left.past) {
-    return <p className="font-serif text-2xl italic text-inkSoft">{t(jubilee.done)}</p>;
+    return (
+      <p className="gd-lining-nums font-serif text-2xl italic text-inkSoft">{t(jubilee.done)}</p>
+    );
   }
 
   const cells = [
@@ -57,7 +59,7 @@ export function Hero() {
 
             <h1 className="mt-6 font-display text-[clamp(40px,6.8vw,86px)] font-extrabold uppercase leading-[0.94] tracking-[-0.025em] text-inkSoft">
               {t(hero.titleTop)}{" "}
-              <span className="font-serif text-[1.06em] font-medium normal-case italic text-accentRose">
+              <span className="gd-lining-nums font-serif text-[1.06em] font-medium normal-case italic text-accentRose">
                 {t(hero.titleBig)}
               </span>
               <Dot />

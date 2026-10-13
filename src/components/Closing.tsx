@@ -235,7 +235,7 @@ export function Footer() {
         </div>
 
         <div className="mt-14 overflow-hidden border-t border-ink/20 pt-6">
-          <p className="gd-mega uppercase text-inkSoft">
+          <p className="gd-lining-nums gd-mega uppercase text-inkSoft">
             {t(site.short)}
             <span className="text-accentRose">.</span>
           </p>

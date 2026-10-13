@@ -338,6 +338,19 @@ h1, h2, h3, h4 {
     color: hsl(var(--gd-ink-faint));
   }
 
+  /* ── Cifras de caja alta ──
+     Cormorant Garamond trae cifras elzevirianas por defecto: van a la altura
+     de la x y descienden por debajo de la línea base. Sueltas dentro de un
+     párrafo son correctas —es lo que hace un Garamond de imprenta—, pero
+     cuando el numeral comparte línea con mayúsculas el desajuste canta: en la
+     portada el "500" medía 39 px de alto frente a los 59 px de "Años" y
+     colgaba 26 px por debajo de su línea base. Donde un número va junto a
+     texto, cifras de caja alta. */
+  .gd-lining-nums {
+    font-variant-numeric: lining-nums;
+    font-feature-settings: "lnum" 1;
+  }
+
   /* ── §3 Terminating accent dot — one per headline ── */
   .gd-dot { color: hsl(var(--gd-accent)); }
 
