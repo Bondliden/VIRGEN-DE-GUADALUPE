@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   BookOpen,
   Church,
@@ -16,8 +16,9 @@ import type { LucideIcon } from "lucide-react";
 import { useLang } from "@/lib/lang";
 import { site, links, cameras } from "@/data/links";
 import { pilgrimageSection, pilgrimages, type IconKey } from "@/data/pilgrimages";
-import { Container, Coord, Dot, Eyebrow, SectionRule } from "@/components/Chrome";
-import { VirginPlate } from "@/components/VirginPlate";
+import { Container, Coord, Dot, Eyebrow } from "@/components/Chrome";
+import { VideoHero } from "@/components/VideoHero";
+import { VirginSacredDisplay } from "@/components/VirginSacredDisplay";
 
 /* ─────────────────────────────────────────────
    Section I — Peregrinaciones
@@ -43,28 +44,34 @@ export function Pilgrimages() {
   const { unlocked, unlock } = usePilgrimAccess();
 
   return (
-    <section id="peregrinaciones" className="py-16 sm:py-24" data-od-id="peregrinaciones">
-      <Container>
-        <SectionRule roman="I" label={t(pilgrimageSection.eyebrow)} page="002 / 005" />
+    <>
+      <VideoHero
+        id="peregrinaciones-hero"
+        roman="I"
+        eyebrow={pilgrimageSection.eyebrow}
+        titleMain={pilgrimageSection.title}
+        titleItalic={{ es: "Caminar con Fe al Tepeyac", en: "Walking in Faith to Tepeyac" }}
+        subtitle={pilgrimageSection.intro}
+        videoSrc="https://videos.pexels.com/video-files/3209828/3209828-hd_1920_1080_25fps.mp4"
+        posterSrc="/images/guadalupe/basilica-air.jpg"
+        pageOf="002 / 006"
+        badge={{ es: "Más de 12 Millones de Almas", en: "Over 12 Million Pilgrims" }}
+        ctaPrimary={{ label: { es: "Ver la Basílica en Vivo", en: "Watch Basilica Live" }, href: "#basilica-en-vivo" }}
+        ctaSecondary={{ label: { es: "Explorar las 10 Rutas", en: "Explore 10 Routes" }, href: "#rutas-peregrinas" }}
+      />
 
-        <div className="mt-8 grid gap-8 md:grid-cols-[1.15fr_0.85fr] md:items-end">
-          <div>
-            <Eyebrow>{t(pilgrimageSection.eyebrow)}</Eyebrow>
-            <h2 className="mt-4 font-display text-[clamp(34px,5.2vw,64px)] font-extrabold uppercase leading-[0.98] tracking-[-0.03em] text-inkSoft">
-              {t(pilgrimageSection.title)}
-              <Dot />
-            </h2>
+      <section id="peregrinaciones" className="py-16 sm:py-24" data-od-id="peregrinaciones">
+        <Container>
+          <div id="basilica-en-vivo" className="grid gap-8 md:grid-cols-[1.15fr_0.85fr] md:items-end">
+            <div>
+              <Eyebrow>{t(pilgrimageSection.eyebrow)}</Eyebrow>
+              <h2 className="mt-4 font-display text-[clamp(34px,5.2vw,64px)] font-extrabold uppercase leading-[0.98] tracking-[-0.03em] text-inkSoft">
+                {t(pilgrimageSection.title)}
+                <Dot />
+              </h2>
+            </div>
+            <p className="text-body text-inkMute">{t(pilgrimageSection.intro)}</p>
           </div>
-          <p className="text-body text-inkMute">{t(pilgrimageSection.intro)}</p>
-        </div>
-
-        <VirginPlate
-          fig="02"
-          caption={{
-            es: "La imagen hacia la que caminan todos los caminos del Tepeyac.",
-            en: "The image every road of Tepeyac walks towards.",
-          }}
-        />
 
         {/* ── Live from the Basilica ── */}
         <div className="mt-12 grid gap-6 border border-ink/20 bg-bone p-4 lg:grid-cols-[1.45fr_0.55fr] lg:p-6">
@@ -129,9 +136,11 @@ export function Pilgrimages() {
           </ul>
         </div>
 
+        {/* ── Cuadro de la Virgen: Altar Mayor del Tepeyac (Meta del Peregrino) ── */}
+        <VirginSacredDisplay variant="sanctuary-altar" />
 
         {/* ── The places ── */}
-        <div className="mt-16 grid gap-px border border-ink/20 bg-ink/20 sm:grid-cols-2">
+        <div id="rutas-peregrinas" className="mt-16 grid gap-px border border-ink/20 bg-ink/20 sm:grid-cols-2">
           {pilgrimages.map((place, index) => {
             const Icon = icons[place.icon];
             const lastOdd =
@@ -267,6 +276,7 @@ export function Pilgrimages() {
         </div>
       </Container>
     </section>
+    </>
   );
 }
 

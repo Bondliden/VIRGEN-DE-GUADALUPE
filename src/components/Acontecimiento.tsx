@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLang } from "@/lib/lang";
 import {
   acontecimientoSection,
@@ -8,8 +8,9 @@ import {
   tilmaSection,
   tilmaSymbols,
 } from "@/data/acontecimiento";
-import { Container, Coord, Dot, Eyebrow, SectionRule } from "@/components/Chrome";
-import { VirginPlate } from "@/components/VirginPlate";
+import { Container, Coord, Dot, Eyebrow } from "@/components/Chrome";
+import { VideoHero } from "@/components/VideoHero";
+import { VirginSacredDisplay } from "@/components/VirginSacredDisplay";
 
 /* Section II — the five panels of the Guadalupan Event.
    §5: tabs are a printed contents list, not a web widget — roman numeral,
@@ -100,28 +101,34 @@ export function Acontecimiento() {
   }, [active]);
 
   return (
-    <section id="acontecimiento" className="py-16 sm:py-24" data-od-id="acontecimiento">
-      <Container>
-        <SectionRule roman="II" label={t(acontecimientoSection.eyebrow)} page="003 / 005" />
+    <>
+      <VideoHero
+        id="acontecimiento-hero"
+        roman="II"
+        eyebrow={acontecimientoSection.eyebrow}
+        titleMain={acontecimientoSection.title}
+        titleItalic={{ es: "Las Apariciones y la Tilma", en: "The Apparitions and the Tilma" }}
+        subtitle={acontecimientoSection.intro}
+        videoSrc="https://videos.pexels.com/video-files/2795400/2795400-hd_1920_1080_25fps.mp4"
+        posterSrc="/images/guadalupe/tepeyac.jpg"
+        pageOf="003 / 006"
+        badge={{ es: "Diciembre de 1531 · Cerro del Tepeyac", en: "December 1531 · Tepeyac Hill" }}
+        ctaPrimary={{ label: { es: "Explorar los Paneles", en: "Explore the Panels" }, href: "#paneles-acontecimiento" }}
+        ctaSecondary={{ label: { es: "El Lienzo Milagroso", en: "The Miraculous Canvas" }, href: "#lienzo-milagroso" }}
+      />
 
-        <div className="mt-8 grid gap-8 md:grid-cols-[1.15fr_0.85fr] md:items-end">
-          <div>
-            <Eyebrow>{t(acontecimientoSection.eyebrow)}</Eyebrow>
-            <h2 className="mt-4 font-display text-[clamp(34px,5.2vw,64px)] font-extrabold uppercase leading-[0.98] tracking-[-0.03em] text-inkSoft">
-              {t(acontecimientoSection.title)}
-              <Dot />
-            </h2>
+      <section id="acontecimiento" className="py-16 sm:py-24" data-od-id="acontecimiento">
+        <Container>
+          <div id="paneles-acontecimiento" className="grid gap-8 md:grid-cols-[1.15fr_0.85fr] md:items-end">
+            <div>
+              <Eyebrow>{t(acontecimientoSection.eyebrow)}</Eyebrow>
+              <h2 className="mt-4 font-display text-[clamp(34px,5.2vw,64px)] font-extrabold uppercase leading-[0.98] tracking-[-0.03em] text-inkSoft">
+                {t(acontecimientoSection.title)}
+                <Dot />
+              </h2>
+            </div>
+            <p className="text-body text-inkMute">{t(acontecimientoSection.intro)}</p>
           </div>
-          <p className="text-body text-inkMute">{t(acontecimientoSection.intro)}</p>
-        </div>
-
-        <VirginPlate
-          fig="03"
-          caption={{
-            es: "La imagen que quedó impresa en el ayate ante el obispo Zumárraga.",
-            en: "The image left on the ayate before Bishop Zumárraga.",
-          }}
-        />
 
         {/* ── Contents list ── */}
         <nav
@@ -355,7 +362,13 @@ export function Acontecimiento() {
         </div>
           ) : null}
         </div>
+
+        {/* ── Cuadro de la Virgen: El Milagro del Ayate ante el Obispo Zumárraga ── */}
+        <div id="lienzo-milagroso">
+          <VirginSacredDisplay variant="miracle-relic" />
+        </div>
       </Container>
     </section>
+    </>
   );
 }

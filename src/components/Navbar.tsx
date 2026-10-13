@@ -78,7 +78,9 @@ export function Navbar() {
       className={[
         "sticky top-0 z-40 transition-transform duration-300",
         hidden && !open ? "-translate-y-full" : "translate-y-0",
-        solid ? "bg-paper/95 shadow-[0_1px_0_0_hsl(var(--gd-ink)/0.14)] backdrop-blur" : "bg-transparent",
+        solid
+          ? "bg-paper/95 shadow-[0_1px_0_0_hsl(var(--gd-ink)/0.14)] backdrop-blur-md"
+          : "bg-paper/85 shadow-sm backdrop-blur-md border-b border-ink/10",
       ].join(" ")}
     >
       <Container className="flex items-center justify-between gap-6 py-3">

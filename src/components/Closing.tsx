@@ -1,11 +1,12 @@
-﻿import { Instagram, Mail, MessageCircle, Youtube } from "lucide-react";
+import { Instagram, Mail, MessageCircle, Youtube } from "lucide-react";
 import { useLang } from "@/lib/lang";
 import { closing } from "@/data/hero";
 import { novena } from "@/data/jubilee";
 import { links, site } from "@/data/links";
 import { pilgrimageSection } from "@/data/pilgrimages";
-import { Container, Coord, Dot, Eyebrow, SectionRule } from "@/components/Chrome";
-import { VirginPlate } from "@/components/VirginPlate";
+import { Container, Coord, Dot, Eyebrow } from "@/components/Chrome";
+import { VideoHero } from "@/components/VideoHero";
+import { VirginSacredDisplay } from "@/components/VirginSacredDisplay";
 
 /* Section V — the closing call to action, and the colophon footer with the
    Atelier Zero mega kicker word and the image licence attribution. */
@@ -14,34 +15,40 @@ export function Closing() {
   const { t } = useLang();
 
   return (
-    <section id="jubileo" className="py-16 sm:py-24" data-od-id="jubileo">
-      <Container>
-        <SectionRule roman="V" label={t(novena.ruleLabel)} page="005 / 005" />
+    <>
+      <VideoHero
+        id="jubileo-hero"
+        roman="V"
+        eyebrow={novena.eyebrow}
+        titleMain={novena.title}
+        titleItalic={{ es: "Hacia el Quinto Centenario", en: "Towards the Fifth Centenary" }}
+        subtitle={novena.lead}
+        videoSrc="https://videos.pexels.com/video-files/3129671/3129671-hd_1920_1080_30fps.mp4"
+        posterSrc="/images/guadalupe/tilma-hero.jpg"
+        pageOf="006 / 006"
+        badge={{ es: "1531 · Jubileo Guadalupano · 2031", en: "1531 · Guadalupan Jubilee · 2031" }}
+        ctaPrimary={{ label: { es: "Las 5 Líneas de Acción", en: "The 5 Lines of Action" }, href: "#lineas-de-accion" }}
+        ctaSecondary={{ label: { es: "Coronación Final", en: "Final Coronation" }, href: "#coronacion-jubileo" }}
+      />
 
-        {/* ── La novena de años ── */}
-        <div className="mt-10 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
-          <div>
-            <Eyebrow>{t(novena.eyebrow)}</Eyebrow>
-            <h2 className="mt-5 font-display text-[clamp(34px,5.2vw,64px)] font-extrabold uppercase leading-[0.98] tracking-[-0.03em] text-inkSoft">
-              {t(novena.title)}
-              <Dot />
-            </h2>
-            <p className="mt-4 font-display text-[clamp(24px,3vw,38px)] font-extrabold tracking-[0.04em] text-inkFaint">
-              {novena.years}
+      <section id="jubileo" className="py-16 sm:py-24" data-od-id="jubileo">
+        <Container>
+          {/* ── La novena de años ── */}
+          <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+            <div>
+              <Eyebrow>{t(novena.eyebrow)}</Eyebrow>
+              <h2 className="mt-5 font-display text-[clamp(34px,5.2vw,64px)] font-extrabold uppercase leading-[0.98] tracking-[-0.03em] text-inkSoft">
+                {t(novena.title)}
+                <Dot />
+              </h2>
+              <p className="mt-4 font-display text-[clamp(24px,3vw,38px)] font-extrabold tracking-[0.04em] text-inkFaint">
+                {novena.years}
+              </p>
+            </div>
+            <p className="font-serif text-xl italic leading-relaxed text-inkSoft">
+              {t(novena.lead)}
             </p>
           </div>
-          <p className="font-serif text-xl italic leading-relaxed text-inkSoft">
-            {t(novena.lead)}
-          </p>
-        </div>
-
-        <VirginPlate
-          fig="06"
-          caption={{
-            es: "Quinientos años de esta imagen: hacia el Jubileo de 2031.",
-            en: "Five hundred years of this image: towards the Jubilee of 2031.",
-          }}
-        />
 
         {/* ── Las cinco líneas de acción ── */}
         <div className="mt-12">
@@ -105,8 +112,14 @@ export function Closing() {
             <Coord className="mt-2 block uppercase">{t(pilgrimageSection.multiplier.lead)}</Coord>
           </div>
         </div>
+
+        {/* ── Cuadro de la Virgen: Coronación Monumental del Jubileo 2031 ── */}
+        <div id="coronacion-jubileo">
+          <VirginSacredDisplay variant="jubilee-climax" />
+        </div>
       </Container>
     </section>
+    </>
   );
 }
 

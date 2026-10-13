@@ -121,9 +121,9 @@ export function Coord({
 }
 
 /** §3 Terminating accent dot — one per display headline, never more. */
-export function Dot() {
+export function Dot({ className = "" }: { className?: string } = {}) {
   return (
-    <span className="gd-dot" aria-hidden>
+    <span className={`gd-dot ${className}`} aria-hidden>
       .
     </span>
   );

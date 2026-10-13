@@ -1,8 +1,9 @@
-﻿import { ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { useLang } from "@/lib/lang";
 import { rosaryModes, voices, voicesSection } from "@/data/voices";
-import { Container, Coord, Dot, Eyebrow, SectionRule } from "@/components/Chrome";
-import { VirginPlate } from "@/components/VirginPlate";
+import { Container, Coord, Dot, Eyebrow } from "@/components/Chrome";
+import { VideoHero } from "@/components/VideoHero";
+import { VirginSacredDisplay } from "@/components/VirginSacredDisplay";
 
 /* Section III — voices, testimonies and the Guadalupan rosary. */
 
@@ -11,28 +12,34 @@ export function Voices() {
   const [featured, ...rest] = voices;
 
   return (
-    <section id="voces" className="py-16 sm:py-24" data-od-id="voces">
-      <Container>
-        <SectionRule roman="III" label={t(voicesSection.eyebrow)} page="004 / 005" />
+    <>
+      <VideoHero
+        id="voces-hero"
+        roman="III"
+        eyebrow={voicesSection.eyebrow}
+        titleMain={voicesSection.title}
+        titleItalic={{ es: "y el Santo Rosario Guadalupano", en: "and the Holy Guadalupan Rosary" }}
+        subtitle={voicesSection.intro}
+        videoSrc="https://videos.pexels.com/video-files/5198164/5198164-hd_1920_1080_25fps.mp4"
+        posterSrc="/images/guadalupe/tilma-detail.jpg"
+        pageOf="004 / 006"
+        badge={{ es: "Oración Continua y Testimonios", en: "Perpetual Prayer & Testimonies" }}
+        ctaPrimary={{ label: { es: "Rezar el Santo Rosario", en: "Pray the Holy Rosary" }, href: "#rosario-guadalupano" }}
+        ctaSecondary={{ label: { es: "Ofrenda de Veladoras", en: "Light a Candle" }, href: "#oratorio-veladoras" }}
+      />
 
-        <div className="mt-8 grid gap-8 md:grid-cols-[1.15fr_0.85fr] md:items-end">
-          <div>
-            <Eyebrow>{t(voicesSection.eyebrow)}</Eyebrow>
-            <h2 className="mt-4 font-display text-[clamp(34px,5.2vw,64px)] font-extrabold uppercase leading-[0.98] tracking-[-0.03em] text-inkSoft">
-              {t(voicesSection.title)}
-              <Dot />
-            </h2>
+      <section id="voces" className="py-16 sm:py-24" data-od-id="voces">
+        <Container>
+          <div className="grid gap-8 md:grid-cols-[1.15fr_0.85fr] md:items-end">
+            <div>
+              <Eyebrow>{t(voicesSection.eyebrow)}</Eyebrow>
+              <h2 className="mt-4 font-display text-[clamp(34px,5.2vw,64px)] font-extrabold uppercase leading-[0.98] tracking-[-0.03em] text-inkSoft">
+                {t(voicesSection.title)}
+                <Dot />
+              </h2>
+            </div>
+            <p className="text-body text-inkMute">{t(voicesSection.intro)}</p>
           </div>
-          <p className="text-body text-inkMute">{t(voicesSection.intro)}</p>
-        </div>
-
-        <VirginPlate
-          fig="04"
-          caption={{
-            es: "La imagen a la que se dirigen las voces de este sitio.",
-            en: "The image these voices of the site speak to.",
-          }}
-        />
 
         {/* ── Featured testimony ── */}
         <div className="mt-12 grid gap-8 border border-ink/20 bg-bone p-4 lg:grid-cols-[1.3fr_0.7fr] lg:p-6">
@@ -100,8 +107,13 @@ export function Voices() {
           ))}
         </div>
 
+        {/* ── Cuadro de la Virgen: Capilla de Oración y Veladoras Votivas ── */}
+        <div id="oratorio-veladoras">
+          <VirginSacredDisplay variant="devotional-chapel" />
+        </div>
+
         {/* ── The Guadalupan rosary ── */}
-        <div className="mt-20 border-t border-ink/20 pt-10">
+        <div id="rosario-guadalupano" className="mt-20 border-t border-ink/20 pt-10">
           <div className="grid gap-6 md:grid-cols-[0.9fr_1.1fr] md:items-end">
             <div>
               <Eyebrow>{t(voicesSection.rosaryEyebrow)}</Eyebrow>
@@ -144,5 +156,6 @@ export function Voices() {
         </div>
       </Container>
     </section>
+    </>
   );
 }

@@ -1,10 +1,11 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import { Heart, Mail } from "lucide-react";
 import { useLang } from "@/lib/lang";
 import { shopCategories, shopSection } from "@/data/shop";
 import { site } from "@/data/links";
-import { Container, Coord, Dot, Eyebrow, SectionRule } from "@/components/Chrome";
-import { VirginPlate } from "@/components/VirginPlate";
+import { Container, Coord, Dot, Eyebrow } from "@/components/Chrome";
+import { VideoHero } from "@/components/VideoHero";
+import { VirginSacredDisplay } from "@/components/VirginSacredDisplay";
 
 /* Section IV — the shop.
    Nothing is advertised as purchasable: the section is an honest preview
@@ -71,36 +72,47 @@ export function Shop() {
   const { t } = useLang();
 
   return (
-    <section id="tienda" className="py-16 sm:py-24" data-od-id="tienda">
-      <Container>
-        <SectionRule roman="IV" label={t(shopSection.eyebrow)} page="005 / 005" />
+    <>
+      <VideoHero
+        id="tienda-hero"
+        roman="IV"
+        eyebrow={shopSection.eyebrow}
+        titleMain={shopSection.title}
+        titleItalic={{ es: "y Arte Sacro Guadalupano", en: "and Sacred Guadalupan Art" }}
+        subtitle={shopSection.intro}
+        videoSrc="https://videos.pexels.com/video-files/3770033/3770033-hd_1920_1080_25fps.mp4"
+        posterSrc="/images/guadalupe/tilma-plate.jpg"
+        pageOf="005 / 006"
+        badge={shopSection.badge}
+        ctaPrimary={{ label: { es: "Ver Colección", en: "View Collection" }, href: "#categorias-tienda" }}
+        ctaSecondary={{ label: { es: "Sello de Autenticidad", en: "Authenticity Seal" }, href: "#autenticidad-relicario" }}
+      />
 
-        <div className="mt-8 grid gap-8 md:grid-cols-[1.15fr_0.85fr] md:items-end">
-          <div>
-            <div className="flex flex-wrap items-center gap-3">
-              <Eyebrow>{t(shopSection.eyebrow)}</Eyebrow>
-              <span className="border border-accentRose px-2 py-0.5 text-eyebrow font-semibold uppercase tracking-eyebrow text-accentRose">
-                {t(shopSection.badge)}
-              </span>
+      <section id="tienda" className="py-16 sm:py-24" data-od-id="tienda">
+        <Container>
+          <div className="grid gap-8 md:grid-cols-[1.15fr_0.85fr] md:items-end">
+            <div>
+              <div className="flex flex-wrap items-center gap-3">
+                <Eyebrow>{t(shopSection.eyebrow)}</Eyebrow>
+                <span className="border border-accentRose px-2 py-0.5 text-eyebrow font-semibold uppercase tracking-eyebrow text-accentRose">
+                  {t(shopSection.badge)}
+                </span>
+              </div>
+              <h2 className="mt-4 font-display text-[clamp(34px,5.2vw,64px)] font-extrabold uppercase leading-[0.98] tracking-[-0.03em] text-inkSoft">
+                {t(shopSection.title)}
+                <Dot />
+              </h2>
             </div>
-            <h2 className="mt-4 font-display text-[clamp(34px,5.2vw,64px)] font-extrabold uppercase leading-[0.98] tracking-[-0.03em] text-inkSoft">
-              {t(shopSection.title)}
-              <Dot />
-            </h2>
+            <p className="text-body text-inkMute">{t(shopSection.intro)}</p>
           </div>
-          <p className="text-body text-inkMute">{t(shopSection.intro)}</p>
-        </div>
 
-        <VirginPlate
-          fig="05"
-          caption={{
-            es: "La imagen que da nombre a este santuario digital.",
-            en: "The image this digital shrine takes its name from.",
-          }}
-        />
+          {/* ── Cuadro de la Virgen: Placa y Certificado de Fidelidad Sacra ── */}
+          <div id="autenticidad-relicario">
+            <VirginSacredDisplay variant="gallery-relic" />
+          </div>
 
-        {/* ── Categories ── */}
-        <div className="mt-12 grid gap-px bg-ink/20 lg:grid-cols-3">
+          {/* ── Categories ── */}
+          <div id="categorias-tienda" className="mt-12 grid gap-px bg-ink/20 lg:grid-cols-3">
           {shopCategories.map((category) => (
             <article key={category.id} className="flex flex-col bg-bone p-6">
               <div className="flex items-baseline gap-3">
@@ -170,5 +182,6 @@ export function Shop() {
         </div>
       </Container>
     </section>
+    </>
   );
 }
