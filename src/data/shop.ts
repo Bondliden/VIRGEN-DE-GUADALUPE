@@ -41,7 +41,13 @@ export const shopSection = {
     en: "If you want to sustain this work — the site, the pilgrimages and the Guadalupan material we give away — your donation goes further than any purchase.",
   } satisfies Bi,
   donateCta: { es: "Hacer un donativo", en: "Make a donation" } satisfies Bi,
-  writeCta: { es: "Escribirnos", en: "Write to us" } satisfies Bi,
+  writeCta: { es: "Escríbenos", en: "Write to us" } satisfies Bi,
+  writeEmailLabel: { es: "Email", en: "Email" } satisfies Bi,
+  writeSubjectLabel: { es: "Concepto", en: "Subject" } satisfies Bi,
+  writeSubject: {
+    es: "Donativo · Guadalupe 500 Años",
+    en: "Donation · Guadalupe 500 Years",
+  } satisfies Bi,
 };
 
 export type ShopCategory = {

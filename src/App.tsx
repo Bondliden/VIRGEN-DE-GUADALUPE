@@ -9,7 +9,6 @@ import { Acontecimiento } from "@/components/Acontecimiento";
 import { Voices } from "@/components/Voices";
 import { Shop } from "@/components/Shop";
 import { Closing, Footer } from "@/components/Closing";
-import { BackgroundMusic } from "@/components/Audio";
 import { ChatBox } from "@/components/ChatBox";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { anchorFromHash, routes, useRoute } from "@/lib/useRoute";
@@ -69,14 +68,15 @@ function Pages() {
 
       <Footer />
 
-      {/* Floating dock: the assistant sits above the direct WhatsApp button,
-          so the panel grows upward without ever covering the CTA. */}
+      {/* Floating dock, one per corner: WhatsApp as a round button bottom
+          left, the assistant bottom right. Small enough not to cover the
+          content; the music moved into the header, under the brand. */}
+      <div className="pointer-events-none fixed bottom-5 left-5 z-40 print:hidden">
+        <WhatsAppButton className="flex h-14 w-14" />
+      </div>
       <div className="pointer-events-none fixed bottom-5 right-5 z-40 flex flex-col items-end gap-3 print:hidden">
         <ChatBox />
-        <WhatsAppButton />
       </div>
-
-      <BackgroundMusic />
     </>
   );
 }

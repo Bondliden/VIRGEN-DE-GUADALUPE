@@ -52,8 +52,8 @@ export function Pilgrimages() {
         titleMain={pilgrimageSection.title}
         titleItalic={{ es: "Caminar con Fe al Tepeyac", en: "Walking in Faith to Tepeyac" }}
         subtitle={pilgrimageSection.intro}
-        videoSrc="https://videos.pexels.com/video-files/3209828/3209828-hd_1920_1080_25fps.mp4"
-        posterSrc="/images/guadalupe/basilica-air.jpg"
+        videoSrc="/videos/heroes/peregrinaciones.mp4"
+        posterSrc="/videos/heroes/peregrinaciones.jpg"
         pageOf="002 / 006"
         badge={{ es: "Más de 12 Millones de Almas", en: "Over 12 Million Pilgrims" }}
         ctaPrimary={{ label: { es: "Ver la Basílica en Vivo", en: "Watch Basilica Live" }, href: "#basilica-en-vivo" }}
@@ -95,42 +95,37 @@ export function Pilgrimages() {
                 {t(pilgrimageSection.liveNote)}
               </p>
             </div>
-            <div className="mt-6">
-              <Coord className="block uppercase">{t(pilgrimageSection.liveFallback)}</Coord>
-              <a
-                href={links.basilicaLive}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="mt-3 inline-block border border-ink/30 px-4 py-2 text-eyebrow font-semibold uppercase tracking-eyebrow text-inkSoft transition-colors hover:border-ink hover:bg-ink/5"
-              >
-                {t(pilgrimageSection.liveOpen)}
-              </a>
-            </div>
           </div>
         </div>
 
-        {/* ── Other cameras around the Tepeyac ── */}
+        {/* ── Other live cameras around the Tepeyac ──
+            Letra de lectura, no de anotación: quien entra aquí busca una
+            cámara, y el rótulo de 10px no se distinguía. A la izquierda y sin
+            justificar: en una columna tan estrecha la justificación abría
+            huecos entre palabras. */}
         <div className="mt-4 grid gap-6 border border-ink/20 bg-bone p-5 lg:grid-cols-[0.55fr_1.45fr] lg:p-6">
           <div>
-            <Coord className="block uppercase">
+            <Eyebrow>{t({ es: "En vivo", en: "Live" })}</Eyebrow>
+            <h3 className="mt-3 font-serif text-2xl italic text-inkSoft">
               {t(pilgrimageSection.camerasTitle)}
-            </Coord>
-            <p className="mt-3 text-[14px] leading-relaxed text-inkMute">
+            </h3>
+            <p className="mt-3 text-left text-body text-inkMute">
               {t(pilgrimageSection.camerasNote)}
             </p>
           </div>
           <ul className="grid gap-px self-start border border-ink/20 bg-ink/20 sm:grid-cols-3">
             {cameras.map((camera) => (
-              <li key={camera.href} className="bg-bone p-4">
+              <li key={camera.href} className="bg-bone p-5 text-left">
                 <a
                   href={camera.href}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="gd-link-underline text-[14px] font-semibold text-inkSoft transition-colors hover:text-ink"
+                  className="gd-link-underline text-lg font-semibold leading-snug text-inkSoft transition-colors hover:text-ink sm:text-xl"
                 >
                   {t(camera.label)}
+                  <span aria-hidden> ↗</span>
                 </a>
-                <Coord className="mt-2 block">{camera.source}</Coord>
+                <span className="mt-2 block text-[15px] text-inkMute">{camera.source}</span>
               </li>
             ))}
           </ul>

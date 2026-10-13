@@ -47,16 +47,11 @@ export const pilgrimageSection = {
     es: "Asómate ahora mismo a la explanada de la Basílica de Guadalupe en la Ciudad de México, con la imagen de Nuestra Virgencita.",
     en: "Look right now at the esplanade of the Basilica of Guadalupe in Mexico City, with the image of Our Lady.",
   } satisfies Bi,
-  liveFallback: {
-    es: "Si la emisión no carga aquí, ábrela en YouTube.",
-    en: "If the broadcast does not load here, open it on YouTube.",
-  } satisfies Bi,
-  liveOpen: { es: "Ver en YouTube", en: "Watch on YouTube" } satisfies Bi,
   liveError: {
     es: "La emisión no está disponible ahora mismo.",
     en: "The broadcast is not available right now.",
   } satisfies Bi,
-  camerasTitle: { es: "Otras cámaras", en: "Other cameras" } satisfies Bi,
+  camerasTitle: { es: "Otras cámaras en vivo", en: "Other live cameras" } satisfies Bi,
   camerasNote: {
     es: "El santuario enciende su cámara según su horario: Laudes a las 8:30, Misa Coral del Cabildo a las 9:00, Rosario a las 17:00, Novenario a las 18:00, hora de la Ciudad de México. La de la fachada no descansa y mira al atrio a cualquier hora.",
     en: "The sanctuary switches its camera on according to its schedule: Lauds at 8:30, the Chapter's choral Mass at 9:00, the Rosary at 17:00, the Novena at 18:00, Mexico City time. The one on the façade never rests and watches the atrium at any hour.",

@@ -21,7 +21,8 @@ function WhatsAppGlyph({ className = "" }: { className?: string }) {
   );
 }
 
-export function WhatsAppButton() {
+/** Round icon button, floating bottom left. `className` sets its size. */
+export function WhatsAppButton({ className = "flex h-14 w-14" }: { className?: string }) {
   const { t } = useLang();
 
   if (!site.whatsapp) return null;
@@ -34,11 +35,11 @@ export function WhatsAppButton() {
       href={href}
       target="_blank"
       rel="noreferrer noopener"
-      className="pointer-events-auto flex items-center gap-2 bg-[#1faa59] px-4 py-3 text-eyebrow font-semibold uppercase tracking-eyebrow text-white shadow-[0_16px_36px_-18px_rgba(31,170,89,0.85)] transition-transform hover:scale-[1.03]"
-      aria-label={t({ es: "Escribir por WhatsApp", en: "Message us on WhatsApp" })}
+      className={`${className} pointer-events-auto shrink-0 items-center justify-center rounded-full bg-[#1faa59] text-white shadow-[0_16px_36px_-18px_rgba(31,170,89,0.85)] transition-transform hover:scale-[1.06]`}
+      aria-label={t({ es: "Hablar por WhatsApp", en: "Chat on WhatsApp" })}
+      title={t({ es: "Hablar por WhatsApp", en: "Chat on WhatsApp" })}
     >
-      <WhatsAppGlyph className="h-4 w-4" />
-      <span>{t({ es: "Hablar por WhatsApp", en: "Chat on WhatsApp" })}</span>
+      <WhatsAppGlyph className="h-6 w-6" />
     </a>
   );
 }

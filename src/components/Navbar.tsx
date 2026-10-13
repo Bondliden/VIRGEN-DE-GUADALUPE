@@ -3,6 +3,7 @@ import { Menu, X } from "lucide-react";
 import { useLang } from "@/lib/lang";
 import { site } from "@/data/links";
 import { Container } from "@/components/Chrome";
+import { BackgroundMusic } from "@/components/Audio";
 import { navRoutes, useRoute, type RouteId } from "@/lib/useRoute";
 
 /* Atelier Zero §4–5: sticky nav carrying the brand mark, up to five nav
@@ -83,25 +84,35 @@ export function Navbar() {
           : "bg-paper/85 shadow-sm backdrop-blur-md border-b border-ink/10",
       ].join(" ")}
     >
-      <Container className="flex items-center justify-between gap-6 py-3">
-        <a
-          href="#portada"
-          onClick={goTo("portada")}
-          className="group flex items-center gap-3 text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-accentRose"
-        >
-          <TilmaMark className="h-8 w-8 text-accentRose transition-transform duration-500 group-hover:rotate-90 sm:h-10 sm:w-10" />
-          <span className="flex flex-col leading-none">
-            <span className="font-display text-[clamp(20px,2.6vw,32px)] font-extrabold uppercase leading-[1.02] tracking-[0.04em]">
+      <Container className="flex items-center justify-between gap-4 py-3 xl:gap-6">
+        {/* La marca, y justo debajo de «Años» (donde iban las coordenadas)
+            la música del manto, que antes flotaba sobre el contenido. */}
+        <div className="flex items-center gap-3 xl:gap-4">
+          <a
+            href="#portada"
+            onClick={goTo("portada")}
+            tabIndex={-1}
+            aria-hidden
+            className="group shrink-0"
+          >
+            <TilmaMark className="h-8 w-8 text-accentRose transition-transform duration-500 group-hover:rotate-90 sm:h-10 sm:w-10" />
+          </a>
+          <span className="flex flex-col items-start leading-none">
+            <a
+              href="#portada"
+              onClick={goTo("portada")}
+              className="font-display text-[clamp(20px,2.1vw,32px)] font-extrabold uppercase leading-[1.02] tracking-[0.04em] text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-accentRose"
+            >
               {t(site.short)}
-            </span>
-            <span className="gd-coord mt-1.5 hidden sm:block">
-              19.4845° N · 99.1177° W
+            </a>
+            <span className="mt-1.5">
+              <BackgroundMusic />
             </span>
           </span>
-        </a>
+        </div>
 
         <nav
-          className="hidden items-center gap-5 lg:flex xl:gap-9"
+          className="hidden items-center gap-3.5 lg:flex xl:gap-7"
           aria-label={t({ es: "Principal", en: "Primary" })}
         >
           {navItems.map((item) => {
@@ -113,7 +124,7 @@ export function Navbar() {
                 onClick={goTo(item.id)}
                 aria-current={current ? "page" : undefined}
                 className={[
-                  "gd-link-underline font-display text-[clamp(13px,1.05vw,17px)] font-extrabold uppercase leading-none tracking-[0.08em] transition-colors hover:text-ink",
+                  "gd-link-underline font-display text-[clamp(13px,1.05vw,15px)] font-extrabold uppercase leading-none tracking-[0.08em] transition-colors hover:text-ink",
                   current ? "text-ink" : "text-inkMute",
                 ].join(" ")}
               >
@@ -128,13 +139,15 @@ export function Navbar() {
             type="button"
             onClick={toggle}
             aria-label={t({ es: "Cambiar idioma", en: "Switch language" })}
-            className="border border-ink/25 px-2.5 py-1.5 text-[13px] font-bold uppercase tracking-[0.08em] text-inkMute transition-colors hover:border-accentRose hover:text-accentRose"
+            className="whitespace-nowrap border border-ink/25 px-2.5 py-1.5 text-[13px] font-bold uppercase tracking-[0.08em] text-inkMute transition-colors hover:border-accentRose hover:text-accentRose"
           >
             {lang === "es" ? "ES / EN" : "EN / ES"}
           </button>
+          {/* Entre 1024 y 1280 px la barra no cabe entera: este botón se
+              oculta ahí porque repite «Peregrinaciones» del menú. */}
           <a
             href="#peregrinar"
-            className="hidden bg-accentRose px-4 py-2.5 font-display text-[13px] font-extrabold uppercase tracking-[0.08em] text-[hsl(var(--gd-accent-on))] transition-colors hover:bg-accentRose/85 sm:inline-block"
+            className="hidden whitespace-nowrap bg-accentRose px-4 py-2.5 font-display text-[13px] font-extrabold uppercase tracking-[0.08em] text-[hsl(var(--gd-accent-on))] transition-colors hover:bg-accentRose/85 sm:inline-block lg:hidden xl:inline-block"
           >
             {t({ es: "Peregrinar", en: "Go on pilgrimage" })}
           </a>

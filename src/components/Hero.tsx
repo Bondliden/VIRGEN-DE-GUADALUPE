@@ -54,9 +54,8 @@ export function Hero() {
         titleMain={hero.titleTop}
         titleItalic={hero.titleBig}
         subtitle={hero.subtitle}
-        quote={nicanQuote}
-        videoSrc="https://videos.pexels.com/video-files/855019/855019-hd_1920_1080_30fps.mp4"
-        posterSrc="/images/guadalupe/basilica.jpg"
+        videoSrc="/videos/heroes/portada.mp4"
+        posterSrc="/videos/heroes/portada.jpg"
         pageOf="001 / 006"
         badge={{ es: "Jubileo Guadalupano 2031", en: "Guadalupan Jubilee 2031" }}
         ctaPrimary={{ label: jubilee.cta, href: "#peregrinaciones" }}

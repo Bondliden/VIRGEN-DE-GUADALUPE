@@ -80,8 +80,8 @@ export function Shop() {
         titleMain={shopSection.title}
         titleItalic={{ es: "y Arte Sacro Guadalupano", en: "and Sacred Guadalupan Art" }}
         subtitle={shopSection.intro}
-        videoSrc="https://videos.pexels.com/video-files/3770033/3770033-hd_1920_1080_25fps.mp4"
-        posterSrc="/images/guadalupe/tilma-plate.jpg"
+        videoSrc="/videos/heroes/tienda.mp4"
+        posterSrc="/videos/heroes/tienda.jpg"
         pageOf="005 / 006"
         badge={shopSection.badge}
         ctaPrimary={{ label: { es: "Ver Colección", en: "View Collection" }, href: "#categorias-tienda" }}
@@ -160,23 +160,33 @@ export function Shop() {
             <p className="mt-3 text-[15px] leading-relaxed text-inkMute">
               {t(shopSection.donateBody)}
             </p>
-            <div className="mt-5 flex flex-wrap gap-3">
-              {site.donateUrl ? (
-                <a
-                  href={site.donateUrl}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="border border-ink/30 px-5 py-2.5 text-eyebrow font-semibold uppercase tracking-eyebrow text-inkSoft transition-colors hover:border-ink hover:bg-ink/5"
-                >
-                  {t(shopSection.donateCta)}
-                </a>
-              ) : null}
+            {site.donateUrl ? (
               <a
-                href={`mailto:${site.contactEmail}`}
-                className="border border-ink/30 px-5 py-2.5 text-eyebrow font-semibold uppercase tracking-eyebrow text-inkSoft transition-colors hover:border-ink hover:bg-ink/5"
+                href={site.donateUrl}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="mt-5 inline-block border border-ink/30 px-5 py-2.5 text-eyebrow font-semibold uppercase tracking-eyebrow text-inkSoft transition-colors hover:border-ink hover:bg-ink/5"
               >
-                {t(shopSection.writeCta)}
+                {t(shopSection.donateCta)}
               </a>
+            ) : null}
+            {/* Sin mailto: no abre ningún programa de correo, deja a la
+                vista la dirección y el concepto para escribirlos a mano o
+                copiarlos. */}
+            <div className="mt-5 border border-ink/30 px-5 py-4">
+              <p className="text-left text-eyebrow font-semibold uppercase tracking-eyebrow text-inkSoft">
+                {t(shopSection.writeCta)}
+              </p>
+              <dl className="mt-3 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5 text-[16px]">
+                <dt className="text-inkMute">{t(shopSection.writeEmailLabel)}</dt>
+                <dd className="select-all break-all text-left font-semibold text-inkSoft">
+                  {site.contactEmail}
+                </dd>
+                <dt className="text-inkMute">{t(shopSection.writeSubjectLabel)}</dt>
+                <dd className="select-all text-left font-semibold text-inkSoft">
+                  {t(shopSection.writeSubject)}
+                </dd>
+              </dl>
             </div>
           </div>
         </div>

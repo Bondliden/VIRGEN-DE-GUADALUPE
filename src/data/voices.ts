@@ -31,6 +31,9 @@ export type Voice = {
   body: Bi;
   href: string;
   embed?: string;
+  /** Imagen de la persona, en /public, y su texto alternativo. */
+  photo?: string;
+  photoAlt?: Bi;
 };
 
 export const voices: Voice[] = [
@@ -52,6 +55,11 @@ export const voices: Voice[] = [
     },
     href: links.azucenaTestimony,
     embed: links.azucenaTestimonyEmbed,
+    photo: "/images/azucena/azucena-rezando.jpg",
+    photoAlt: {
+      es: "Azucena Cierco, de rodillas, ofrece un ramo de rosas ante la imagen de Santa María de Guadalupe",
+      en: "Azucena Cierco, kneeling, offers a bouquet of roses before the image of Our Lady of Guadalupe",
+    },
   },
   {
     id: "radio-maria",

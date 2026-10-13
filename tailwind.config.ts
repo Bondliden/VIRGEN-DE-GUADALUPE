@@ -38,6 +38,9 @@ export default {
         inkMute: "hsl(40, 11%, 32%)",
         inkFaint: "hsl(42, 11%, 50%)",
         accentRose: "hsl(351, 47%, 53%)", // single accent slot
+        // El mismo rosa, más hondo, para TEXTO pequeño sobre papel: el
+        // accentRose se queda en 3,6:1 y no llega al AA; este da ~5,9:1.
+        accentRoseInk: "hsl(351, 55%, 38%)",
         mustard: "hsl(45, 68%, 47%)", // jewelry only
         olive: "hsl(82, 22%, 37%)", // quiet third accent
       },

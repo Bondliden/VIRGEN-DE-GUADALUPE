@@ -1,7 +1,24 @@
 import { useEffect, useRef, useState } from "react";
-import { Pause, Play, Volume2, VolumeX, Sparkles } from "lucide-react";
+import { Pause, Play } from "lucide-react";
 import { useLang, type Bi } from "@/lib/lang";
 import { Container, Dot, SectionRule } from "@/components/Chrome";
+
+/* ─────────────────────────────────────────────
+   Héroe con vídeo — uno por página.
+
+   Una franja, no la pantalla entera: entre 440 y 600 px, para que asome el
+   contenido de debajo. El vídeo va a plena luz y un único velo lateral
+   oscurece solo la zona del texto; antes eran cuatro capas apiladas
+   (vídeo al 45 %, brillo 0,85, degradado del 65–100 % y viñeta de hasta el
+   95 %) que dejaban ver un 5–10 % de la imagen. En el móvil el texto ocupa
+   todo el ancho y el velo sube desde abajo.
+
+   Un solo control: pausa, redondo, abajo a la derecha (lo que se mueve
+   solo más de cinco segundos tiene que poder pararse). Sin botón de
+   audio: los vídeos no tienen sonido que aporte y chocaba con la música
+   del manto. Con «reducir movimiento» activado no hay reproducción: se ve
+   la imagen fija.
+   ───────────────────────────────────────────── */
 
 export type VideoHeroProps = {
   id?: string;
@@ -22,6 +39,23 @@ export type VideoHeroProps = {
   ctaSecondary?: { label: Bi | string; href: string };
 };
 
+/* Velo de escritorio: oscuro detrás del texto, transparente a la derecha,
+   y una caída suave abajo para la regla de sección. */
+const SCRIM_WIDE =
+  "linear-gradient(0deg, rgba(8,18,31,0.55) 0%, rgba(8,18,31,0) 32%)," +
+  "linear-gradient(90deg, rgba(8,18,31,0.84) 0%, rgba(8,18,31,0.62) 38%, rgba(8,18,31,0.14) 70%, rgba(8,18,31,0) 100%)";
+
+/* Velo de móvil: el texto va abajo y a todo el ancho. */
+const SCRIM_NARROW =
+  "linear-gradient(0deg, rgba(8,18,31,0.9) 0%, rgba(8,18,31,0.62) 55%, rgba(8,18,31,0.3) 100%)";
+
+function prefersReducedMotion() {
+  return (
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+}
+
 export function VideoHero({
   id,
   roman,
@@ -39,34 +73,25 @@ export function VideoHero({
 }: VideoHeroProps) {
   const { t } = useLang();
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(true);
+  const [reduced] = useState(prefersReducedMotion);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
+  /* El estado del botón sale de los eventos del propio vídeo (onPlay /
+     onPause), no de lo que creemos haber pedido: antes decía «Pausado»
+     mientras el vídeo corría. */
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {
-        // Autoplay may be restricted in some browsers
-        setIsPlaying(false);
-      });
-    }
-  }, [videoSrc]);
+    if (reduced || !videoRef.current) return;
+    videoRef.current.play().catch(() => {
+      /* El navegador puede bloquear el autoplay: queda la imagen fija. */
+    });
+  }, [videoSrc, reduced]);
 
   const togglePlay = () => {
-    if (!videoRef.current) return;
-    if (isPlaying) {
-      videoRef.current.pause();
-      setIsPlaying(false);
-    } else {
-      videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
-    }
-  };
-
-  const toggleMute = () => {
-    if (!videoRef.current) return;
-    const nextMuted = !isMuted;
-    videoRef.current.muted = nextMuted;
-    setIsMuted(nextMuted);
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) video.play().catch(() => {});
+    else video.pause();
   };
 
   const resolveText = (val: Bi | string | undefined): string => {
@@ -77,166 +102,120 @@ export function VideoHero({
   return (
     <header
       id={id}
-      className="relative min-h-[78vh] w-full overflow-hidden border-b border-ink/20 bg-[#08121f] text-bone transition-all duration-700 sm:min-h-[84vh]"
+      className="relative w-full overflow-hidden border-b border-ink/20 bg-[#08121f] text-bone"
       data-od-id={`video-hero-${roman}`}
     >
-      {/* ── Background Video Layer ── */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <video
-          ref={videoRef}
-          src={videoSrc}
-          poster={posterSrc}
-          autoPlay
-          loop
-          muted={isMuted}
-          playsInline
-          onLoadedData={() => setIsLoaded(true)}
-          className={`h-full w-full object-cover transition-opacity duration-1000 ${
-            isLoaded ? "opacity-45 scale-100" : "opacity-25 scale-105"
-          }`}
-          style={{ filter: "brightness(0.85) contrast(1.1) saturate(1.15)" }}
-        />
-
-        {/* Liturgical Marian & Gold atmospheric overlays */}
-        <div
-          className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#08121f] via-[#08121f]/65 to-[#08121f]/80"
-          aria-hidden
-        />
-        <div
-          className="absolute inset-0 pointer-events-none bg-radial-vignette opacity-80"
-          style={{
-            background:
-              "radial-gradient(circle at 50% 40%, rgba(212, 175, 55, 0.08) 0%, rgba(8, 18, 31, 0.7) 70%, rgba(5, 11, 20, 0.95) 100%)",
-          }}
-          aria-hidden
-        />
-        {/* Subtle celestial starlight grid */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-20"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle, rgba(255, 223, 115, 0.4) 1px, transparent 1px)",
-            backgroundSize: "48px 48px",
-          }}
-          aria-hidden
-        />
+      {/* ── Fondo: póster siempre, vídeo encima en cuanto puede ── */}
+      <div className="absolute inset-0 z-0" aria-hidden>
+        <img src={posterSrc} alt="" className="h-full w-full object-cover" />
+        {reduced ? null : (
+          <video
+            ref={videoRef}
+            src={videoSrc}
+            poster={posterSrc}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            onLoadedData={() => setIsLoaded(true)}
+            onPlay={() => setIsPlaying(true)}
+            onPause={() => setIsPlaying(false)}
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
+              isLoaded ? "opacity-100" : "opacity-0"
+            }`}
+          />
+        )}
+        <div className="absolute inset-0 sm:hidden" style={{ background: SCRIM_NARROW }} />
+        <div className="absolute inset-0 hidden sm:block" style={{ background: SCRIM_WIDE }} />
       </div>
 
-      {/* ── Foreground Sacred Typography & Content ── */}
-      <div className="relative z-10 flex min-h-[78vh] flex-col justify-between pb-10 pt-6 sm:min-h-[84vh] sm:pb-14">
+      {/* ── Texto ── */}
+      <div className="relative z-10 flex min-h-[560px] flex-col pb-8 pt-6 sm:min-h-[clamp(440px,62vh,600px)] sm:pb-10">
         <Container className="w-full">
-          {/* Top section rule / breadcrumb */}
           <div className="border-b border-white/15 pb-4 pt-2">
             <SectionRule
               roman={roman}
               label={resolveText(eyebrow)}
               page={pageOf}
-              className="text-white/80 [&_.gd-roman]:text-guadalupe-gold [&_.gd-label]:text-white/90 [&_.gd-leader]:border-white/20 [&_.gd-pageofpages]:text-white/60"
+              className="text-white/85 [&_.gd-roman]:text-guadalupe-gold [&_.gd-label]:text-white/90 [&_.gd-leader]:border-white/20 [&_.gd-pageofpages]:text-white/70"
             />
           </div>
         </Container>
 
-        <Container className="my-auto py-10">
-          <div className="max-w-4xl">
-            {/* Kicker badge */}
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="inline-flex items-center gap-2 border border-guadalupe-gold/50 bg-guadalupe-gold/10 px-3 py-1 font-mono text-[10.5px] uppercase tracking-widest text-guadalupe-goldSoft backdrop-blur-sm">
-                <span className="text-[11px] text-guadalupe-gold">✦</span>
-                {resolveText(eyebrow)}
+        <Container className="mt-auto w-full pt-10 sm:my-auto sm:pt-8">
+          <div className="max-w-3xl">
+            {badge ? (
+              <span className="inline-flex items-center gap-2 border border-guadalupe-gold/55 bg-guadalupe-gold/15 px-3 py-1 font-mono text-[11px] uppercase tracking-widest text-guadalupe-goldSoft backdrop-blur-sm">
+                <span className="text-guadalupe-gold" aria-hidden>✦</span>
+                {resolveText(badge)}
               </span>
-              {badge ? (
-                <span className="border border-white/20 bg-white/5 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-white/80">
-                  {resolveText(badge)}
-                </span>
-              ) : null}
-            </div>
+            ) : null}
 
-            {/* Monumental Headline */}
-            <h1 className="mt-6 font-display text-[clamp(36px,5.8vw,78px)] font-extrabold uppercase leading-[0.96] tracking-[-0.025em] text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.8)]">
+            <h1 className="mt-5 font-display text-[clamp(32px,5.2vw,68px)] font-extrabold uppercase leading-[0.98] tracking-[-0.025em] text-white [text-shadow:0_2px_18px_rgba(0,0,0,0.55)]">
               {resolveText(titleMain)}{" "}
               {titleItalic ? (
-                <span className="font-serif font-normal normal-case italic text-guadalupe-goldSoft drop-shadow-sm">
+                <span className="font-serif font-normal normal-case italic text-guadalupe-goldSoft">
                   {resolveText(titleItalic)}
                 </span>
               ) : null}
               <Dot className="text-guadalupe-gold" />
             </h1>
 
-            {/* Poetic Subtitle */}
-            <p className="mt-5 max-w-2xl font-serif text-lg leading-relaxed text-bone/90 drop-shadow sm:text-2xl sm:leading-relaxed">
+            <p className="mt-4 max-w-2xl font-serif text-[19px] leading-snug text-bone/95 [text-shadow:0_1px_10px_rgba(0,0,0,0.6)] sm:text-[22px]">
               {resolveText(subtitle)}
             </p>
 
-            {/* Sacred Quote (if provided) */}
             {quote ? (
-              <blockquote className="mt-7 border-l-2 border-guadalupe-gold/60 pl-5 pt-1 text-white/95">
+              <blockquote className="mt-6 max-w-2xl border-l-2 border-guadalupe-gold/60 pl-5 text-white/95">
                 <p className="font-serif text-base italic leading-relaxed sm:text-lg">
-                  "{resolveText(quote.text)}"
+                  “{resolveText(quote.text)}”
                 </p>
-                <footer className="mt-2 font-mono text-[10.5px] uppercase tracking-widest text-guadalupe-goldSoft">
+                <footer className="mt-2 font-mono text-[11px] uppercase tracking-widest text-guadalupe-goldSoft">
                   — {resolveText(quote.source)}
                 </footer>
               </blockquote>
             ) : null}
 
-            {/* Calls to Action */}
-            {(ctaPrimary || ctaSecondary) && (
-              <div className="mt-9 flex flex-wrap items-center gap-4">
+            {ctaPrimary || ctaSecondary ? (
+              <div className="mt-7 flex flex-wrap items-center gap-3 sm:gap-4">
                 {ctaPrimary ? (
                   <a
                     href={ctaPrimary.href}
-                    className="group inline-flex items-center gap-2 border border-guadalupe-gold bg-guadalupe-gold px-6 py-3.5 font-sans text-xs font-bold uppercase tracking-[0.2em] text-[#08121f] shadow-[0_4px_20px_rgba(212,175,55,0.35)] transition-all hover:bg-guadalupe-goldSoft hover:shadow-[0_6px_28px_rgba(212,175,55,0.5)]"
+                    className="group inline-flex items-center gap-2 bg-guadalupe-gold px-6 py-3.5 font-sans text-xs font-semibold uppercase tracking-[0.2em] text-[#08121f] shadow-[0_4px_20px_rgba(212,175,55,0.35)] transition-colors hover:bg-guadalupe-goldSoft"
                   >
                     <span>{resolveText(ctaPrimary.label)}</span>
-                    <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                    <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden>→</span>
                   </a>
                 ) : null}
-
                 {ctaSecondary ? (
                   <a
                     href={ctaSecondary.href}
-                    className="inline-flex items-center gap-2 border border-white/40 bg-white/10 px-6 py-3.5 font-sans text-xs font-semibold uppercase tracking-[0.18em] text-white backdrop-blur-sm transition-all hover:border-white hover:bg-white/20"
+                    className="inline-flex items-center gap-2 border border-white/55 bg-white/10 px-6 py-3.5 font-sans text-xs font-semibold uppercase tracking-[0.18em] text-white backdrop-blur-sm transition-colors hover:border-white hover:bg-white/20"
                   >
                     {resolveText(ctaSecondary.label)}
                   </a>
                 ) : null}
               </div>
-            )}
-          </div>
-        </Container>
-
-        {/* Bottom Bar: Video controls & scroll invitation */}
-        <Container className="w-full">
-          <div className="flex flex-wrap items-center justify-between gap-4 border-t border-white/15 pt-4 text-xs text-white/70">
-            <div className="flex items-center gap-4">
-              <button
-                type="button"
-                onClick={togglePlay}
-                aria-label={isPlaying ? "Pausar video de fondo" : "Reproducir video de fondo"}
-                className="flex items-center gap-2 rounded border border-white/20 bg-white/10 px-3 py-1.5 font-mono text-[10.5px] uppercase tracking-wider text-white/90 backdrop-blur-md transition-colors hover:border-guadalupe-gold hover:text-guadalupe-gold"
-              >
-                {isPlaying ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
-                <span>{isPlaying ? "Video Activo" : "Pausado"}</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={toggleMute}
-                aria-label={isMuted ? "Activar audio" : "Silenciar audio"}
-                className="flex items-center gap-2 rounded border border-white/20 bg-white/10 px-3 py-1.5 font-mono text-[10.5px] uppercase tracking-wider text-white/90 backdrop-blur-md transition-colors hover:border-guadalupe-gold hover:text-guadalupe-gold"
-              >
-                {isMuted ? <VolumeX className="h-3.5 w-3.5" /> : <Volume2 className="h-3.5 w-3.5" />}
-                <span>{isMuted ? "Silencio" : "Audio"}</span>
-              </button>
-            </div>
-
-            <div className="flex items-center gap-2 font-mono text-[10.5px] uppercase tracking-widest text-guadalupe-goldSoft">
-              <Sparkles className="h-3.5 w-3.5 text-guadalupe-gold animate-pulse" />
-              <span>Santuario Digital Tepeyac 1531 · 2031</span>
-            </div>
+            ) : null}
           </div>
         </Container>
       </div>
+
+      {reduced ? null : (
+        <button
+          type="button"
+          onClick={togglePlay}
+          aria-label={
+            isPlaying
+              ? t({ es: "Pausar el vídeo de fondo", en: "Pause the background video" })
+              : t({ es: "Reproducir el vídeo de fondo", en: "Play the background video" })
+          }
+          className="absolute bottom-4 right-4 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-white/40 bg-[#08121f]/45 text-white backdrop-blur-sm transition-colors hover:border-guadalupe-gold hover:text-guadalupe-gold sm:bottom-5 sm:right-5"
+        >
+          {isPlaying ? <Pause className="h-4 w-4" aria-hidden /> : <Play className="h-4 w-4" aria-hidden />}
+        </button>
+      )}
     </header>
   );
 }
