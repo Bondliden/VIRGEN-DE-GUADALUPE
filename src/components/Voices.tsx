@@ -2,6 +2,7 @@
 import { useLang } from "@/lib/lang";
 import { rosaryModes, voices, voicesSection } from "@/data/voices";
 import { Container, Coord, Dot, Eyebrow, SectionRule } from "@/components/Chrome";
+import { VirginPlate } from "@/components/VirginPlate";
 
 /* Section III — voices, testimonies and the Guadalupan rosary. */
 
@@ -24,6 +25,14 @@ export function Voices() {
           </div>
           <p className="text-body text-inkMute">{t(voicesSection.intro)}</p>
         </div>
+
+        <VirginPlate
+          fig="04"
+          caption={{
+            es: "La imagen a la que se dirigen las voces de este sitio.",
+            en: "The image these voices of the site speak to.",
+          }}
+        />
 
         {/* ── Featured testimony ── */}
         <div className="mt-12 grid gap-8 border border-ink/20 bg-bone p-4 lg:grid-cols-[1.3fr_0.7fr] lg:p-6">

@@ -9,6 +9,7 @@ import {
   tilmaSymbols,
 } from "@/data/acontecimiento";
 import { Container, Coord, Dot, Eyebrow, SectionRule } from "@/components/Chrome";
+import { VirginPlate } from "@/components/VirginPlate";
 
 /* Section II — the five panels of the Guadalupan Event.
    §5: tabs are a printed contents list, not a web widget — roman numeral,
@@ -113,6 +114,14 @@ export function Acontecimiento() {
           </div>
           <p className="text-body text-inkMute">{t(acontecimientoSection.intro)}</p>
         </div>
+
+        <VirginPlate
+          fig="03"
+          caption={{
+            es: "La imagen que quedó impresa en el ayate ante el obispo Zumárraga.",
+            en: "The image left on the ayate before Bishop Zumárraga.",
+          }}
+        />
 
         {/* ── Contents list ── */}
         <nav

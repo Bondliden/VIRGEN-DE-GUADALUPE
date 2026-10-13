@@ -5,6 +5,7 @@ import { novena } from "@/data/jubilee";
 import { links, site } from "@/data/links";
 import { pilgrimageSection } from "@/data/pilgrimages";
 import { Container, Coord, Dot, Eyebrow, SectionRule } from "@/components/Chrome";
+import { VirginPlate } from "@/components/VirginPlate";
 
 /* Section V — the closing call to action, and the colophon footer with the
    Atelier Zero mega kicker word and the image licence attribution. */
@@ -33,6 +34,14 @@ export function Closing() {
             {t(novena.lead)}
           </p>
         </div>
+
+        <VirginPlate
+          fig="06"
+          caption={{
+            es: "Quinientos años de esta imagen: hacia el Jubileo de 2031.",
+            en: "Five hundred years of this image: towards the Jubilee of 2031.",
+          }}
+        />
 
         {/* ── Las cinco líneas de acción ── */}
         <div className="mt-12">

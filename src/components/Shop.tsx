@@ -4,6 +4,7 @@ import { useLang } from "@/lib/lang";
 import { shopCategories, shopSection } from "@/data/shop";
 import { site } from "@/data/links";
 import { Container, Coord, Dot, Eyebrow, SectionRule } from "@/components/Chrome";
+import { VirginPlate } from "@/components/VirginPlate";
 
 /* Section IV — the shop.
    Nothing is advertised as purchasable: the section is an honest preview
@@ -89,6 +90,14 @@ export function Shop() {
           </div>
           <p className="text-body text-inkMute">{t(shopSection.intro)}</p>
         </div>
+
+        <VirginPlate
+          fig="05"
+          caption={{
+            es: "La imagen que da nombre a este santuario digital.",
+            en: "The image this digital shrine takes its name from.",
+          }}
+        />
 
         {/* ── Categories ── */}
         <div className="mt-12 grid gap-px bg-ink/20 lg:grid-cols-3">

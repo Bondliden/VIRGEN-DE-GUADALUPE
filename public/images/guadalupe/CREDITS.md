@@ -14,6 +14,7 @@ pago ni tiene derechos reservados.
 | `tilma-hero.jpg` | [Our Lady of Guadalupe.JPG](https://commons.wikimedia.org/wiki/File:Our_Lady_of_Guadalupe.JPG) | Janothird~commonswiki (Jan Zatko), 2005 | **CC BY-SA 3.0** |
 | `tilma-card.jpg` | Derivado de `tilma-hero.jpg` (redimensionado a 900 px) | Janothird~commonswiki | **CC BY-SA 3.0** |
 | `tilma-detail.jpg` | Derivado de `tilma-hero.jpg` (recorte del rostro, 1200 px) | Janothird~commonswiki | **CC BY-SA 3.0** |
+| `tilma-plate.jpg` | Derivado de `tilma-hero.jpg` (recorte del ayate completo, 640 px — la placa de las cinco páginas) | Janothird~commonswiki | **CC BY-SA 3.0** |
 | `basilica.jpg` | [Acceso poniente de la Basílica de Guadalupe 01.jpg](https://commons.wikimedia.org/wiki/File:Acceso_poniente_de_la_Bas%C3%ADlica_de_Guadalupe_01.jpg) | ProtoplasmaKid | **CC BY 4.0** |
 | `basilica-air.jpg` | [Basílica de Guadalupe desde el aire 2.jpg](https://commons.wikimedia.org/wiki/File:Bas%C3%ADlica_de_Guadalupe_desde_el_aire_2.jpg) | ProtoplasmaKid | **CC BY-SA 4.0** |
 | `nican-mopohua.jpg` | [Nican-mopohua.jpeg](https://commons.wikimedia.org/wiki/File:Nican-mopohua.jpeg) — ejemplar del Nican Mopohua, New York Public Library | Antonio Valeriano (atribuido) / NYPL | **CC0** (dominio público) |

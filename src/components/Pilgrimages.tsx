@@ -17,6 +17,7 @@ import { useLang } from "@/lib/lang";
 import { site, links, cameras } from "@/data/links";
 import { pilgrimageSection, pilgrimages, type IconKey } from "@/data/pilgrimages";
 import { Container, Coord, Dot, Eyebrow, SectionRule } from "@/components/Chrome";
+import { VirginPlate } from "@/components/VirginPlate";
 
 /* ─────────────────────────────────────────────
    Section I — Peregrinaciones
@@ -56,6 +57,14 @@ export function Pilgrimages() {
           </div>
           <p className="text-body text-inkMute">{t(pilgrimageSection.intro)}</p>
         </div>
+
+        <VirginPlate
+          fig="02"
+          caption={{
+            es: "La imagen hacia la que caminan todos los caminos del Tepeyac.",
+            en: "The image every road of Tepeyac walks towards.",
+          }}
+        />
 
         {/* ── Live from the Basilica ── */}
         <div className="mt-12 grid gap-6 border border-ink/20 bg-bone p-4 lg:grid-cols-[1.45fr_0.55fr] lg:p-6">
