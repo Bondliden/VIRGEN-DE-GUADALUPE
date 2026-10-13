@@ -4,7 +4,9 @@ import { CalendarDays, MessageCircle, X, Youtube } from "lucide-react";
 import { useLang } from "@/lib/lang";
 import { site } from "@/data/links";
 
-/* Reservar una videollamada o un podcast con Azucena.
+/* Reservar para participar en el podcast de Azucena: hablar en el directo
+   con ella y sus invitados (un sacerdote, otro testigo…). No es para verlo:
+   para eso está el anuncio del podcast, con su botón a YouTube.
 
    Botón redondo encima del de WhatsApp, en el color del manto. Siempre
    visible; lo que abre depende de si ya hay agenda:
@@ -31,8 +33,8 @@ function embedUrl(url: string) {
 }
 
 const WHATSAPP_REQUEST = {
-  es: "Hola, quiero reservar una videollamada o un podcast con Azucena Cierco.",
-  en: "Hello, I would like to book a video call or a podcast with Azucena Cierco.",
+  es: "Hola, quiero participar en el podcast de Azucena Cierco.",
+  en: "Hello, I would like to take part in Azucena Cierco's podcast.",
 };
 
 export function CalendlyButton({ className = "flex h-14 w-14" }: { className?: string }) {
@@ -49,12 +51,20 @@ export function CalendlyButton({ className = "flex h-14 w-14" }: { className?: s
   }, [open]);
 
   const label = t({
-    es: "Reservar videollamada o podcast con Azucena",
-    en: "Book a video call or podcast with Azucena",
+    es: "Participar en el podcast con Azucena",
+    en: "Take part in the podcast with Azucena",
   });
   const heading = t({
-    es: "Reservar videollamada o podcast con Azucena Cierco",
-    en: "Book a video call or podcast with Azucena Cierco",
+    es: "Participar en el podcast con Azucena Cierco",
+    en: "Take part in the podcast with Azucena Cierco",
+  });
+
+  /* Lo que pasa después de reservar. El enlace para entrar al estudio y
+     hablar en el directo llega por correo, solo a quien ha reservado: si
+     estuviera en la web, cualquiera podría colarse en la emisión. */
+  const afterBooking = t({
+    es: "Al reservar te llega por correo la cita y el enlace para entrar al estudio y hablar en el directo.",
+    en: "When you book, you receive the appointment and the link to join the studio and speak on air by email.",
   });
 
   const closeButton = (
@@ -69,18 +79,19 @@ export function CalendlyButton({ className = "flex h-14 w-14" }: { className?: s
     </button>
   );
 
-  /* Después de reservar: el acceso al directo de su canal de YouTube, donde
-     se emite el podcast. Google Calendar no avisa a la web de que la reserva
-     se ha hecho, así que el botón está siempre, justo debajo de la agenda. */
-  const liveButton = site.youtubeLive ? (
+  /* Para quien solo quiere verlo: un enlace discreto al directo del canal,
+     distinto del de participar. */
+  const watchLink = site.youtubeLive ? (
     <a
       href={site.youtubeLive}
       target="_blank"
       rel="noreferrer noopener"
-      className="inline-flex items-center gap-2 bg-accentRose px-4 py-2.5 text-eyebrow font-semibold uppercase tracking-eyebrow text-[hsl(var(--gd-accent-on))] transition-colors hover:bg-accentRose/80"
+      className="inline-flex items-center gap-1.5 text-[14px] font-semibold text-inkSoft hover:text-ink"
     >
       <Youtube className="h-4 w-4" aria-hidden />
-      {t({ es: "¿Ya reservaste? Entra al podcast en vivo", en: "Booked? Join the live podcast" })}
+      <span className="gd-link-underline">
+        {t({ es: "¿Solo quieres verlo? En YouTube ↗", en: "Just want to watch? On YouTube ↗" })}
+      </span>
     </a>
   ) : null;
 
@@ -97,8 +108,9 @@ export function CalendlyButton({ className = "flex h-14 w-14" }: { className?: s
         {closeButton}
       </div>
       <iframe src={embedUrl(site.calendly)} title={heading} className="w-full flex-1 bg-white" />
-      <div className="flex flex-wrap items-center justify-between gap-3 border-t border-ink/20 px-4 py-2.5">
-        {liveButton ?? <span />}
+      <p className="border-t border-ink/20 px-4 pt-2.5 text-left text-[14px] text-inkSoft">{afterBooking}</p>
+      <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-2.5">
+        {watchLink ?? <span />}
         <a
           href={site.calendly}
           target="_blank"
@@ -130,8 +142,8 @@ export function CalendlyButton({ className = "flex h-14 w-14" }: { className?: s
       <div className="px-5 py-5 text-left">
         <p className="text-left text-[16px] leading-relaxed text-inkSoft">
           {t({
-            es: "Muy pronto podrás elegir día y hora aquí mismo. Mientras tanto, pídela por WhatsApp o por correo y te respondemos para acordarla.",
-            en: "Soon you will be able to choose a day and time right here. Meanwhile, ask for it on WhatsApp or by email and we will reply to arrange it.",
+            es: "Habla en el directo junto a Azucena y sus invitados. Muy pronto podrás elegir día y hora aquí mismo; mientras tanto, pídelo por WhatsApp o por correo y te respondemos para acordarlo.",
+            en: "Speak on air alongside Azucena and her guests. Soon you will be able to choose a day and time right here; meanwhile, ask on WhatsApp or by email and we will reply to arrange it.",
           })}
         </p>
         {site.whatsapp ? (
@@ -142,14 +154,14 @@ export function CalendlyButton({ className = "flex h-14 w-14" }: { className?: s
             className="mt-5 inline-flex items-center gap-2 bg-[#1faa59] px-5 py-3 text-eyebrow font-semibold uppercase tracking-eyebrow text-white transition-opacity hover:opacity-90"
           >
             <MessageCircle className="h-4 w-4" aria-hidden />
-            {t({ es: "Pedirla por WhatsApp", en: "Ask on WhatsApp" })}
+            {t({ es: "Pedirlo por WhatsApp", en: "Ask on WhatsApp" })}
           </a>
         ) : null}
         <p className="mt-4 text-[14px] text-inkMute">
           {t({ es: "O escribe a", en: "Or write to" })}{" "}
           <span className="select-all font-semibold text-inkSoft">{site.contactEmail}</span>
         </p>
-        {liveButton ? <div className="mt-5 border-t border-ink/20 pt-4">{liveButton}</div> : null}
+        {watchLink ? <div className="mt-5 border-t border-ink/20 pt-4">{watchLink}</div> : null}
       </div>
     </div>
   );
