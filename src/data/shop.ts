@@ -37,8 +37,8 @@ export const shopSection = {
     en: "Before buying, helping",
   } satisfies Bi,
   donateBody: {
-    es: "Si quieres sostener esta obra —el sitio, las peregrinaciones y el material guadalupano que repartimos gratis—, tu donativo llega más lejos que cualquier compra.",
-    en: "If you want to sustain this work — the site, the pilgrimages and the Guadalupan material we give away — your donation goes further than any purchase.",
+    es: "Tu donativo va directamente a la Iglesia, para ayudar a los más necesitados y a las peregrinaciones. Llega más lejos que cualquier compra.",
+    en: "Your donation goes directly to the Church, to help those most in need and to support pilgrimages. It goes further than any purchase.",
   } satisfies Bi,
   donateCta: { es: "Hacer un donativo", en: "Make a donation" } satisfies Bi,
   writeCta: { es: "Escríbenos", en: "Write to us" } satisfies Bi,
