@@ -1,20 +1,21 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { Menu, X } from "lucide-react";
 import { useLang } from "@/lib/lang";
 import { site } from "@/data/links";
 import { Container } from "@/components/Chrome";
+import { navRoutes, useRoute, type RouteId } from "@/lib/useRoute";
 
 /* Atelier Zero §4–5: sticky nav carrying the brand mark, up to five nav
    entries and the one accent CTA. Headroom behaviour: hides on scroll
    down, returns on scroll up. */
 
-const navItems = [
-  { href: "#peregrinaciones", label: { es: "Peregrinaciones", en: "Pilgrimages" } },
-  { href: "#acontecimiento", label: { es: "Acontecimiento", en: "The Event" } },
-  { href: "#voces", label: { es: "Voces", en: "Voices" } },
-  { href: "#tienda", label: { es: "Tienda", en: "Shop" } },
-  { href: "#jubileo", label: { es: "Jubileo", en: "Jubilee" } },
-] as const;
+/* Las cinco entradas de la barra son cinco páginas, no cinco anclajes dentro
+   de un mismo documento. La marca abre la portada. */
+const navItems = navRoutes.map((route) => ({
+  href: `#${route.id}`,
+  id: route.id,
+  label: route.label,
+}));
 
 /** The four-petalled flower of the tilma (Nahui Ollin), used as the mark. */
 function TilmaMark({ className = "" }: { className?: string }) {
@@ -44,10 +45,21 @@ function TilmaMark({ className = "" }: { className?: string }) {
 
 export function Navbar() {
   const { t, lang, toggle } = useLang();
+  const route = useRoute();
   const [hidden, setHidden] = useState(false);
   const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);
   const lastY = useRef(0);
+
+  /* Un enlace a la página en la que ya estamos no cambia el hash, así que no
+     dispara nada: en ese caso subimos al principio a mano. */
+  const goTo = (id: RouteId) => (event: MouseEvent<HTMLAnchorElement>) => {
+    setOpen(false);
+    if (id === route) {
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
 
   useEffect(() => {
     const onScroll = () => {
@@ -71,7 +83,8 @@ export function Navbar() {
     >
       <Container className="flex items-center justify-between gap-6 py-3">
         <a
-          href="#inicio"
+          href="#portada"
+          onClick={goTo("portada")}
           className="group flex items-center gap-3 text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-accentRose"
         >
           <TilmaMark className="h-8 w-8 text-accentRose transition-transform duration-500 group-hover:rotate-90 sm:h-10 sm:w-10" />
@@ -89,15 +102,23 @@ export function Navbar() {
           className="hidden items-center gap-5 lg:flex xl:gap-9"
           aria-label={t({ es: "Principal", en: "Primary" })}
         >
-          {navItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="gd-link-underline font-display text-[clamp(13px,1.05vw,17px)] font-extrabold uppercase leading-none tracking-[0.08em] text-inkMute transition-colors hover:text-ink"
-            >
-              {t(item.label)}
-            </a>
-          ))}
+          {navItems.map((item) => {
+            const current = item.id === route;
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={goTo(item.id)}
+                aria-current={current ? "page" : undefined}
+                className={[
+                  "gd-link-underline font-display text-[clamp(13px,1.05vw,17px)] font-extrabold uppercase leading-none tracking-[0.08em] transition-colors hover:text-ink",
+                  current ? "text-ink" : "text-inkMute",
+                ].join(" ")}
+              >
+                {t(item.label)}
+              </a>
+            );
+          })}
         </nav>
 
         <div className="flex items-center gap-3">
@@ -134,8 +155,12 @@ export function Navbar() {
               <a
                 key={item.href}
                 href={item.href}
-                onClick={() => setOpen(false)}
-                className="border-b border-ink/10 py-3.5 font-display text-[17px] font-extrabold uppercase tracking-[0.08em] text-inkMute"
+                onClick={goTo(item.id)}
+                aria-current={item.id === route ? "page" : undefined}
+                className={[
+                  "border-b border-ink/10 py-3.5 font-display text-[17px] font-extrabold uppercase tracking-[0.08em]",
+                  item.id === route ? "text-ink" : "text-inkMute",
+                ].join(" ")}
               >
                 {t(item.label)}
               </a>
