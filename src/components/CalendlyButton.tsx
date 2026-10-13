@@ -9,13 +9,26 @@ import { site } from "@/data/links";
    Botón redondo encima del de WhatsApp, en el color del manto. Siempre
    visible; lo que abre depende de si ya hay agenda:
 
-   · Con VITE_CALENDLY_URL, su Calendly en un panel dentro de la propia web,
-     con un iframe: la página de reservas de Calendly admite incrustarse así
-     y no hace falta cargar su script externo. Si el iframe no carga, el
+   · Con VITE_CALENDLY_URL —su Calendly o su agenda de citas de Google
+     Calendar—, la agenda en un panel dentro de la propia web, con un
+     iframe: las dos admiten incrustarse así sin cargar scripts externos. Si el iframe no carga, el
      enlace del pie del panel la abre en Calendly.
    · Sin él, un panel que pide la cita a mano: WhatsApp con el mensaje ya
      escrito y el correo a la vista. Nunca un enlace de relleno a la agenda
      de otra persona. */
+
+/* La agenda puede ser de Calendly o la «agenda de citas» de Google Calendar
+   (gratis con un Gmail: cada reserva entra en su calendario con su enlace de
+   Google Meet). Las dos se pueden incrustar; cada una con sus parámetros. */
+const isGoogle = (url: string) => /calendar\.google\.com|calendar\.app\.google/.test(url);
+
+function embedUrl(url: string) {
+  const sep = url.includes("?") ? "&" : "?";
+  if (isGoogle(url)) return `${url}${sep}gv=true`;
+  return `${url}${sep}embed_type=Inline&hide_gdpr_banner=1&embed_domain=${encodeURIComponent(
+    window.location.host
+  )}`;
+}
 
 const WHATSAPP_REQUEST = {
   es: "Hola, quiero reservar una videollamada o un podcast con Azucena Cierco.",
@@ -68,13 +81,7 @@ export function CalendlyButton({ className = "flex h-14 w-14" }: { className?: s
         <p className="font-display text-[15px] font-bold uppercase tracking-[0.08em] text-inkSoft">{heading}</p>
         {closeButton}
       </div>
-      <iframe
-        src={`${site.calendly}${site.calendly.includes("?") ? "&" : "?"}embed_type=Inline&hide_gdpr_banner=1&embed_domain=${encodeURIComponent(
-          window.location.host
-        )}`}
-        title={heading}
-        className="w-full flex-1 bg-white"
-      />
+      <iframe src={embedUrl(site.calendly)} title={heading} className="w-full flex-1 bg-white" />
       <div className="border-t border-ink/20 px-4 py-2.5 text-right">
         <a
           href={site.calendly}
@@ -82,7 +89,9 @@ export function CalendlyButton({ className = "flex h-14 w-14" }: { className?: s
           rel="noreferrer noopener"
           className="gd-link-underline text-[14px] font-semibold text-inkSoft hover:text-ink"
         >
-          {t({ es: "Abrir en Calendly ↗", en: "Open in Calendly ↗" })}
+          {isGoogle(site.calendly)
+            ? t({ es: "Abrir en Google Calendar ↗", en: "Open in Google Calendar ↗" })
+            : t({ es: "Abrir en Calendly ↗", en: "Open in Calendly ↗" })}
         </a>
       </div>
     </div>
