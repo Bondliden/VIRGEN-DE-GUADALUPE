@@ -355,12 +355,16 @@ h1, h2, h3, h4 {
   .gd-dot { color: hsl(var(--gd-accent)); }
 
   /* ── §12 Footer mega kicker word ──
-     El titulón del pie se mide contra su propia caja, no contra la ventana. La
+     El titulón del pie se mide contra su propia caja, no contra la ventana: la
      frase entera —"Guadalupe 500 Years" es la más larga de los dos idiomas—
-     mide 10,36 em en Cormorant a peso 500, así que 9,3 cqw la deja en una sola
-     línea que ocupa el 96 % de la medida a cualquier ancho. Antes iba a
-     clamp(70px, 13vw, 200px): dos líneas de 344 px de alto en escritorio y, en
-     teléfono, una primera línea más ancha que su caja, que el pie recortaba. */
+     mide 10,36 em en Cormorant a peso 500, así que el cuerpo es siempre una
+     fracción previsible de la medida: 4,4 cqw la deja en una sola línea que
+     ocupa ~45 % de la medida (56 px con los 1272 px de escritorio). Es un
+     remate de colofón, no un segundo titular: a 9,3 cqw llegaba al 96 %.
+     Los 24 px de suelo mantienen en el teléfono ~70 % de la medida, donde
+     4,4 cqw daría 15 px. Antes iba a clamp(70px, 13vw, 200px): dos líneas de
+     344 px de alto en escritorio y, en teléfono, una primera línea más ancha
+     que su caja, que el pie recortaba. */
   .gd-mega-fit { container-type: inline-size; }
   .gd-mega {
     font-family: "Cormorant Garamond", "Playfair Display", Georgia, serif;
@@ -368,8 +372,8 @@ h1, h2, h3, h4 {
     line-height: 0.86;
     letter-spacing: -0.02em;
     /* Respaldo para navegadores sin consultas de contenedor. */
-    font-size: clamp(26px, 8vw, 118px);
-    font-size: clamp(26px, 9.3cqw, 120px);
+    font-size: clamp(24px, 3.9vw, 56px);
+    font-size: clamp(24px, 4.4cqw, 56px);
   }
 }
 
