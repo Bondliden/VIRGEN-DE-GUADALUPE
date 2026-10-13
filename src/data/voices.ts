@@ -107,6 +107,32 @@ export const voices: Voice[] = [
   },
 ];
 
+/** ─────────────────────────────────────────────
+ *  Próximo podcast en vivo de Azucena (bajo el vídeo de su testimonio).
+ *
+ *  En YouTube Live: se ve sin cuenta y sin instalar nada, sin límite de
+ *  público ni de tiempo, y la grabación queda en el canal. `startsAt` lleva
+ *  la zona horaria; la web la enseña en la hora de cada visitante. Antes de
+ *  empezar dice «Próximo», durante «En vivo ahora» y al acabar «Ver la
+ *  grabación», solo.
+ *
+ *  `null` = no hay ninguno anunciado y el bloque no se muestra.
+ *  ───────────────────────────────────────────── */
+export type LiveEvent = {
+  title: Bi;
+  /** ISO 8601 con zona, p. ej. "2026-10-22T20:00:00-04:00". Sin fecha, el
+      bloque dice «Se anunciará pronto…». */
+  startsAt?: string;
+  durationMin?: number;
+  /** Enlace de la emisión en YouTube (sirve también para la grabación). Sin
+      él, el directo del canal (VITE_YOUTUBE_LIVE_URL). */
+  url?: string;
+};
+
+export const nextLive: LiveEvent | null = {
+  title: { es: "Podcast en vivo con Azucena Cierco", en: "Live podcast with Azucena Cierco" },
+};
+
 export type RosaryMode = {
   id: string;
   roman: string;

@@ -1,6 +1,7 @@
 import { ExternalLink } from "lucide-react";
 import { useLang } from "@/lib/lang";
-import { rosaryModes, voices, voicesSection } from "@/data/voices";
+import { nextLive, rosaryModes, voices, voicesSection } from "@/data/voices";
+import { LiveAnnouncement } from "@/components/LiveAnnouncement";
 import { Container, Coord, Dot, Eyebrow } from "@/components/Chrome";
 import { VideoHero } from "@/components/VideoHero";
 import { VirginSacredDisplay } from "@/components/VirginSacredDisplay";
@@ -43,17 +44,22 @@ export function Voices() {
 
         {/* ── Featured testimony ── */}
         <div className="mt-12 grid gap-8 border border-ink/20 bg-bone p-4 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)] lg:p-6">
-          <div className="aspect-video w-full self-start bg-ink/20">
-            {featured.embed ? (
-              <iframe
-                src={featured.embed}
-                title={t(featured.title)}
-                allow="autoplay"
-                allowFullScreen
-                loading="lazy"
-                className="h-full w-full"
-              />
-            ) : null}
+          {/* Columna del vídeo: el testimonio y, debajo, en el hueco que
+              dejaba la columna de la derecha, el próximo podcast en vivo. */}
+          <div className="flex flex-col gap-6 self-start">
+            <div className="aspect-video w-full bg-ink/20">
+              {featured.embed ? (
+                <iframe
+                  src={featured.embed}
+                  title={t(featured.title)}
+                  allow="autoplay"
+                  allowFullScreen
+                  loading="lazy"
+                  className="h-full w-full"
+                />
+              ) : null}
+            </div>
+            {nextLive ? <LiveAnnouncement live={nextLive} /> : null}
           </div>
           <div className="flex flex-col">
             <div>
