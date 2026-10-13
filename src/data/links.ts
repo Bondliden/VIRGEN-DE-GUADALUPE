@@ -34,10 +34,19 @@ export const site = {
  *  External links — everything verified with the authors
  *  ───────────────────────────────────────────── */
 export const links = {
-  /** Live camera at the Basilica of Guadalupe */
-  basilicaLive: "https://youtu.be/c-v1cM9XqyE",
+  /* Cámara en vivo de la Basílica. Verificado el 13 de octubre de 2026
+     contra la web oficial del santuario, que incrusta h31bMiHuFcs en su
+     bloque "Contempla a la Virgen en vivo": ese es el identificador bueno,
+     no c-v1cM9XqyE, que es una emisión anterior del mismo canal y ya
+     terminó. El enlace de apertura apunta al canal, no a un vídeo suelto,
+     porque la Basílica abre una emisión distinta cada vez: su /live siempre
+     resuelve a la que esté al aire. El santuario enciende la cámara según
+     su horario (hora de la Ciudad de México): Laudes 8:30, Misa Coral del
+     Cabildo 9:00, Rosario 17:00 de lunes a jueves, Novenario 18:00 y, los
+     domingos, la Misa del Cardenal a las 12:00. */
+  basilicaLive: "https://www.youtube.com/@inbguadalupe3618/live",
   basilicaLiveEmbed:
-    "https://www.youtube.com/embed/c-v1cM9XqyE?rel=0&playsinline=1",
+    "https://www.youtube.com/embed/h31bMiHuFcs?rel=0&playsinline=1",
 
   /** Official Guadalupan YouTube channel used for the live broadcast */
   youtubeChannel: "https://www.youtube.com/@inbguadalupe3618",
