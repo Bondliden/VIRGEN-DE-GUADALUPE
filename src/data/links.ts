@@ -100,8 +100,10 @@ export const cameras: Camera[] = [
       es: "La fachada y la explanada",
       en: "The façade and the esplanade",
     },
-    source: "Webcams de México · Canal 11",
-    href: "https://youtu.be/gPi3ZvpX0pY",
+    source: "Webcams de México · 24 horas",
+    /* La página oficial de la cámara y no un vídeo de YouTube: Webcams de
+       México cambia el ID cada vez que reinicia la emisión. */
+    href: "https://webcamsdemexico.com/webcam/basilica-de-guadalupe/",
   },
   {
     label: {
