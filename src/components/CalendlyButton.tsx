@@ -32,8 +32,8 @@ export function CalendlyButton({ className = "flex h-14 w-14" }: { className?: s
   if (!site.calendly) return null;
 
   const label = t({
-    es: "Reservar una videollamada con Azucena",
-    en: "Book a video call with Azucena",
+    es: "Reservar la videollamada con Azucena",
+    en: "Book the video call with Azucena",
   });
   const separator = site.calendly.includes("?") ? "&" : "?";
   const embedUrl = `${site.calendly}${separator}embed_type=Inline&hide_gdpr_banner=1&embed_domain=${encodeURIComponent(
@@ -54,7 +54,7 @@ export function CalendlyButton({ className = "flex h-14 w-14" }: { className?: s
       >
         <div className="flex items-center justify-between gap-4 border-b border-ink/20 px-4 py-3">
           <p className="font-display text-[15px] font-bold uppercase tracking-[0.08em] text-inkSoft">
-            {t({ es: "Videollamada con Azucena Cierco", en: "Video call with Azucena Cierco" })}
+            {t({ es: "Reservar la videollamada con Azucena Cierco", en: "Book the video call with Azucena Cierco" })}
           </p>
           <button
             type="button"
