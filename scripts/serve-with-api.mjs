@@ -35,7 +35,9 @@ function loadEnv() {
 /* The core reads process.env at module-load time, so the .env must be loaded
    FIRST. That is why this is a dynamic import and not a top-of-file import. */
 loadEnv();
-const { runChat, sanitise } = await import("../api/_chat-core.mjs");
+const { configuredProviders, runChat, sanitise, DEEPSEEK_MODEL, MODEL } = await import(
+  "../api/_chat-core.mjs"
+);
 
 const MIME = {
   ".html": "text/html; charset=utf-8",
@@ -67,8 +69,7 @@ const server = createServer(async (req, res) => {
   if (url.pathname === "/api/chat") {
     if (req.method !== "POST") return sendJson(res, 405, { error: "method_not_allowed" });
 
-    const key = process.env.GLM_API_KEY;
-    if (!key) {
+    if (configuredProviders().length === 0) {
       return sendJson(res, 503, {
         error: "chat_not_configured",
         message: "El asistente no está configurado todavía.",
@@ -95,11 +96,11 @@ const server = createServer(async (req, res) => {
     if (messages.length === 0) return sendJson(res, 400, { error: "empty_conversation" });
 
     const started = Date.now();
-    const outcome = await runChat(messages, key);
+    const outcome = await runChat(messages);
     const ms = Date.now() - started;
 
     if (outcome.ok) {
-      console.log(`  chat ok    ${ms} ms  ${outcome.usage?.total_tokens ?? "?"} tok`);
+      console.log(`  chat ok    ${ms} ms  ${outcome.provider}  ${outcome.usage?.total_tokens ?? "?"} tok`);
       return sendJson(res, 200, { reply: outcome.reply });
     }
 
@@ -135,13 +136,15 @@ const server = createServer(async (req, res) => {
 server.listen(PORT, () => {
   console.log("");
   console.log(`  Sitio      http://localhost:${PORT}/`);
+  const order = configuredProviders().map((p) => p.name);
+  console.log(`  Modelos    1) ${DEEPSEEK_MODEL} (DeepSeek)  2) ${MODEL} (GLM, respaldo)`);
   console.log(
-    `  Modelo     ${process.env.GLM_MODEL || "glm-5.3-flash"} (razonamiento: ${
-      process.env.GLM_REASONING_EFFORT || "low"
-    })`
+    `  Claves     DeepSeek ${process.env.DEEPSEEK_API_KEY ? "presente" : "AUSENTE"} · GLM ${
+      process.env.GLM_API_KEY ? "presente" : "AUSENTE"
+    }`
   );
   console.log(
-    `  Clave GLM  ${process.env.GLM_API_KEY ? "presente" : "AUSENTE — el chat devolvera 503"}`
+    `  Orden      ${order.length ? order.join(" → ") : "ninguno — el chat devolverá 503"}`
   );
   console.log("");
 });

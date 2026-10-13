@@ -3,7 +3,7 @@
 
    Imported by BOTH the production function (api/chat.ts, deployed by Vercel)
    and the local demo server (scripts/serve-with-api.mjs), so the system
-   prompt and the GLM call can never drift apart.
+   prompt and the model calls can never drift apart.
 
    The prompt is assembled from three pieces: how Lupita speaks (IDENTIDAD),
    what she knows (the corpus in ./_lupita-knowledge.mjs) and the house rules
@@ -51,9 +51,17 @@ REGLAS DE CASA
    revisarlo sin tocar la lógica. */
 export const SYSTEM_PROMPT = [IDENTIDAD, CORPUS, GLOSARIO, REGLAS].join("\n\n");
 
-/* Model choice is a cost decision, documented in .env.example.
-   glm-5.3-flash at $0.15/$0.50 per 1M dominates models that cost more. */
-export const MODEL = process.env.GLM_MODEL || "glm-5.3-flash";
+/* ─────────────────────────────────────────────
+   Los modelos, en cadena: si el primero falla, contesta el segundo.
+
+     1. DeepSeek V4.1 Flash ("deepseek-flash"), sin razonamiento: el más
+        rápido. Además DeepSeek cachea el prefijo repetido de cada petición
+        —este prompt con todo el corpus— y esa parte cuesta céntimos.
+     2. GLM 5.3 Flash, el modelo de siempre, como respaldo.
+
+   Un proveedor sin clave se salta. Cada uno tiene su propio límite de tiempo:
+   si DeepSeek tarda o falla, el visitante no se queda esperando, contesta GLM.
+   ───────────────────────────────────────────── */
 
 /* The glm-5.3 family always reasons, and reasoning tokens are billed at the
    OUTPUT rate. At the default "max", 74% of the output budget went into
@@ -62,6 +70,13 @@ export const REASONING_EFFORT = process.env.GLM_REASONING_EFFORT || "low";
 
 export const GLM_BASE =
   process.env.GLM_BASE_URL || "https://api.z.ai/api/paas/v4/chat/completions";
+
+export const MODEL = process.env.GLM_MODEL || "glm-5.3-flash";
+
+export const DEEPSEEK_URL =
+  process.env.DEEPSEEK_BASE_URL || "https://api.deepseek.com/chat/completions";
+
+export const DEEPSEEK_MODEL = process.env.DEEPSEEK_MODEL || "deepseek-flash";
 
 const MAX_TURNS = 12;
 const MAX_CHARS_PER_MESSAGE = 2000;
@@ -79,10 +94,43 @@ export function sanitise(messages) {
     }));
 }
 
+const withSystem = (messages) => [{ role: "system", content: SYSTEM_PROMPT }, ...messages];
+
+const PROVIDERS = [
+  {
+    name: "deepseek",
+    url: DEEPSEEK_URL,
+    key: () => process.env.DEEPSEEK_API_KEY,
+    timeoutMs: 20_000,
+    payload: (messages) => ({
+      model: DEEPSEEK_MODEL,
+      messages: withSystem(messages),
+      temperature: 0.5,
+      max_tokens: MAX_OUTPUT_TOKENS,
+      stream: false,
+      /* Sin razonamiento: respuestas de una o dos frases desde un corpus
+         dado no ganan nada pensando, y así contesta antes. */
+      thinking: { type: "disabled" },
+    }),
+  },
+  {
+    name: "glm",
+    url: GLM_BASE,
+    key: () => process.env.GLM_API_KEY,
+    timeoutMs: 30_000,
+    payload: (messages) => buildPayload(messages),
+  },
+];
+
+/** Los proveedores con clave, en el orden en que se prueban. */
+export function configuredProviders() {
+  return PROVIDERS.filter((provider) => Boolean(provider.key()));
+}
+
 export function buildPayload(messages) {
   return {
     model: MODEL,
-    messages: [{ role: "system", content: SYSTEM_PROMPT }, ...messages],
+    messages: withSystem(messages),
     /* Más bajo que antes (0.6): el corpus ya pone el contenido, así que la
        temperatura sólo puede restar precisión o añadir adornos. */
     temperature: 0.5,
@@ -93,26 +141,23 @@ export function buildPayload(messages) {
   };
 }
 
-/**
- * Calls GLM and normalises the outcome so callers never have to guess.
- * @returns {Promise<{ok: true, reply: string, usage?: unknown}
- *   | {ok: false, kind: string, status?: number, detail?: string}>}
- */
-export async function runChat(messages, apiKey) {
+/** One provider, one attempt, normalised. */
+async function callProvider(provider, messages) {
   let upstream;
   try {
-    upstream = await fetch(GLM_BASE, {
+    upstream = await fetch(provider.url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
+        Authorization: `Bearer ${provider.key()}`,
       },
-      body: JSON.stringify(buildPayload(messages)),
+      body: JSON.stringify(provider.payload(messages)),
+      signal: AbortSignal.timeout(provider.timeoutMs),
     });
   } catch (error) {
     return {
       ok: false,
-      kind: "request_failed",
+      kind: error instanceof Error && error.name === "TimeoutError" ? "timeout" : "request_failed",
       detail: error instanceof Error ? error.message : "unknown",
     };
   }
@@ -142,4 +187,24 @@ export async function runChat(messages, apiKey) {
   }
 
   return { ok: true, reply, usage: parsed.usage };
+}
+
+/**
+ * Tries each configured provider in order and returns the first good answer.
+ * @returns {Promise<{ok: true, reply: string, provider: string, usage?: unknown}
+ *   | {ok: false, kind: string, status?: number, detail?: string}>}
+ */
+export async function runChat(messages) {
+  const providers = configuredProviders();
+  if (providers.length === 0) return { ok: false, kind: "not_configured" };
+
+  const failures = [];
+  for (const provider of providers) {
+    const outcome = await callProvider(provider, messages);
+    if (outcome.ok) return { ...outcome, provider: provider.name };
+    failures.push(`${provider.name}: ${outcome.kind}${outcome.status ? ` ${outcome.status}` : ""}`);
+    console.warn(`[chat] ${provider.name} falló (${outcome.kind}); se prueba el siguiente`, outcome.detail ?? "");
+  }
+
+  return { ok: false, kind: "all_providers_failed", detail: failures.join(" · ") };
 }
