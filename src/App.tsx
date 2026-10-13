@@ -11,6 +11,7 @@ import { Shop } from "@/components/Shop";
 import { Closing, Footer } from "@/components/Closing";
 import { ChatBox } from "@/components/ChatBox";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { CalendlyButton } from "@/components/CalendlyButton";
 import { anchorFromHash, routes, useRoute } from "@/lib/useRoute";
 
 export default function App() {
@@ -68,10 +69,12 @@ function Pages() {
 
       <Footer />
 
-      {/* Floating dock, one per corner: WhatsApp as a round button bottom
-          left, the assistant bottom right. Small enough not to cover the
-          content; the music moved into the header, under the brand. */}
-      <div className="pointer-events-none fixed bottom-5 left-5 z-40 print:hidden">
+      {/* Floating dock, one per corner. Bottom left, two round buttons
+          stacked: book a video call with Azucena (Calendly) above WhatsApp.
+          Bottom right, the assistant. The music moved into the header,
+          under the brand. */}
+      <div className="pointer-events-none fixed bottom-5 left-5 z-40 flex flex-col items-center gap-3 print:hidden">
+        <CalendlyButton className="flex h-14 w-14" />
         <WhatsAppButton className="flex h-14 w-14" />
       </div>
       <div className="pointer-events-none fixed bottom-5 right-5 z-40 flex flex-col items-end gap-3 print:hidden">

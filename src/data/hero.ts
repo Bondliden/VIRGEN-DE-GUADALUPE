@@ -184,6 +184,22 @@ export const closing = {
     es: "Quiero apoyar el documental",
     en: "I want to support the documentary",
   } satisfies Bi,
+  captainIntro: {
+    es: "Déjanos tu nombre y tu correo. Después, Lupita te explica cómo ser capitán y reunir tu grupo.",
+    en: "Leave us your name and email. Then Lupita will explain how to become a captain and gather your group.",
+  } satisfies Bi,
+  captainQuestion: {
+    es: "Acabo de dejar mis datos para ser capitán de peregrinación. ¿Cómo lo hago?",
+    en: "I have just left my details to become a pilgrimage captain. How do I do it?",
+  } satisfies Bi,
+  supportIntro: {
+    es: "Déjanos tu nombre y tu correo. Después, Lupita te explica cómo apoyar el documental.",
+    en: "Leave us your name and email. Then Lupita will explain how to support the documentary.",
+  } satisfies Bi,
+  supportQuestion: {
+    es: "Acabo de dejar mis datos para apoyar el documental sobre Santa María de Guadalupe. ¿Cómo puedo ayudar?",
+    en: "I have just left my details to support the documentary on Our Lady of Guadalupe. How can I help?",
+  } satisfies Bi,
 };
 
 

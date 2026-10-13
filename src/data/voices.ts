@@ -34,6 +34,8 @@ export type Voice = {
   /** Imagen de la persona, en /public, y su texto alternativo. */
   photo?: string;
   photoAlt?: Bi;
+  /** Bio breve bajo la foto. Si falta, no se muestra nada. */
+  bio?: Bi;
 };
 
 export const voices: Voice[] = [

@@ -81,20 +81,16 @@ export function Voices() {
             ) : (
               <div className="flex-1" />
             )}
+            {/* Bajo la foto, quién es y su historia. Sin enlace «Abrir»:
+                llevaba al mismo vídeo que se ve a la izquierda. */}
             <div className="mt-6 border-t border-ink/20 pt-4">
               <p className="font-display text-base font-semibold uppercase tracking-[0.06em] text-inkSoft">
                 {featured.person}
               </p>
               <Coord className="mt-1 block uppercase">{t(featured.role)}</Coord>
-              <a
-                href={featured.href}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="mt-3 inline-flex items-center gap-2 text-eyebrow font-semibold uppercase tracking-eyebrow text-accentRose"
-              >
-                {t(voicesSection.openLabel)}
-                <ExternalLink className="h-3.5 w-3.5" aria-hidden />
-              </a>
+              {featured.bio ? (
+                <p className="mt-4 text-[15px] leading-relaxed text-inkMute">{t(featured.bio)}</p>
+              ) : null}
             </div>
           </div>
         </div>

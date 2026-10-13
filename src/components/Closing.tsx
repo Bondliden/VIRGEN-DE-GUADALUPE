@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { Instagram, Mail, MessageCircle, Youtube } from "lucide-react";
+import { LeadForm } from "@/components/LeadForm";
 import { useLang } from "@/lib/lang";
 import { closing } from "@/data/hero";
 import { novena } from "@/data/jubilee";
@@ -13,6 +15,7 @@ import { VirginSacredDisplay } from "@/components/VirginSacredDisplay";
 
 export function Closing() {
   const { t } = useLang();
+  const [openForm, setOpenForm] = useState<"capitan" | "documental" | null>(null);
 
   return (
     <>
@@ -95,20 +98,31 @@ export function Closing() {
             >
               {t(closing.ctaJoin)}
             </a>
-            <a
-              href={`mailto:${site.contactEmail}?subject=${encodeURIComponent(
-                t({ es: "Quiero ser capitán de peregrinación", en: "I want to be a pilgrimage captain" })
-              )}`}
+            {/* Capitán y documental: piden nombre y correo, igual que
+                «Quiero peregrinar», y al enviar abren a Lupita con la
+                pregunta de cómo seguir. Antes abrían el programa de correo. */}
+            <button
+              type="button"
+              aria-expanded={openForm === "capitan"}
+              onClick={() => setOpenForm(openForm === "capitan" ? null : "capitan")}
               className="border border-ink/30 px-5 py-3 text-center text-eyebrow font-semibold uppercase tracking-eyebrow text-inkSoft transition-colors hover:border-ink hover:bg-ink/5"
             >
               {t(closing.ctaCaptain)}
-            </a>
-            <a
-              href={site.donateUrl || `mailto:${site.contactEmail}`}
+            </button>
+            {openForm === "capitan" ? (
+              <LeadForm source="capitan" intro={closing.captainIntro} lupitaQuestion={closing.captainQuestion} />
+            ) : null}
+            <button
+              type="button"
+              aria-expanded={openForm === "documental"}
+              onClick={() => setOpenForm(openForm === "documental" ? null : "documental")}
               className="border border-ink/30 px-5 py-3 text-center text-eyebrow font-semibold uppercase tracking-eyebrow text-inkSoft transition-colors hover:border-ink hover:bg-ink/5"
             >
               {t(closing.ctaSupport)}
-            </a>
+            </button>
+            {openForm === "documental" ? (
+              <LeadForm source="documental" intro={closing.supportIntro} lupitaQuestion={closing.supportQuestion} />
+            ) : null}
             <Coord className="mt-2 block uppercase">{t(pilgrimageSection.multiplier.lead)}</Coord>
           </div>
         </div>

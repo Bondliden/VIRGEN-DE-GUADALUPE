@@ -3,6 +3,7 @@ import { Heart, Mail } from "lucide-react";
 import { useLang } from "@/lib/lang";
 import { shopCategories, shopSection } from "@/data/shop";
 import { site } from "@/data/links";
+import { leadsConfigured, submitLead } from "@/lib/leads";
 import { Container, Coord, Dot, Eyebrow } from "@/components/Chrome";
 import { VideoHero } from "@/components/VideoHero";
 import { VirginSacredDisplay } from "@/components/VirginSacredDisplay";
@@ -21,13 +22,7 @@ function Notify() {
     event.preventDefault();
     setBusy(true);
     try {
-      if (site.leadsEndpoint) {
-        await fetch(site.leadsEndpoint, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, source: "tienda-aviso" }),
-        });
-      }
+      await submitLead({ email, source: "tienda-aviso" });
     } catch {
       /* never block on a network error */
     } finally {
@@ -59,7 +54,7 @@ function Notify() {
           {busy ? "…" : t(shopSection.notifyCta)}
         </button>
       </div>
-      {!site.leadsEndpoint ? (
+      {!leadsConfigured ? (
         <Coord className="mt-3 block uppercase">
           {t(shopSection.notifyNoBackend)} {site.contactEmail}
         </Coord>

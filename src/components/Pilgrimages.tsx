@@ -18,6 +18,9 @@ import { site, links, cameras } from "@/data/links";
 import { pilgrimageSection, pilgrimages, type IconKey } from "@/data/pilgrimages";
 import { Container, Coord, Dot, Eyebrow } from "@/components/Chrome";
 import { VideoHero } from "@/components/VideoHero";
+import { LeadForm } from "@/components/LeadForm";
+import { closing } from "@/data/hero";
+import { leadsConfigured, submitLead } from "@/lib/leads";
 import { VirginSacredDisplay } from "@/components/VirginSacredDisplay";
 
 /* ─────────────────────────────────────────────
@@ -42,6 +45,7 @@ const icons: Record<IconKey, LucideIcon> = {
 export function Pilgrimages() {
   const { t } = useLang();
   const { unlocked, unlock } = usePilgrimAccess();
+  const [captainForm, setCaptainForm] = useState(false);
 
   return (
     <>
@@ -87,11 +91,11 @@ export function Pilgrimages() {
           </div>
           <div className="flex flex-col justify-between">
             <div>
-              <Eyebrow>{t({ es: "En vivo", en: "Live" })}</Eyebrow>
+              <LiveBadge />
               <h3 className="mt-3 font-serif text-2xl italic text-inkSoft">
                 {t(pilgrimageSection.liveTitle)}
               </h3>
-              <p className="mt-3 text-[15px] leading-relaxed text-inkMute">
+              <p className="mt-3 text-left text-[16px] font-semibold leading-relaxed text-inkSoft">
                 {t(pilgrimageSection.liveNote)}
               </p>
             </div>
@@ -105,11 +109,11 @@ export function Pilgrimages() {
             huecos entre palabras. */}
         <div className="mt-4 grid gap-6 border border-ink/20 bg-bone p-5 lg:grid-cols-[0.55fr_1.45fr] lg:p-6">
           <div>
-            <Eyebrow>{t({ es: "En vivo", en: "Live" })}</Eyebrow>
+            <LiveBadge />
             <h3 className="mt-3 font-serif text-2xl italic text-inkSoft">
               {t(pilgrimageSection.camerasTitle)}
             </h3>
-            <p className="mt-3 text-left text-body text-inkMute">
+            <p className="mt-3 text-left text-body font-semibold text-inkSoft">
               {t(pilgrimageSection.camerasNote)}
             </p>
           </div>
@@ -223,14 +227,20 @@ export function Pilgrimages() {
             </p>
             <p className="mt-4 text-body text-inkMute">{t(pilgrimageSection.multiplier.body)}</p>
 
-            <a
-              href={`mailto:${site.contactEmail}?subject=${encodeURIComponent(
-                t({ es: "Quiero ser capitán de peregrinación", en: "I want to be a pilgrimage captain" })
-              )}`}
-              className="mt-6 inline-block bg-accentRose px-5 py-3 text-eyebrow font-semibold uppercase tracking-eyebrow text-[hsl(var(--gd-accent-on))] transition-colors hover:bg-accentRose/80"
-            >
-              {t(pilgrimageSection.multiplier.cta)}
-            </a>
+            {/* Igual que en el cierre: nombre y correo, y luego Lupita. */}
+            {captainForm ? (
+              <div className="mt-6">
+                <LeadForm source="capitan" intro={closing.captainIntro} lupitaQuestion={closing.captainQuestion} />
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setCaptainForm(true)}
+                className="mt-6 inline-block bg-accentRose px-5 py-3 text-eyebrow font-semibold uppercase tracking-eyebrow text-[hsl(var(--gd-accent-on))] transition-colors hover:bg-accentRose/80"
+              >
+                {t(pilgrimageSection.multiplier.cta)}
+              </button>
+            )}
           </div>
 
           <div className="grid gap-8 sm:grid-cols-2">
@@ -275,6 +285,21 @@ export function Pilgrimages() {
   );
 }
 
+/* «En vivo», grande y en rojo, con el punto que late de las emisiones en
+   directo: es lo primero que tiene que ver quien busca una cámara. */
+function LiveBadge() {
+  const { t } = useLang();
+  return (
+    <span className="inline-flex items-center gap-3 font-display text-[22px] font-extrabold uppercase leading-none tracking-[0.12em] text-accentRose sm:text-[26px]">
+      <span className="relative flex h-3.5 w-3.5" aria-hidden>
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accentRose opacity-60" />
+        <span className="relative inline-flex h-3.5 w-3.5 rounded-full bg-accentRose" />
+      </span>
+      {t({ es: "En vivo", en: "Live" })}
+    </span>
+  );
+}
+
 const STORAGE_KEY = "guadalupe-pilgrim-access";
 
 function usePilgrimAccess() {
@@ -311,13 +336,7 @@ function Gate({ onUnlock }: { onUnlock: () => void }) {
     event.preventDefault();
     setBusy(true);
     try {
-      if (site.leadsEndpoint) {
-        await fetch(site.leadsEndpoint, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, email, source: "peregrinaciones" }),
-        });
-      }
+      await submitLead({ name, email, source: "peregrinaciones" });
     } catch {
       /* never block the pilgrim on a network error */
     } finally {
@@ -383,7 +402,7 @@ function Gate({ onUnlock }: { onUnlock: () => void }) {
         {busy ? "…" : t(pilgrimageSection.gate.lockedCta)}
       </button>
 
-      {!site.leadsEndpoint ? (
+      {!leadsConfigured ? (
         <p className="gd-coord mt-3 uppercase">
           {t({ es: "También puedes escribirnos a", en: "You can also write to us at" })}{" "}
           {site.contactEmail}
