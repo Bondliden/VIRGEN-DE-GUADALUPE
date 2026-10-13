@@ -70,6 +70,54 @@ export const links = {
 };
 
 /** ─────────────────────────────────────────────
+ *  Cámaras alrededor del Tepeyac
+ *  ───────────────────────────────────────────── */
+
+/* Las que emiten de verdad y no hay que pedirle permiso a nadie: son vídeos
+   y canales públicos de YouTube, que se enlazan sin más y, si algún día los
+   retiran, el enlace cae solo en lugar de romper la página.
+   Verificadas el 13 de octubre de 2026, a las 03:00 de la Ciudad de México.
+   De todas las cámaras de la capital, solo estas miran a la Basílica: las
+   demás (Zócalo, Bellas Artes, Monumento a la Revolución, Torre
+   Latinoamericana) están en el centro y no alcanzan la Villa. La de dentro,
+   que es la que sostiene el reproductor de esta sección, no se repite aquí. */
+export type Camera = {
+  /** Qué se ve. */
+  label: Bi;
+  /** Quién la publica: el visitante tiene derecho a saber a quién mira. */
+  source: string;
+  href: string;
+};
+
+export const cameras: Camera[] = [
+  {
+    label: {
+      es: "La fachada y la explanada",
+      en: "The façade and the esplanade",
+    },
+    source: "Webcams de México · Canal 11",
+    href: "https://youtu.be/gPi3ZvpX0pY",
+  },
+  {
+    label: {
+      es: "El canal del santuario",
+      en: "The sanctuary's own channel",
+    },
+    source: "Basílica de Guadalupe A.R",
+    href: "https://www.youtube.com/@BasilicadeGuadalupe",
+  },
+  {
+    label: {
+      es: "Misa y Rosario diarios desde la Basílica",
+      en: "Daily Mass and Rosary from the Basilica",
+    },
+    source: "CatholicNet",
+    href: "https://www.youtube.com/@CatholicNet",
+  },
+];
+
+
+/** ─────────────────────────────────────────────
  *  Music found in the tilma (background harmony)
  *  ───────────────────────────────────────────── */
 export type Track = {

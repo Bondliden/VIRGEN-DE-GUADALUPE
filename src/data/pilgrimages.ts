@@ -56,6 +56,11 @@ export const pilgrimageSection = {
     es: "La emisión no está disponible ahora mismo.",
     en: "The broadcast is not available right now.",
   } satisfies Bi,
+  camerasTitle: { es: "Otras cámaras", en: "Other cameras" } satisfies Bi,
+  camerasNote: {
+    es: "El santuario enciende su cámara según su horario: Laudes a las 8:30, Misa Coral del Cabildo a las 9:00, Rosario a las 17:00, Novenario a las 18:00, hora de la Ciudad de México. La de la fachada no descansa y mira al atrio a cualquier hora.",
+    en: "The sanctuary switches its camera on according to its schedule: Lauds at 8:30, the Chapter's choral Mass at 9:00, the Rosary at 17:00, the Novena at 18:00, Mexico City time. The one on the façade never rests and watches the atrium at any hour.",
+  } satisfies Bi,
 
   multiplier: {
     eyebrow: { es: "Modelo multiplicador", en: "A multiplying model" } satisfies Bi,

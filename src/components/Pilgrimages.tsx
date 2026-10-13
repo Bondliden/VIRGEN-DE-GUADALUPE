@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { useLang } from "@/lib/lang";
-import { site, links } from "@/data/links";
+import { site, links, cameras } from "@/data/links";
 import { pilgrimageSection, pilgrimages, type IconKey } from "@/data/pilgrimages";
 import { Container, Coord, Dot, Eyebrow, SectionRule } from "@/components/Chrome";
 
@@ -92,6 +92,34 @@ export function Pilgrimages() {
             </div>
           </div>
         </div>
+
+        {/* ── Other cameras around the Tepeyac ── */}
+        <div className="mt-4 grid gap-6 border border-ink/20 bg-bone p-5 lg:grid-cols-[0.55fr_1.45fr] lg:p-6">
+          <div>
+            <Coord className="block uppercase">
+              {t(pilgrimageSection.camerasTitle)}
+            </Coord>
+            <p className="mt-3 text-[14px] leading-relaxed text-inkMute">
+              {t(pilgrimageSection.camerasNote)}
+            </p>
+          </div>
+          <ul className="grid gap-px self-start border border-ink/20 bg-ink/20 sm:grid-cols-3">
+            {cameras.map((camera) => (
+              <li key={camera.href} className="bg-bone p-4">
+                <a
+                  href={camera.href}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="gd-link-underline text-[14px] font-semibold text-inkSoft transition-colors hover:text-ink"
+                >
+                  {t(camera.label)}
+                </a>
+                <Coord className="mt-2 block">{camera.source}</Coord>
+              </li>
+            ))}
+          </ul>
+        </div>
+
 
         {/* ── The places ── */}
         <div className="mt-16 grid gap-px border border-ink/20 bg-ink/20 sm:grid-cols-2">
