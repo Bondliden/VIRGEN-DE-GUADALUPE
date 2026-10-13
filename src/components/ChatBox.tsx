@@ -5,10 +5,10 @@ import { site } from "@/data/links";
 import { askAssistant, type ChatTurn } from "@/lib/chat";
 import { Coord } from "@/components/Chrome";
 
-/* Floating assistant powered by GLM.
-   It posts only to the same-origin proxy; the API key never reaches the
-   browser. The panel is honest about being an AI and always offers the
-   human fallback (WhatsApp / email). */
+/* Floating assistant. The model behind it is an implementation detail: the
+   visitor only needs to know that the answers come from an AI and that a
+   person is one click away. It posts only to the same-origin proxy; the API
+   key never reaches the browser. */
 
 const suggestions = [
   { es: "¿Quién es la Virgen de Guadalupe?", en: "Who is Our Lady of Guadalupe?" },
@@ -125,8 +125,8 @@ export function ChatBox() {
           </p>
           <Coord className="mt-1 block uppercase">
             {t({
-              es: "Respuestas con IA (GLM) · puede equivocarse",
-              en: "AI answers (GLM) · can be wrong",
+              es: "Respuestas con IA · puede equivocarse",
+              en: "AI answers · can be wrong",
             })}
           </Coord>
         </div>

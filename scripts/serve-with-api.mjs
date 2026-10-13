@@ -71,7 +71,7 @@ const server = createServer(async (req, res) => {
     if (!key) {
       return sendJson(res, 503, {
         error: "chat_not_configured",
-        message: "Falta GLM_API_KEY. Configúrala como variable de entorno.",
+        message: "El asistente no está configurado todavía.",
       });
     }
 
@@ -103,8 +103,8 @@ const server = createServer(async (req, res) => {
       return sendJson(res, 200, { reply: outcome.reply });
     }
 
-    console.error(`  chat falla ${ms} ms  ${outcome.kind}`);
-    return sendJson(res, 502, { error: outcome.kind, detail: outcome.detail });
+    console.error(`  chat falla ${ms} ms  ${outcome.kind}`, outcome.detail ?? "");
+    return sendJson(res, 502, { error: outcome.kind });
   }
 
   const path = url.pathname === "/" ? "/index.html" : url.pathname;

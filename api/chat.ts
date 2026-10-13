@@ -31,9 +31,10 @@ export default async function handler(req: Req, res: Res): Promise<void> {
 
   const apiKey = process.env.GLM_API_KEY;
   if (!apiKey) {
+    console.error("[chat] falta la clave del asistente: se devuelve 503");
     res.status(503).json({
       error: "chat_not_configured",
-      message: "The assistant is not configured yet. Set GLM_API_KEY.",
+      message: "The assistant is not configured yet.",
     });
     return;
   }
@@ -53,5 +54,8 @@ export default async function handler(req: Req, res: Res): Promise<void> {
 
   // 502 tells the widget "reachable but unusable" — it then offers the
   // human fallback (WhatsApp / email) instead of leaving a blank bubble.
-  res.status(502).json({ error: outcome.kind, detail: outcome.detail });
+  // The upstream detail stays in the server log: naming the provider to the
+  // browser is nobody's business.
+  console.error(`[chat] ${outcome.kind}`, outcome.detail ?? outcome.status ?? "");
+  res.status(502).json({ error: outcome.kind });
 }
