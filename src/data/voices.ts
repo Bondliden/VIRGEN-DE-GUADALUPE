@@ -58,6 +58,10 @@ export const voices: Voice[] = [
     href: links.azucenaTestimony,
     embed: links.azucenaTestimonyEmbed,
     photo: "/images/azucena/azucena-rezando.jpg",
+    bio: {
+      es: "Azucena Cierco ejerció el periodismo durante veinticuatro años y, en los últimos diez, participó en la conducción del programa especial que cada 12 de diciembre conmemora el aniversario del Acontecimiento Guadalupano. En 2023, al subir a la Capilla de las Rosas, tuvo un encuentro con la siempre Virgen Santa María de Guadalupe que transformó su vida. Desde entonces ha puesto su vida y su corazón en difundir el Acontecimiento que cambió la historia de América Latina.",
+      en: "Azucena Cierco worked as a journalist for twenty-four years and, in the last ten, co-hosted the special programme that commemorates the anniversary of the Guadalupan Event every 12 December. In 2023, as she climbed to the Chapel of the Roses, she had an encounter with the ever-Virgin Holy Mary of Guadalupe that transformed her life. Since then she has given her life and her heart to spreading the Event that changed the history of Latin America.",
+    },
     photoAlt: {
       es: "Azucena Cierco, de rodillas, ofrece un ramo de rosas ante la imagen de Santa María de Guadalupe",
       en: "Azucena Cierco, kneeling, offers a bouquet of roses before the image of Our Lady of Guadalupe",

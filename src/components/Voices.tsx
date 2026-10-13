@@ -1,4 +1,4 @@
-import { ExternalLink } from "lucide-react";
+import { ChevronDown, ExternalLink } from "lucide-react";
 import { useLang } from "@/lib/lang";
 import { nextLive, rosaryModes, voices, voicesSection } from "@/data/voices";
 import { LiveAnnouncement } from "@/components/LiveAnnouncement";
@@ -87,17 +87,34 @@ export function Voices() {
             ) : (
               <div className="flex-1" />
             )}
-            {/* Bajo la foto, quién es y su historia. Sin enlace «Abrir»:
-                llevaba al mismo vídeo que se ve a la izquierda. */}
-            <div className="mt-6 border-t border-ink/20 pt-4">
-              <p className="font-display text-base font-semibold uppercase tracking-[0.06em] text-inkSoft">
-                {featured.person}
-              </p>
-              <Coord className="mt-1 block uppercase">{t(featured.role)}</Coord>
-              {featured.bio ? (
-                <p className="mt-4 text-[15px] leading-relaxed text-inkMute">{t(featured.bio)}</p>
-              ) : null}
-            </div>
+            {/* Bajo la foto, quién es; su historia, desplegable con la flecha
+                (un <details> nativo: se abre con ratón, teclado y lector de
+                pantalla sin código). Sin enlace «Abrir»: llevaba al mismo
+                vídeo que se ve a la izquierda. */}
+            {featured.bio ? (
+              <details className="group mt-6 border-t border-ink/20 pt-4">
+                <summary className="flex cursor-pointer list-none items-start justify-between gap-3 [&::-webkit-details-marker]:hidden">
+                  <span>
+                    <span className="block font-display text-base font-semibold uppercase tracking-[0.06em] text-inkSoft">
+                      {featured.person}
+                    </span>
+                    <Coord className="mt-1 block uppercase">{t(featured.role)}</Coord>
+                  </span>
+                  <span className="flex flex-none items-center gap-1.5 pt-0.5 text-[13px] font-semibold text-accentRoseInk">
+                    {t({ es: "Su historia", en: "Her story" })}
+                    <ChevronDown className="h-5 w-5 transition-transform duration-300 group-open:rotate-180" aria-hidden />
+                  </span>
+                </summary>
+                <p className="mt-4 text-left text-[15px] leading-relaxed text-inkSoft">{t(featured.bio)}</p>
+              </details>
+            ) : (
+              <div className="mt-6 border-t border-ink/20 pt-4">
+                <p className="font-display text-base font-semibold uppercase tracking-[0.06em] text-inkSoft">
+                  {featured.person}
+                </p>
+                <Coord className="mt-1 block uppercase">{t(featured.role)}</Coord>
+              </div>
+            )}
           </div>
         </div>
 
