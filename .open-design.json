@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "designSystem": {
+    "slug": "atelier-zero",
+    "path": "design-systems/atelier-zero"
+  },
+  "skill": {
+    "slug": "open-design-landing",
+    "path": "design-templates/open-design-landing",
+    "kind": "design-template",
+    "mode": "brand-page"
+  },
+  "boundAt": "2026-10-13T12:00:00Z"
+}

@@ -1,0 +1,412 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────────
+   Santa María de Guadalupe 500 Años
+   Palette sampled from the image venerated in the
+   Basilica of Guadalupe, Mexico City:
+   verde azulado del manto · salmón del vestido ·
+   dorado de los rayos · rosas de Castilla · ayate.
+   ───────────────────────────────────────────── */
+
+:root {
+  --gd-mantle: 190 40% 36%;
+  --gd-mantle-deep: 191 52% 11%;
+  --gd-mantle-mid: 191 44% 22%;
+  --gd-salmon: 20 55% 75%;
+  --gd-salmon-deep: 18 48% 58%;
+  --gd-gold: 45 68% 47%;
+  --gd-gold-soft: 45 70% 78%;
+  --gd-rose: 351 47% 53%;
+  --gd-ivory: 38 45% 93%;
+  --gd-sand: 35 34% 85%;
+}
+
+/* ─────────────────────────────────────────────
+   Atelier Zero contract — Open Design
+   design-systems/atelier-zero · DESIGN.md is the authority.
+   (tokens.css in that folder ships a generic monochrome placeholder
+   that contradicts DESIGN.md; the skill's authority order is
+   DESIGN.md > craft/* > template SKILL.md, so DESIGN.md wins.)
+
+   The tilma palette keeps the COLOUR SLOTS (it is the subject);
+   Atelier Zero supplies the STRUCTURE: warm paper canvas, a single
+   accent per ~600vh, Roman-numeral section walks, hairline rules,
+   mono annotations, mandatory metadata strip and side rails.
+   ───────────────────────────────────────────── */
+:root {
+  /* Paper canvas — warm ivory, never pure white */
+  --gd-paper: 40 42% 88%;       /* #efe7d2 warm paper */
+  --gd-paper-warm: 41 41% 86%;
+  --gd-paper-dark: 41 34% 79%;
+  --gd-bone: 43 58% 92%;        /* elevated card, always on paper */
+
+  /* Ink ladder — pure black is forbidden */
+  --gd-ink: 40 16% 7%;          /* #15140f */
+  --gd-ink-soft: 36 13% 15%;
+  --gd-ink-mute: 40 11% 32%;
+  --gd-ink-faint: 42 11% 50%;
+
+  /* Single accent slot (Atelier Zero "coral") → rosas de Castilla */
+  --gd-accent: 351 47% 53%;
+  --gd-accent-soft: 351 60% 63%;
+  --gd-accent-on: 40 42% 96%;
+
+  /* Jewelry only: ≤1% surface, never a CTA fill */
+  --gd-mustard: 45 68% 47%;
+  --gd-olive: 82 22% 37%;
+
+  /* Text on the single dark panel (the mantle). Solid values on purpose:
+     a slash inside a Tailwind arbitrary value is ambiguous with the
+     opacity modifier, so the tints live here instead. */
+  --gd-on-dark: 38 45% 93%;
+  --gd-on-dark-soft: 38 38% 84%;
+}
+
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* The navbar is sticky, so every in-page anchor target must clear it.
+   Without this the section heading lands hidden behind the bar. */
+main [id],
+footer[id] {
+  scroll-margin-top: 7rem;
+}
+
+body {
+  font-family: "DM Sans", Inter, system-ui, sans-serif;
+  background-color: hsl(var(--gd-paper));
+  background-image:
+    radial-gradient(ellipse 70% 55% at 12% 6%, rgba(106, 92, 56, 0.06), transparent 62%),
+    radial-gradient(ellipse 60% 50% at 92% 86%, rgba(106, 92, 56, 0.06), transparent 62%);
+  color: hsl(var(--gd-ink));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Mandatory paper noise (Atelier Zero §2 Surface noise):
+   fixed, pointer-events-disabled, multiply-blended turbulence ~6%. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+
+h1, h2, h3, h4 {
+  font-family: "Cormorant Garamond", "Playfair Display", Georgia, serif;
+  font-weight: 500;
+}
+
+::selection {
+  background: hsl(var(--gd-gold) / 0.28);
+}
+
+/* Scrollbar in the tilma palette */
+::-webkit-scrollbar { width: 11px; height: 11px; }
+::-webkit-scrollbar-track { background: hsl(var(--gd-sand)); }
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--gd-mantle));
+  border-radius: 9999px;
+  border: 2px solid hsl(var(--gd-sand));
+}
+::-webkit-scrollbar-thumb:hover { background: hsl(var(--gd-mantle-mid)); }
+
+@layer components {
+  /* ── Sunburst: the rays that frame the sacred image ── */
+  .gd-rays {
+    background-image: repeating-conic-gradient(
+      from 0deg at 50% 44%,
+      hsl(var(--gd-gold) / 0.15) 0deg 0.85deg,
+      transparent 0.85deg 3.2deg
+    );
+  }
+
+  /* ── Star field: the stars woven into the mantle ── */
+  .gd-stars {
+    background-color: hsl(var(--gd-mantle-deep));
+    background-image:
+      radial-gradient(circle at 12% 22%, hsl(var(--gd-gold-soft) / 0.85) 0 1.1px, transparent 1.4px),
+      radial-gradient(circle at 34% 62%, hsl(var(--gd-gold-soft) / 0.7) 0 1px, transparent 1.3px),
+      radial-gradient(circle at 58% 14%, hsl(var(--gd-gold-soft) / 0.8) 0 1.2px, transparent 1.5px),
+      radial-gradient(circle at 76% 44%, hsl(var(--gd-gold-soft) / 0.65) 0 1px, transparent 1.3px),
+      radial-gradient(circle at 91% 78%, hsl(var(--gd-gold-soft) / 0.75) 0 1.1px, transparent 1.4px),
+      radial-gradient(circle at 22% 88%, hsl(var(--gd-gold-soft) / 0.6) 0 1px, transparent 1.3px),
+      radial-gradient(circle at 66% 92%, hsl(var(--gd-gold-soft) / 0.7) 0 1px, transparent 1.3px),
+      radial-gradient(circle at 45% 36%, hsl(var(--gd-gold-soft) / 0.6) 0 1px, transparent 1.3px);
+    background-size:
+      190px 190px, 240px 240px, 210px 210px, 260px 260px,
+      230px 230px, 250px 250px, 200px 200px, 220px 220px;
+  }
+
+  /* ── Ayate texture: the maguey-fibre cloth ── */
+  .gd-ayate {
+    background-color: hsl(var(--gd-ivory));
+    background-image:
+      linear-gradient(0deg, hsl(35 30% 45% / 0.055) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(35 30% 45% / 0.055) 1px, transparent 1px);
+    background-size: 7px 7px, 7px 7px;
+  }
+
+  /* ── Glow behind the image ── */
+  .gd-glow::before {
+    content: "";
+    position: absolute;
+    inset: -14%;
+    border-radius: 9999px;
+    background: radial-gradient(
+      circle,
+      hsl(var(--gd-gold) / 0.42) 0%,
+      hsl(var(--gd-gold) / 0.14) 44%,
+      transparent 72%
+    );
+    filter: blur(30px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── Gold rule with a diamond at its centre ── */
+  .gd-rule {
+    position: relative;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      hsl(var(--gd-gold) / 0.85) 16%,
+      hsl(var(--gd-gold) / 0.85) 84%,
+      transparent
+    );
+  }
+  .gd-rule::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 7px;
+    height: 7px;
+    transform: translate(-50%, -50%) rotate(45deg);
+    background: hsl(var(--gd-gold));
+  }
+
+  /* ── Gold text gradient ── */
+  .gd-gold-text {
+    background: linear-gradient(
+      100deg,
+      hsl(45 72% 64%) 0%,
+      hsl(38 62% 76%) 32%,
+      hsl(20 62% 76%) 66%,
+      hsl(45 72% 64%) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* ── Glass panel for dark sections ── */
+  .gd-glass {
+    background: hsl(191 45% 14% / 0.62);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid hsl(var(--gd-gold) / 0.22);
+  }
+
+  /* ── Ornamental frame used around the sacred image ── */
+  .gd-frame {
+    box-shadow:
+      0 0 0 1px hsl(var(--gd-gold) / 0.45),
+      0 0 0 7px hsl(var(--gd-mantle-deep) / 0.9),
+      0 0 0 8px hsl(var(--gd-gold) / 0.35),
+      0 34px 70px -18px hsl(191 60% 6% / 0.85);
+  }
+
+  .gd-link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 0.3s ease;
+  }
+  .gd-link-underline:hover {
+    background-size: 0% 1px;
+  }
+
+  /* ═══════════════════════════════════════════
+     Atelier Zero mandatory structures
+     ═══════════════════════════════════════════ */
+
+  /* ── §5 Mandatory top metadata strip ── */
+  .gd-meta-strip {
+    border-bottom: 1px solid hsl(var(--gd-ink) / 0.18);
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: hsl(var(--gd-ink-faint));
+  }
+
+  /* ── §4 Mandatory fixed side rails (36px, ≥1280px only) ── */
+  .gd-rail {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 36px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: hsl(var(--gd-ink-faint));
+    pointer-events: none;
+    z-index: 8;
+  }
+  .gd-rail > span { writing-mode: vertical-rl; }
+  .gd-rail-left { left: 0; }
+  .gd-rail-right { right: 0; }
+  @media (min-width: 1280px) { .gd-rail { display: flex; } }
+
+  /* ── §5 Mandatory section rule:  I.  LABEL  ·······  004 / 008 ── */
+  .gd-section-rule {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    border-top: 1px solid hsl(var(--gd-ink) / 0.22);
+    padding-top: 0.6rem;
+  }
+  .gd-roman {
+    flex: none;
+    font-family: "Playfair Display", Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 14px;
+    color: hsl(var(--gd-accent));
+  }
+  .gd-section-rule .gd-label {
+    flex: none;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: hsl(var(--gd-ink-mute));
+  }
+  .gd-section-rule .gd-leader {
+    flex: 1;
+    height: 1px;
+    border-top: 1px dotted hsl(var(--gd-ink) / 0.3);
+    transform: translateY(-0.28em);
+  }
+  .gd-pageofpages {
+    flex: none;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: hsl(var(--gd-ink-faint));
+  }
+
+  /* ── §3 Eyebrow label with 18px accent hairline ── */
+  .gd-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: hsl(var(--gd-accent));
+  }
+  .gd-eyebrow::before {
+    content: "";
+    width: 18px;
+    height: 1px;
+    background: hsl(var(--gd-accent));
+  }
+
+  /* ── §3 Monospace annotation (coordinates, plate numbers) ── */
+  .gd-coord {
+    font-family: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    color: hsl(var(--gd-ink-faint));
+  }
+
+  /* ── §3 Terminating accent dot — one per headline ── */
+  .gd-dot { color: hsl(var(--gd-accent)); }
+
+  /* ── §12 Footer mega kicker word ── */
+  .gd-mega {
+    font-family: "Cormorant Garamond", "Playfair Display", Georgia, serif;
+    font-weight: 500;
+    line-height: 0.86;
+    letter-spacing: -0.02em;
+    font-size: clamp(70px, 13vw, 200px);
+  }
+}
+
+/* ─────────────────────────────────────────────
+   Justificación — petición expresa del cliente.
+
+   El manual de artes gráficas del sistema advierte contra justificar en web
+   ("create rivers; never use on the web"). Los ríos no los crea la
+   justificación en sí, sino justificar SIN partición de palabras: el
+   navegador estira los huecos entre palabras para llegar al margen. Con
+   guionado activo los huecos se mantienen cortos y el bloque queda macizo,
+   como una página impresa. De ahí estas tres reglas:
+
+     · hyphens: auto     — sin esto, la justificación es una defecto. El
+                           navegador usa el diccionario del idioma que ya
+                           declaramos en <html lang>, así que funciona en
+                           castellano y en inglés.
+     · text-align-last   — la última línea de cada bloque queda a la
+                           izquierda en vez de estirarse de margen a margen.
+     · text-justify      — inter-word, no inter-character.
+
+   Quedan FUERA a propósito los titulares, la monoespaciada, los rótulos y
+   el chrome de interfaz: estirar un titular que rompe en dos líneas no
+   parece imprenta, parece roto.
+   ───────────────────────────────────────────── */
+p,
+li,
+dd,
+blockquote,
+figcaption {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  text-align-last: start;
+}
+
+/* La monoespaciada, los rótulos, los numerales y el titulón vuelven a su
+   borde irregular: son anotaciones de una línea, no texto corrido. */
+.gd-coord,
+.gd-eyebrow,
+.gd-roman,
+.gd-mega,
+h1,
+h2,
+h3,
+h4 {
+  text-align: start;
+  hyphens: none;
+  -webkit-hyphens: none;
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .gd-rays { background-image: none; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

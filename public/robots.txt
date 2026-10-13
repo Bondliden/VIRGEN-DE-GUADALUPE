@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://santamariadeguadalupe500years.com/sitemap.xml
