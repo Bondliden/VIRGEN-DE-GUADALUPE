@@ -73,10 +73,33 @@ paquete del navegador. Ese único archivo se apoya en `api/_chat-core.mjs`, dond
 vive el prompt del sistema y la llamada a GLM, de modo que la misma ruta funciona
 en Vercel, Netlify, Cloudflare o en el servidor de demostración sin tocar nada.
 
-El prompt está escrito para que el asistente **responda en prosa, sin markdown** y
-**tenga prohibido inventar datos**: cuando un dato no está en el corpus del sitio,
-lo dice y remite al correo de contacto. El razonamiento va en `low` porque la
-familia `glm-5.3` factura los tokens de pensamiento a precio de salida.
+El prompt se arma con tres piezas: **cómo habla** Lupita (`IDENTIDAD`), **lo que
+sabe** (el corpus) y **las reglas de casa** (`REGLAS`).
+
+### El corpus
+
+Todo lo que Lupita puede afirmar vive en `api/_lupita-knowledge.mjs`, y sale del
+mismo trabajo documental que ya está publicado en `src/data/*.ts`: los hechos con
+fecha, el Nican Mopohua y sus fuentes, la Tilma con los ocho signos y los estudios
+citados por el nombre de sus autores, el Tepeyac y la Basílica, el Jubileo de 2031
+con la Novena, las siete peregrinaciones, el equipo, la transparencia y el
+contacto. Va en trece bloques y un glosario de nombres en inglés.
+
+Dos cautelas que el propio corpus lleva escritas: la Novena Intercontinental sigue
+pendiente de cotejar con la Conferencia del Episcopado Mexicano —el asistente lo
+dice en voz alta, igual que lo dice la página— y sobre el Jubileo no se anuncian
+indulgencias ni actos oficiales, porque eso sólo lo puede establecer la Iglesia.
+
+**Si se cambia un dato en `src/data`, hay que cambiarlo también aquí.** Es el
+precio de que el asistente no diga una cosa y la página diga otra.
+
+Las reglas están escritas para que el asistente **responda en prosa, sin markdown**,
+**sea cálido y trate de usted o de tú según el visitante** y **tenga prohibido
+inventar datos**: cuando un dato no está en el corpus, lo dice con naturalidad y
+remite al correo de contacto. El prompt completo ronda los 38 000 caracteres, unos
+11 000 tokens por mensaje: alrededor de 0,002 $ por respuesta con `glm-5.3-flash`.
+El razonamiento va en `low` porque la familia `glm-5.3` factura los tokens de
+pensamiento a precio de salida.
 
 > **Antes de dar el sitio por publicado, hay que rotar `GLM_API_KEY`.** La clave
 > que se usó durante el desarrollo circuló en texto plano por un archivo local y
@@ -97,7 +120,7 @@ respetan literalmente, y las que más mandan son:
 
 ## Estructura
 
-    api/               ruta del asistente (chat.ts + _chat-core.mjs)
+    api/               ruta del asistente (chat.ts + _chat-core.mjs + _lupita-knowledge.mjs)
     scripts/           servidor de demostración que sirve Vite y /api/chat
     public/            favicon, robots e imágenes del santuario
     src/components/    una pieza por sección

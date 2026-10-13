@@ -12,14 +12,16 @@ import { Coord } from "@/components/Chrome";
 
 const suggestions = [
   { es: "¿Quién es la Virgen de Guadalupe?", en: "Who is Our Lady of Guadalupe?" },
+  { es: "¿Qué pasó entre el 9 y el 12 de diciembre de 1531?", en: "What happened between 9 and 12 December 1531?" },
   { es: "¿Qué se descubrió en la Tilma?", en: "What was found in the Tilma?" },
+  { es: "¿Qué es el Jubileo Guadalupano de 2031?", en: "What is the Guadalupan Jubilee of 2031?" },
   { es: "Quiero organizar una peregrinación", en: "I want to organise a pilgrimage" },
-  { es: "¿Qué es el Jubileo de 2031?", en: "What is the 2031 Jubilee?" },
+  { es: "¿Cómo rezo el Rosario Guadalupano?", en: "How do I pray the Guadalupan Rosary?" },
 ] as const;
 
 const intro = {
-  es: "¡Bendiciones! Soy Lupita, la asistente de este sitio. Pregúntame por Santa María de Guadalupe, la Tilma, el Nican Mopohua o las peregrinaciones al Tepeyac.",
-  en: "Blessings! I am Lupita, the assistant of this site. Ask me about Saint Mary of Guadalupe, the Tilma, the Nican Mopohua or the pilgrimages to Tepeyac.",
+  es: "¡Bendiciones! Soy Lupita, la asistente de este sitio. Pregúntame por Santa María de Guadalupe, la Tilma, el Nican Mopohua, el Jubileo de 2031 o las peregrinaciones al Tepeyac.",
+  en: "Blessings! I am Lupita, the assistant of this site. Ask me about Saint Mary of Guadalupe, the Tilma, the Nican Mopohua, the 2031 Jubilee or the pilgrimages to Tepeyac.",
 };
 
 type Msg = { id: number; role: "user" | "assistant"; content: string };
