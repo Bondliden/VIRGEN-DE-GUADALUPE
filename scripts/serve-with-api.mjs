@@ -1,9 +1,9 @@
 /* ─────────────────────────────────────────────
-   Local demo server.
+   Site server.
 
-   Serves the built site AND the /api/chat function on one port, so the
-   assistant can actually be used before deploying. Production does not need
-   this file: Vercel runs api/chat.ts directly.
+   Serves the built site AND the /api/chat route on one port. Railway does not
+   execute serverless api/ functions the way Vercel does, so this process is
+   what stands in for that adapter. It doubles as the local demo server.
 
    Usage:  npm run build   (once)
            npm run demo     ->  http://localhost:5002
@@ -15,7 +15,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { extname, join, normalize } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const PORT = Number(process.env.DEMO_PORT || 5002);
+const PORT = Number(process.env.PORT || process.env.DEMO_PORT || 5002);
 const DIST = fileURLToPath(new URL("../dist/", import.meta.url));
 
 /* Minimal .env loader so the key does not have to be exported by hand. */
@@ -71,7 +71,7 @@ const server = createServer(async (req, res) => {
     if (!key) {
       return sendJson(res, 503, {
         error: "chat_not_configured",
-        message: "Falta GLM_API_KEY en el fichero .env",
+        message: "Falta GLM_API_KEY. Configúrala como variable de entorno.",
       });
     }
 
@@ -134,14 +134,14 @@ const server = createServer(async (req, res) => {
 
 server.listen(PORT, () => {
   console.log("");
-  console.log(`  Demo       http://localhost:${PORT}/`);
+  console.log(`  Sitio      http://localhost:${PORT}/`);
   console.log(
     `  Modelo     ${process.env.GLM_MODEL || "glm-5.3-flash"} (razonamiento: ${
       process.env.GLM_REASONING_EFFORT || "low"
     })`
   );
   console.log(
-    `  Clave GLM  ${process.env.GLM_API_KEY ? "cargada del .env" : "AUSENTE — el chat devolvera 503"}`
+    `  Clave GLM  ${process.env.GLM_API_KEY ? "presente" : "AUSENTE — el chat devolvera 503"}`
   );
   console.log("");
 });

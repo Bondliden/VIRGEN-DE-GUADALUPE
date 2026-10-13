@@ -39,3 +39,6 @@ pnpm-debug.log*
 
 # Desecho: maqueta de portal ajena al proyecto, descartada
 portal_de_noticias_din_mico.html
+
+# Documentos personales: nunca al repositorio
+*.pdf
