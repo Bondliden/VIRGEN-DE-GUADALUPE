@@ -25,6 +25,9 @@ export const site = {
   /** Enlace de Calendly para reservar una videollamada con Azucena. Vacío:
       no se muestra el botón. */
   calendly: import.meta.env.VITE_CALENDLY_URL || "",
+  /** El directo del canal de YouTube de Azucena (…/@canal/live: siempre abre
+      la emisión que esté en el aire). Vacío: no se muestra el botón. */
+  youtubeLive: import.meta.env.VITE_YOUTUBE_LIVE_URL || "",
   instagram: import.meta.env.VITE_INSTAGRAM_HANDLE || "",
   youtube: import.meta.env.VITE_YOUTUBE_HANDLE || "@inbguadalupe3618",
   nonprofitName: import.meta.env.VITE_NONPROFIT_NAME || "",

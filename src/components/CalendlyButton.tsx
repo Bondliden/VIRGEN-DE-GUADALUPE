@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { CalendarDays, MessageCircle, X } from "lucide-react";
+import { CalendarDays, MessageCircle, X, Youtube } from "lucide-react";
 import { useLang } from "@/lib/lang";
 import { site } from "@/data/links";
 
@@ -69,6 +69,21 @@ export function CalendlyButton({ className = "flex h-14 w-14" }: { className?: s
     </button>
   );
 
+  /* Después de reservar: el acceso al directo de su canal de YouTube, donde
+     se emite el podcast. Google Calendar no avisa a la web de que la reserva
+     se ha hecho, así que el botón está siempre, justo debajo de la agenda. */
+  const liveButton = site.youtubeLive ? (
+    <a
+      href={site.youtubeLive}
+      target="_blank"
+      rel="noreferrer noopener"
+      className="inline-flex items-center gap-2 bg-accentRose px-4 py-2.5 text-eyebrow font-semibold uppercase tracking-eyebrow text-[hsl(var(--gd-accent-on))] transition-colors hover:bg-accentRose/80"
+    >
+      <Youtube className="h-4 w-4" aria-hidden />
+      {t({ es: "¿Ya reservaste? Entra al podcast en vivo", en: "Booked? Join the live podcast" })}
+    </a>
+  ) : null;
+
   const calendlyPanel = site.calendly ? (
     <div
       role="dialog"
@@ -82,7 +97,8 @@ export function CalendlyButton({ className = "flex h-14 w-14" }: { className?: s
         {closeButton}
       </div>
       <iframe src={embedUrl(site.calendly)} title={heading} className="w-full flex-1 bg-white" />
-      <div className="border-t border-ink/20 px-4 py-2.5 text-right">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-t border-ink/20 px-4 py-2.5">
+        {liveButton ?? <span />}
         <a
           href={site.calendly}
           target="_blank"
@@ -133,6 +149,7 @@ export function CalendlyButton({ className = "flex h-14 w-14" }: { className?: s
           {t({ es: "O escribe a", en: "Or write to" })}{" "}
           <span className="select-all font-semibold text-inkSoft">{site.contactEmail}</span>
         </p>
+        {liveButton ? <div className="mt-5 border-t border-ink/20 pt-4">{liveButton}</div> : null}
       </div>
     </div>
   );
