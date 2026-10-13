@@ -159,8 +159,8 @@ export const pilgrimages: Pilgrimage[] = [
         en: "The Historic Centre and the Zócalo, raised over ancient México-Tenochtitlan.",
       },
       {
-        es: "Catedral Metropolitana, donde la Tilma estuvo resguardada mientras se restauraba el Templo Expiatorio.",
-        en: "The Metropolitan Cathedral, where the Tilma was safeguarded while the Expiatory Temple was restored.",
+        es: "Catedral Metropolitana, en cuya sede estuvo resguardada la Tilma de 1629 a 1634, durante la gran inundación de la ciudad.",
+        en: "The Metropolitan Cathedral, whose see kept the Tilma from 1629 to 1634, during the city's great flood.",
       },
       {
         es: "Sitios de la evangelización temprana y de los primeros conventos franciscanos.",
@@ -236,8 +236,8 @@ export const pilgrimages: Pilgrimage[] = [
           en: "The Old Basilica, now the Expiatory Temple of Christ the King",
         },
         body: {
-          es: "Lugar que albergó la Tilma durante 267 años. Este fue el templo donde en 1921 se encontraba la Tilma cuando, durante la Guerra Cristera, alguien puso una bomba a la santa imagen: la iglesia fue destruida al 95 %, pero milagrosamente a Ella no le ocurrió nada. El templo estuvo al borde del colapso, fue cerrado y posteriormente restaurado. La Tilma fue trasladada en esa época a la Catedral Metropolitana.",
-          en: "The place that housed the Tilma for 267 years. This was the temple where the Tilma stood in 1921 when, during the Cristero War, someone placed a bomb beside the holy image: the church was 95 % destroyed, yet miraculously nothing happened to her. The temple came to the brink of collapse, was closed and later restored. At that time the Tilma was moved to the Metropolitan Cathedral.",
+          es: "Lugar que albergó la Tilma durante 267 años, de 1709 a 1976. Aquí estaba la imagen el 14 de noviembre de 1921, cuando alguien dejó a sus pies un ramo de flores con dinamita: la explosión dañó el altar, los candeleros y el piso, y dobló un crucifijo de bronce, pero a Ella no le ocurrió nada y ni siquiera se rompió el cristal que la cubría. Hoy es el Templo Expiatorio a Cristo Rey.",
+          en: "The place that housed the Tilma for 267 years, from 1709 to 1976. The image was here on 14 November 1921, when someone left a bouquet of flowers with dynamite at her feet: the blast damaged the altar, the candlesticks and the floor, and bent a bronze crucifix, yet nothing happened to her and not even the glass covering her broke. Today it is the Expiatory Temple of Christ the King.",
         },
       },
     ],
@@ -339,8 +339,8 @@ export const pilgrimages: Pilgrimage[] = [
     },
     highlights: [
       {
-        es: "Catedral Metropolitana, primera sede episcopal de México y refugio de la Tilma mientras se restauraba el Templo Expiatorio.",
-        en: "The Metropolitan Cathedral, first episcopal see of Mexico and refuge of the Tilma while the Expiatory Temple was restored.",
+        es: "Catedral Metropolitana, primera sede episcopal de México y refugio de la Tilma durante la gran inundación, de 1629 a 1634.",
+        en: "The Metropolitan Cathedral, first episcopal see of Mexico and refuge of the Tilma during the great flood, from 1629 to 1634.",
       },
       {
         es: "El Palacio Arzobispal y la memoria del primer obispado, junto al Zócalo.",
