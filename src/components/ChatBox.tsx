@@ -117,27 +117,32 @@ export function ChatBox() {
       className="pointer-events-auto flex w-[min(23rem,calc(100vw-2.5rem))] flex-col border border-ink/25 bg-paper shadow-[0_30px_70px_-30px_hsl(var(--gd-ink)/0.65)]"
       aria-label={t({ es: "Asistente del sitio", en: "Site assistant" })}
     >
-      <header className="flex items-start justify-between gap-3 border-b border-ink/20 px-4 py-3">
-        <div>
+      <header className="border-b border-ink/20 px-4 pt-3 pb-3.5">
+        <div className="flex items-start justify-between gap-3">
           <p className="flex items-center gap-2 font-display text-[13px] font-bold uppercase tracking-[0.14em] text-inkSoft">
             <Sparkles className="h-3.5 w-3.5 text-accentRose" aria-hidden />
             {t({ es: "Lupita · asistente", en: "Lupita · assistant" })}
           </p>
-          <Coord className="mt-1 block uppercase">
-            {t({
-              es: "Respuestas con IA · puede equivocarse",
-              en: "AI answers · can be wrong",
-            })}
-          </Coord>
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            aria-label={t({ es: "Cerrar el asistente", en: "Close the assistant" })}
+            className="text-inkMute transition-colors hover:text-ink"
+          >
+            <X className="h-4 w-4" />
+          </button>
         </div>
-        <button
-          type="button"
-          onClick={() => setOpen(false)}
-          aria-label={t({ es: "Cerrar el asistente", en: "Close the assistant" })}
-          className="text-inkMute transition-colors hover:text-ink"
-        >
-          <X className="h-4 w-4" />
-        </button>
+
+        {/* Aviso de que quien responde es una IA. Va a lo ancho del panel y en
+            la tinta de anotación legible: en la columna estrecha del título, a
+            10px y en la tinta más pálida, apenas se leía y quedaba pegada al
+            filete que la separa de los mensajes. */}
+        <Coord className="mt-2 block text-[11px] uppercase text-inkMute">
+          {t({
+            es: "Respuestas con IA · puede equivocarse",
+            en: "AI answers · can be wrong",
+          })}
+        </Coord>
       </header>
 
       <div className="flex max-h-[52vh] flex-col gap-3 overflow-y-auto px-4 py-4" aria-live="polite">
