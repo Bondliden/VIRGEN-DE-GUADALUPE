@@ -74,8 +74,20 @@ export const GLM_BASE =
 
 export const MODEL = process.env.GLM_MODEL || "glm-5.3-flash";
 
-export const DEEPSEEK_URL =
-  process.env.DEEPSEEK_BASE_URL || "https://api.deepseek.com/chat/completions";
+/* DEEPSEEK_BASE_URL puede venir como raíz («https://api.deepseek.com», como
+   está en las variables de usuario de este equipo y como lo usan otras
+   herramientas) o como dirección completa. Pegarle a la raíz da 404, así que
+   se completa aquí. La raíz «/anthropic» es la del otro protocolo de
+   DeepSeek: si llega esa, se usa la raíz OpenAI. */
+export function chatCompletionsUrl(raw, fallback) {
+  const base = (raw || fallback).trim().replace(/\/+$/, "").replace(/\/anthropic$/, "");
+  return /\/chat\/completions$/.test(base) ? base : `${base}/chat/completions`;
+}
+
+export const DEEPSEEK_URL = chatCompletionsUrl(
+  process.env.DEEPSEEK_BASE_URL,
+  "https://api.deepseek.com"
+);
 
 export const DEEPSEEK_MODEL = process.env.DEEPSEEK_MODEL || "deepseek-flash";
 
