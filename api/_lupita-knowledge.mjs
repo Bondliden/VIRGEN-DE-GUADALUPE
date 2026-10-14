@@ -37,8 +37,8 @@ const PARTES = [
 · Ese mismo 12 de diciembre, la Señora se aparece a Juan Bernardino en Tulpetlac (Ecatepec, Estado de México), lo sana y allí le dice su nombre: Santa María de Guadalupe. Es la quinta aparición, la que casi nunca se cuenta.
 · En resumen: cuatro apariciones a Juan Diego, entre el 9 y el 12 de diciembre, y una quinta a Juan Bernardino el día 12 en Tulpetlac.
 · Después: se levanta la primera capilla en el cerro. Juan Diego deja su casa y vive diecisiete años en un cuartito junto a ella, custodiando la Tilma (lo cuenta el Nican Motecpana). Murió en 1548. Zumárraga murió el 3 de junio de 1548.
-· Juan Diego nació hacia 1474 en Cuautitlán, se casó con María Lucía y no tuvieron hijos; fueron de los primeros en recibir el bautismo, probablemente hacia 1525. Cuando la Señora lo llama es un hombre maduro, viudo, de unos 57 años. Cuauhtlatoatzin significa «el que habla como un águila».
-· Fray Juan de Zumárraga (Durango, Vizcaya, 1468): franciscano, humanista, el primer obispo de México (consagrado en 1528) y en 1546 el primer arzobispo. Sus cartas a Carlos V son fuente de primera mano de los primeros años de la colonia, y en ellas denunció los abusos de los encomenderos contra los indios. Dudó, pidió una señal, y ante la imagen mandó levantar la primera capilla.
+· Juan Diego nació hacia 1474 en Cuautitlán, se casó con María Lucía y no tuvieron hijos; fueron de los primeros en recibir el bautismo; la fecha no es segura (unas fuentes dicen hacia 1525 y otras, hacia 1530). Cuando la Señora lo llama es un hombre maduro, viudo, de unos 57 años. Cuauhtlatoatzin significa «el que habla como un águila».
+· Fray Juan de Zumárraga (Durango, Vizcaya, 1468): franciscano, humanista, el primer obispo de México (llegó en 1528 como obispo electo y fue consagrado en Valladolid en 1533) y en 1546 el primer arzobispo. Sus cartas a Carlos V son fuente de primera mano de los primeros años de la colonia, y en ellas denunció los abusos de los encomenderos contra los indios. Dudó, pidió una señal, y ante la imagen mandó levantar la primera capilla.
 · Camino a la santidad de Juan Diego (contexto católico comúnmente aceptado): fue beatificado por Juan Pablo II el 6 de mayo de 1990 en la Basílica de Guadalupe, y canonizado por el mismo papa el 31 de julio de 2002. Es el primer santo indígena de América.
 `,
 
@@ -50,12 +50,12 @@ const PARTES = [
 · Llegó hasta nosotros dentro del Huei tlamahuiçoltica, el primer libro impreso sobre la Virgen de Guadalupe, publicado en 1649 por Luis Laso de la Vega. El manuscrito que se conserva está hoy en la Biblioteca Pública de Nueva York. No des más detalles del ejemplar (signaturas, folios, estado de conservación) porque no están en el corpus.
 · Otras fuentes que cita el sitio: el Nican Motecpana (sobre la vida de Juan Diego en el Tepeyac, donde se cuenta que vivió allí diecisiete años y que allí fue sepultado su tío) y el Códice Escalada (1548).
 · El trabajo de referencia del sitio es el de Miguel León Portilla sobre el Nican Mopohua.
-· Sinceridad histórica: la datación y la autoría de estos textos son objeto de debate entre historiadores. Miguel León Portilla defendió la antigüedad del relato; otros investigadores —Edmundo O'Gorman entre ellos— lo situaron más tarde, en el siglo XVII. El sitio no esconde ese debate: lo menciona. Si el visitante lo pregunta, contéstale con naturalidad, sin miedo, y no lo presentes como un ataque a la fe: la Iglesia reconoce la devoción guadalupana y su santuario, y el estudio histórico sigue abierto.
+· Sinceridad histórica: la datación y la autoría de estos textos son objeto de debate entre historiadores. Miguel León Portilla y Edmundo O'Gorman coinciden en atribuir el Nican Mopohua a Antonio Valeriano en el siglo XVI (O'Gorman, hacia 1556), aunque O'Gorman niega que el relato sea histórico; otros autores lo sitúan en el siglo XVII. El sitio no esconde ese debate: lo menciona. Si el visitante lo pregunta, contéstale con naturalidad, sin miedo, y no lo presentes como un ataque a la fe: la Iglesia reconoce la devoción guadalupana y su santuario, y el estudio histórico sigue abierto.
 `,
 
   `
 === 4. LA TILMA Y LO QUE SE HA ESTUDIADO EN ELLA ===
-· La Tilma es un ayate de fibra de maguey, no algodón: dos piezas cosidas con hilo de algodón, de unos 1,78 por 1,03 metros. Es la clase de tela que un campesino usaba para cargar maíz —y la clase de tela que se deshace en pocos años—. Lleva cinco siglos sin tratamiento de conservación, expuesta al aire, a la humedad, al humo de las velas y al contacto de los fieles.
+· La Tilma es un ayate de fibra de maguey, no algodón: dos piezas cosidas con hilo de algodón, de unos 1,70 por 1,05 metros (las medidas varían según la fuente; el lienzo se recortó por arriba en el siglo XVIII). La figura de la Virgen mide unos 1,43 metros. Es la clase de tela que un campesino usaba para cargar maíz —y la clase de tela que se deshace en pocos años—. Lleva cinco siglos sin tratamiento de conservación, expuesta al aire, a la humedad, al humo de las velas y al contacto de los fieles.
 · Lo que se ve: una Señora de pie, con las manos juntas, la cabeza levemente inclinada y los ojos bajos. Viste túnica rosada sembrada de flores doradas y manto azul con estrellas. La rodean rayos de oro; bajo sus pies hay una luna creciente negra sostenida por un ángel. Lleva un lazo negro a la cintura y, sobre el vientre, una flor de cuatro pétalos.
 · El manto lleva cuarenta y seis estrellas: veintitrés y veintitrés, una mitad a cada lado. Fernando Ojeda Llanes, matemático del Centro de Estudios Guadalupanos de Mérida, sostiene que no están puestas al azar: son las doce constelaciones y el planeta Júpiter tal como se veían sobre el Tepeyac a las 6:45 de la mañana del 12 de diciembre de 1531. Sostiene también que ese cielo no está dibujado como lo vería un hombre desde la tierra mirando hacia arriba, sino desde arriba, mirando hacia la tierra: desde Dios hacia el hombre.
 · El mismo investigador sostiene que las flores doradas del vestido guardan una disposición geométrica precisa y que, al leer la posición y la distancia de las estrellas como notas, se obtiene una melodía: la música del manto. En el sitio hay vídeos con esa música.
@@ -133,6 +133,7 @@ const PARTES = [
 · Quién puede ser capitán: párrocos y sacerdotes, catequistas, madres y padres de familia, movimientos y grupos de oración, colegios y universidades, y comunidades de migrantes.
 · Cómo funciona, en cuatro pasos: primero, te registras como capitán y recibes el material guadalupano de Azucena; segundo, reúnes tu grupo en la parroquia, el colegio o tu casa; tercero, se preparan juntos la logística, las fechas y el plan espiritual del viaje; y cuarto, peregrinas y animas a tus compañeros a ser capitanes de su propio grupo.
 · El registro es gratuito. En la web se ve el título y las fotos de cada lugar; al registrarse se desbloquean los detalles, los planes de peregrinación y las guías completas, y el equipo envía el material de preparación. Las fotos y vídeos de cada lugar los está preparando Azucena Cierco.
+· QUIÉN ORGANIZA LOS VIAJES: para organizar un viaje o una peregrinación —fechas, grupo, itinerario, logística, costes— el visitante tiene que ponerse en contacto con Azucena Cierco, que es quien organiza y acompaña las peregrinaciones del proyecto. La forma más rápida es el botón redondo verde de WhatsApp, abajo a la izquierda de la página; también puede escribir al correo info@santamariadeguadalupe500years.com. Dilo siempre que alguien quiera viajar, aunque no lo pregunte expresamente, y no des tú precios, fechas ni plazas: eso lo concreta Azucena.
 · Lo que NO hay que inventar: precios, fechas cerradas, cupos, vuelos, hoteles, seguros ni itinerarios hora por hora. Nada de eso está publicado. Para costos, fechas y disponibilidad hay que escribir al equipo, y eso es lo que debes decir, sin dar largas.
 · Si alguien quiere peregrinar en grupo, anímalo a registrarse o a escribir al correo, y ofrécele también la cámara en vivo para «asomarse hoy mismo» a la explanada.
 · Si te dice que acaba de dejar sus datos para ser capitán: agradéceselo, dile que el equipo le escribirá con el material de Azucena y resume los cuatro pasos. Si además quiere una misa para su grupo en la Basílica, eso se pide a la Basílica, con un mes de antelación (sección 16): el programa de capitanes no sustituye ese trámite.
@@ -364,6 +365,162 @@ RECOMENDACIONES AL PEREGRINO (publicadas por la Basílica)
 · La exhortación Ecclesia in America (1999) termina con una oración a Jesucristo que acaba invocando a Nuestra Señora de Guadalupe, Madre de América. Si alguien la pide, di que está al final del documento, en vatican.va.
 · Recuerda que el Rosario Guadalupano del sitio tiene sus propios modos, descritos en la sección 7. Estas oraciones se pueden rezar con él.
 `,
+  `
+=== 19. ANTES DE 1531: EL TEPEYAC, LA CONQUISTA Y LA PRIMERA EVANGELIZACIÓN ===
+· Esta sección da el contexto histórico del Acontecimiento. Lo esencial ya está en la sección 2 (la caída de la ciudad en 1521, la ruina, la llegada de los doce franciscanos en 1524); aquí van los detalles. Lo que es historia va con su fuente; lo que es fe se dice como fe.
+· El nombre del cerro. Tepeyac viene del náhuatl Tepeyácac: tépetl, cerro, y yácatl, nariz o punta; es decir, «en la punta del cerro». Los españoles lo llamaban Tepeaquilla. Estaba en la orilla del antiguo lago, y por allí pasaba la calzada del norte, una de las que unían la ciudad, que era una isla, con tierra firme. Fuente: Diccionario de Historia Cultural de la Iglesia en América Latina (DHIAL), artículo «Tepeyac», de Fidel González Fernández.
+· El Tepeyac en la guerra de 1521. Durante el asedio, Cortés y sus aliados indígenas cerraron México-Tenochtitlan por tres calzadas, y Gonzalo de Sandoval puso su campamento precisamente en el Tepeyac. El 13 de agosto de 1521 Cuauhtémoc fue capturado en Tlatelolco, el último reducto mexica, y con eso terminó la guerra. Fuentes: INAH y el portal Noticonquista de la UNAM.
+· Los doce franciscanos, con más detalle. Desembarcaron en San Juan de Ulúa (Veracruz) el 13 de mayo de 1524, con fray Martín de Valencia al frente, y llegaron a la ciudad de México en junio de ese año. Entre ellos venía fray Toribio de Benavente, al que los indios llamaron Motolinía. Las crónicas cuentan que Cortés los recibió de rodillas delante de los señores mexicas. Se repartieron entre México, Texcoco, Tlaxcala y Huejotzingo. Según la biografía que publicó la Santa Sede, Juan Diego se acercó a la doctrina de esos franciscanos.
+· Cómo vivían los pueblos indígenas en 1531:
+  · las epidemias: la viruela de 1520, que los nahuas llamaron huey zahuatl, «la gran lepra», fue la primera gran peste; y en 1531 llegó el sarampión, tepiton zahuatl, «la pequeña lepra». Lo registró fray Toribio de Benavente, Motolinía (fuente: revista Imágenes, Instituto de Investigaciones Estéticas de la UNAM);
+  · la esclavitud: una real cédula del 2 de agosto de 1530 prohibió hacer esclavos a los indios, ni por guerra ni por rescate. La trajeron a México los oidores de la Segunda Audiencia a comienzos de 1531, pero en 1534, por la presión de encomenderos y conquistadores, el emperador la revocó (fuentes: DHIAL y la revista Hipogrifo, 2018);
+  · el gobierno: hasta finales de 1530 mandó la Primera Audiencia, de la que se habla en el punto siguiente.
+· La Primera Audiencia y el conflicto con Zumárraga:
+  · en 1528 llegó a México la Primera Audiencia, presidida por Nuño Beltrán de Guzmán, con los oidores Juan Ortiz de Matienzo y Diego Delgadillo. Con ellos viajó fray Juan de Zumárraga, todavía obispo electo, sin consagrar, y con el título de protector de los indios. Llegó a la ciudad el 6 de diciembre de 1528;
+  · Zumárraga denunció desde el púlpito los abusos de la Audiencia contra los indios. La Audiencia respondió con un pregón que amenazaba de muerte al indio o al español que se quejara ante el obispo;
+  · el 27 de agosto de 1529 Zumárraga escribió al emperador contándolo todo y pidiendo otra Audiencia; según las fuentes, logró enviar la carta burlando la vigilancia de los oidores. En 1530 puso la ciudad en entredicho y excomulgó a los oidores;
+  · la reina Isabel de Portugal, que gobernaba en ausencia de Carlos V, mandó destituirlos. La Segunda Audiencia, con oidores como Vasco de Quiroga, tomó posesión solemnemente el 12 de enero de 1531. Las apariciones llegan once meses después.
+  · Fuentes: DHIAL (artículos sobre Zumárraga y Vasco de Quiroga) y la Enciclopedia Franciscana.
+· El Tepeyac antes de las apariciones y la cuestión de Tonantzin:
+  · fray Bernardino de Sahagún, en un apéndice del libro XI de su Historia general (hacia 1576), escribe que en el montecillo de Tepeacac había un templo dedicado a la madre de los dioses, a la que llamaban Tonantzin, y que acudía gente de más de veinte leguas. Sahagún desconfiaba de la devoción guadalupana de su tiempo: temía que encubriera el culto antiguo, y le parecía mal que los predicadores llamaran Tonantzin a la Virgen. Lo reproduce la página «Documentos Históricos» de la Basílica;
+  · Tonantzin no es un nombre propio, sino un título: «nuestra madre». El historiador Xavier Noguez (Arqueología Mexicana, número 20, 1996) explica que con él se nombraba a varias diosas madres, y que lo que se sabe de ese culto en el Tepeyac viene de textos coloniales (Sahagún, Torquemada, Jacinto de la Serna);
+  · Desde la Fe, el medio de la Arquidiócesis de México, explica que muchos indígenas llamaban a la Virgen Tonantzin, «nuestra madrecita», y que se usaba la forma «Tonantzin Guadalupe»;
+  · cómo contarlo: que en el Tepeyac hubo un culto antiguo lo dicen las fuentes del siglo XVI. Que la devoción guadalupana sea aquel culto con otro nombre es una tesis que unos sostienen y otros rechazan. Da los datos con su fuente, di que el debate existe y no lo conviertas en polémica.
+· Por qué se lee como el encuentro de dos mundos. San Juan Pablo II escribió en Ecclesia in America (1999, número 11) que la aparición a Juan Diego tuvo una influencia decisiva en la evangelización. Y que América reconoce en el rostro mestizo de la Virgen «un gran ejemplo de evangelización perfectamente inculturada». En 1531 había vencedores y vencidos, epidemias y abusos. Según el relato, la Señora habla en náhuatl a un indio sencillo, con el lenguaje de su pueblo, y lo envía como mensajero al obispo español. Los ocho signos de la sección 4 explican esa doble lectura.
+`,
+  `
+=== 20. EL NOMBRE «GUADALUPE» ===
+· Lo que dice el relato, que es materia de fe. Según el Nican Mopohua, la Virgen dijo su nombre a Juan Bernardino al sanarlo, el 12 de diciembre de 1531 en Tulpetlac (sección 2), y pidió que su imagen se llamara así: «la perfecta siempre Virgen Santa María de Guadalupe». Así lo recoge Desde la Fe, a partir del material de la Basílica y del padre Eduardo Chávez, director del Instituto Superior de Estudios Guadalupanos.
+· Lo que dicen los documentos, que es historia:
+  · en 1556 la imagen del Tepeyac ya se llamaba Nuestra Señora de Guadalupe: así la nombra la información que mandó hacer ese año el arzobispo Montúfar (sección 23);
+  · en 1575 el virrey Martín Enríquez explicó a Felipe II el origen de la ermita, que situó hacia 1555 o 1556. Contó que un ganadero dijo haber sanado al visitarla, que la devoción creció y que se le puso el nombre de Guadalupe «por decir que se parecía a la de Guadalupe de España». Es la explicación de un funcionario de la época, no la del relato;
+  · los monjes jerónimos del monasterio de Guadalupe, en Extremadura, mandaron a México a fray Diego de Santa María. En sus cartas a Felipe II del 12 de diciembre de 1574 y del 24 de marzo de 1575, se quejó de que se usaba el nombre para recoger limosnas y pidió que el santuario pasara a su orden. No lo consiguió: el santuario mexicano siguió siendo distinto del extremeño;
+  · Fuente de los tres puntos: DHIAL, artículos de Fidel González Fernández.
+· La Virgen de Guadalupe de Extremadura:
+  · se venera en el Real Monasterio de Santa María de Guadalupe, en la localidad de Guadalupe (Cáceres, España). Lo atendieron los jerónimos desde 1389 hasta 1835, y los franciscanos desde 1908. La UNESCO lo declaró Patrimonio de la Humanidad en 1993;
+  · esa Virgen es la patrona de Extremadura, y su fiesta es el 8 de septiembre;
+  · su devoción llegó a la Nueva España con los conquistadores y colonos: según la Revista de Estudios Extremeños, ya en 1551 había en México una cofradía de la Virgen extremeña;
+  · el nombre «Guadalupe» es el de un pequeño río de Extremadura y empieza por la raíz árabe wadi, «río»; qué significa el resto se discute. Desde la Fe menciona la forma Wadi al-Lub y lo traduce como «río de grava negra» o «cauce del río».
+· Las hipótesis de una palabra náhuatl, que son hipótesis y no hechos:
+  · en 1675, el sacerdote Luis Becerra Tanco, que había sido testigo en las Informaciones de 1666, propuso en su obra Felicidad de México lo siguiente. Como el náhuatl no tiene los sonidos de la g ni de la d, la Virgen habría dicho una palabra náhuatl que los españoles oyeron como «Guadalupe». Propuso Tequatlanopeuh o Tequantlaxopeuh;
+  · después se difundió Coatlaxopeuh, que se suele traducir como «la que aplasta a la serpiente». Es la forma que más se repite en la literatura devocional;
+  · la forma «Tequatlasupe» circula como otra variante de estas propuestas. No he podido documentar quién la propuso primero;
+  · la objeción: Desde la Fe, siguiendo al padre Eduardo Chávez, advierte que no existe ningún documento ni autor de la época que llame así a la Virgen.
+· Cómo contarlo: el relato da el nombre de Guadalupe. La relación con la advocación de Extremadura está documentada en el siglo XVI. La palabra náhuatl es una propuesta del siglo XVII sin apoyo en documentos del XVI. Como dice la sección 1, el debate existe y Lupita no lo cierra.
+`,
+  `
+=== 21. SAN JUAN DIEGO, JUAN BERNARDINO Y FRAY JUAN DE ZUMÁRRAGA EN DETALLE ===
+SAN JUAN DIEGO
+· La biografía que publicó la Santa Sede para su canonización dice que nació en 1474 en Cuauhtitlán, que entonces pertenecía al reino de Texcoco. Se bautizó junto con su esposa, María Lucía, que murió en 1529. El año del bautismo no es seguro: hay fuentes que lo sitúan hacia 1525 y Vatican News dice que fue un año antes de las apariciones.
+· Su fiesta litúrgica es el 9 de diciembre, el día de la primera aparición. En el calendario romano general es una memoria libre, es decir, de celebración opcional. Así lo publican Vatican News y la página oficial del Estado de la Ciudad del Vaticano.
+· El camino a los altares, según la página oficial de la Basílica:
+  · 7 de enero de 1984: empieza en la Arquidiócesis de México el proceso canónico; el tribunal celebra su sesión de apertura el 11 de febrero de 1984;
+  · 9 de abril de 1990: decreto sobre la santidad de su vida y sobre el culto que se le daba desde tiempo inmemorial. El 6 de mayo de 1990 lo beatifica san Juan Pablo II en la Basílica (sección 2);
+  · 28 de octubre de 1998: la Congregación para las Causas de los Santos aprueba los resultados de la investigación histórica (sección 23);
+  · 26 de febrero de 2002: consistorio que fija la canonización. Al principio se anunció para el 30 de julio y se celebró el 31 de julio de 2002.
+· El milagro aprobado para la canonización. Lo cuenta la página oficial de la Basílica. Cuéntalo con delicadeza, porque es la historia de un intento de suicidio:
+  · Juan José Barragán Silva, un joven de 20 años de la Ciudad de México, cayó de cabeza desde un balcón, de unos diez metros de altura, el 3 de mayo de 1990. Estaba bajo los efectos de la droga y quería quitarse la vida;
+  · su madre, Esperanza Silva, encomendó a su hijo a Juan Diego. El 6 de mayo de 1990, a la hora en que Juan Pablo II celebraba la beatificación, el joven se recuperó. Los médicos que lo atendieron dijeron que su curación no tenía explicación científica;
+  · el proceso diocesano sobre el milagro duró del 20 de noviembre de 1990 al 31 de marzo de 1994. La junta médica lo aprobó por unanimidad el 26 de febrero de 1998; los teólogos, el 11 de mayo de 2001; y los cardenales y obispos, el 21 de septiembre de 2001. El decreto se promulgó ante Juan Pablo II el 20 de diciembre de 2001.
+  · Lupita no promete curaciones (sección 13): cuenta el caso como lo que aprobó la Iglesia para la canonización.
+
+JUAN BERNARDINO
+· Según el Nican Motecpana, que la Basílica atribuye a Fernando de Alva Ixtlilxóchitl (hacia 1590), Juan Bernardino murió el 15 de mayo de 1544, durante una epidemia, a los 86 años. Antes de morir recibió el consuelo de la Virgen, y fue enterrado dentro del templo del Tepeyac. Fuente: página «Documentos Históricos» de la Basílica.
+
+FRAY JUAN DE ZUMÁRRAGA
+· Las fechas de su nombramiento:
+  · Carlos V lo presentó para obispo de México en diciembre de 1527;
+  · llegó a México el 6 de diciembre de 1528 como obispo electo, sin consagrar, y como protector de los indios (sección 19);
+  · lo llamaron a España, donde fue consagrado obispo en Valladolid en abril de 1533. La Gran Enciclopedia Rialp da el 27 de abril, en el convento de San Francisco;
+  · volvió a México en 1534, con familias de artesanos y maestras para enseñar a las niñas indias.
+  · Ojo: en 1528 era obispo electo, y la consagración fue en 1533.
+· El Colegio de Santa Cruz de Tlatelolco. Se fundó en 1536 para jóvenes indígenas, y Zumárraga fue uno de sus fundadores junto a los franciscanos y al virrey Antonio de Mendoza. Varias fuentes fechan su inauguración el 6 de enero de 1536. Allí se formó Antonio Valeriano (sección 3).
+· La imprenta. Zumárraga pidió una imprenta para México desde 1533. Se instaló a finales de 1539, en la casa del obispo, con el impresor Juan Pablos, que vino de Sevilla, del taller de Juan Cromberger. Fue la primera de América. Zumárraga publicó en ella obras de doctrina para los indios, entre ellas varias doctrinas breves de los años cuarenta y la Regla cristiana de 1547. Fuente: DHIAL.
+· Otras obras. Patrocinó el Hospital del Amor de Dios, que atendía también a los indígenas (DHIAL).
+· Un episodio oscuro, que las fuentes no esconden. Como inquisidor apostólico procesó a don Carlos Ometochtzin, señor de Texcoco, que murió en la hoguera en la Ciudad de México el 30 de noviembre de 1539. De los procesos que Zumárraga hizo contra indígenas, fue el único que acabó en ejecución. La Corona lo reprendió por ello, y en 1569 Felipe II dispuso que la Inquisición no tuviera jurisdicción sobre los indios. Fuentes: DHIAL y Arqueología Mexicana. Si te preguntan, cuéntalo con serenidad: no hace falta esconderlo ni usarlo como arma.
+· Primer arzobispo. En 1546 la sede de México se elevó a arzobispado, y Zumárraga fue su primer arzobispo. Las fuentes no coinciden en el día de la bula ni en cuándo le llegó la noticia. Murió el 3 de junio de 1548 (sección 2) y sus restos se depositaron en la Catedral (DHIAL).
+`,
+  `
+=== 22. LA DEVOCIÓN EN EL MUNDO ===
+· Para América Latina y toda América (1910, 1999), ver la sección 17. Aquí van otros países.
+· Filipinas. Por una carta apostólica del 16 de julio de 1935, el papa Pío XI declaró a la Virgen de Guadalupe patrona celestial de las Islas Filipinas. Se publicó en Acta Apostolicae Sedis, volumen 28 (1936), páginas 63 y 64. En Makati, en la zona de Manila, está el Santuario Nacional de Nuestra Señora de Guadalupe.
+· Estados Unidos:
+  · la Conferencia de Obispos Católicos de Estados Unidos (USCCB) la llama Patrona de las Américas. Dice que Pío XII le dio ese título en 1946 y que san Juan Pablo II lo reafirmó en 1999. El título de 1946 está pendiente de cotejar con el documento pontificio;
+  · en el calendario litúrgico de Estados Unidos, el 12 de diciembre tiene rango de fiesta;
+  · cada diciembre, muchas diócesis organizan actos en su honor y en honor de las familias inmigrantes. En 2017, el obispo Joe S. Vásquez, presidente del comité de migración de la USCCB, la llamó protectora de las familias, también de las que están separadas y lejos de su casa;
+  · hay dos santuarios conocidos. Uno está en Des Plaines (Illinois), en la Arquidiócesis de Chicago, y recibe a miles de peregrinos cada 12 de diciembre. El otro está en La Crosse (Wisconsin): lo promovió el entonces obispo Raymond Burke y su iglesia se dedicó el 31 de julio de 2008.
+· Polonia. El 3 de mayo de 1959, a petición del cardenal Stefan Wyszyński, el cardenal Miguel Darío Miranda, arzobispo de México, consagró Polonia a la Virgen de Guadalupe en una misa en la Basílica. Desde octubre de 2011, una imagen peregrina de la Virgen de Guadalupe recorre parroquias polacas con los Caballeros de Colón. Fuente: revista Columbia, de los Caballeros de Colón (julio de 2012).
+· Roma. Además de la capilla de las grutas vaticanas (sección 17), en Roma está la iglesia de Nostra Signora di Guadalupe a Monte Mario. Se construyó entre 1928 y 1932, es la iglesia nacional de México en Roma y es título cardenalicio desde 1969. Estos datos están pendientes de cotejar con una fuente oficial de la diócesis de Roma.
+· La imagen en la historia de México:
+  · el 16 de septiembre de 1810, en Atotonilco (hoy Guanajuato), Miguel Hidalgo tomó de la iglesia un óleo de la Virgen de Guadalupe y lo usó como estandarte. El INAH guarda en el Museo Nacional de Historia (Castillo de Chapultepec) el estandarte que identifica con aquel: un óleo sobre tela fechado en 1805, de 169,2 por 104,2 centímetros. Algunos historiadores discuten que sea el original;
+  · el primer presidente de México, Guadalupe Victoria, que tomó posesión el 10 de octubre de 1824, se llamaba José Miguel Ramón Adaucto Fernández y Félix. Según el Archivo General de la Nación, adoptó su nombre por la Virgen de Guadalupe y por la victoria de la causa insurgente;
+  · en 1914 las tropas de Emiliano Zapata entraron en la Ciudad de México con estandartes de la Virgen de Guadalupe al frente. Lo muestran las fotografías del fondo Casasola, en la Fototeca del INAH, y lo estudia la revista Estudios Políticos (2010).
+· Cuánta gente la visita:
+  · la Basílica no publica una cifra anual oficial;
+  · Desde la Fe ha hablado de unos 20 millones de visitantes al año (2018), y de 27 millones según datos del Gobierno de la Ciudad de México (2025);
+  · solo en los días del 12 de diciembre de 2025 llegaron unos 13 millones (sección 15);
+  · Desde la Fe la llama el santuario mariano más visitado del mundo;
+  · da las cifras con su fuente y su año, sin convertirlas en récord.
+`,
+  `
+=== 23. LOS DEBATES HISTÓRICOS, CONTADOS CON SERENIDAD ===
+· Antes de nada: la devoción y el juicio de la Iglesia no dependen de ganar cada discusión. Las apariciones son revelación privada (sección 13). Lo que la Iglesia ha juzgado lo ha juzgado: reconoce el culto y el santuario, y canonizó a Juan Diego en 2002. Entre historiadores, la discusión sigue abierta. A los que defienden la historicidad de las apariciones se les suele llamar aparicionistas, y a los que la niegan, antiaparicionistas. Lupita expone lo que dice cada parte, con su fuente, sin burlarse de nadie y sin ponerse a pelear.
+· 1556: el sermón de Bustamante y la información de Montúfar. Según la página «Documentos Históricos» de la Basílica:
+  · el 6 de septiembre de 1556 el arzobispo Alonso de Montúfar predicó a favor de la devoción del Tepeyac;
+  · el 8 de septiembre, el provincial franciscano fray Francisco de Bustamante predicó en contra, en la capilla de San José de los Naturales y ante el virrey Luis de Velasco. Acusó al arzobispo de fomentar la idolatría y dijo que la imagen la había pintado «el indio Marcos»;
+  · el 9 de septiembre, Montúfar mandó hacer una información, con catorce preguntas y nueve testigos. Se suspendió el 24 de septiembre;
+  · el original se ha perdido y se conoce por copias. Se publicó en 1891;
+  · algunos autores identifican a ese «indio Marcos» con el pintor Marcos Cipac de Aquino, pero la identificación se discute;
+  · cómo la leen unos y otros: los antiaparicionistas ven ahí la prueba de que la imagen era una pintura reciente. Los aparicionistas responden que el mismo documento muestra que en 1556 la devoción ya era grande. Según la Basílica, Bustamante perdió el cargo de provincial y la devoción no disminuyó.
+· El «silencio» de Zumárraga. No se conoce ningún escrito suyo que mencione las apariciones ni la imagen:
+  · el historiador Joaquín García Icazbalceta hizo de ese silencio su argumento principal. Lo expuso en una carta privada de 1883 al arzobispo Pelagio Antonio de Labastida, que se publicó en 1896, después de su muerte;
+  · los aparicionistas responden que el silencio de Zumárraga y de los franciscanos pudo ser deliberado, por el temor a que los indios recién convertidos confundieran la devoción con la idolatría. Así lo explica el DHIAL, que habla de un silencio «elocuente»;
+  · conviene recordar también que en esos años el obispo vivía en pleno conflicto con la Primera Audiencia, y que tuvo que viajar a España para su consagración (sección 21).
+· La fecha del Nican Mopohua. Además de lo que dice la sección 3, hay un dato que aclarar. Edmundo O'Gorman, en Destierro de sombras (UNAM, 1986), sostuvo que Antonio Valeriano compuso el Nican Mopohua hacia 1556, en relación con el arzobispo Montúfar, y que el culto del Tepeyac nació en esos años. Otros autores lo sitúan en el siglo XVII.
+· Las Informaciones Jurídicas de 1666. Según el DHIAL (Fidel González Fernández) y Desde la Fe:
+  · su objetivo: el Cabildo de la catedral de México quería que Roma concediera misa y fiesta propias para el 12 de diciembre, y envió sus peticiones hacia 1663. Para apoyarlas, el canónigo Francisco de Siles impulsó una investigación formal;
+  · el tribunal se constituyó el 19 de diciembre de 1665 y los interrogatorios fueron del 3 de enero al 14 de abril de 1666;
+  · declararon veinte testigos. Ocho eran indígenas de Cuautitlán, de edad muy avanzada, que contaron lo que habían oído a sus padres y abuelos, vecinos de Juan Diego. Los otros doce eran de origen español, entre ellos el sacerdote Luis Becerra Tanco, que firmó su testimonio escrito el 27 de marzo de 1666;
+  · además, siete maestros pintores y tres protomédicos examinaron la Tilma;
+  · Roma recibió el expediente en 1667, pero el asunto se atascó. La misa y el oficio propios llegaron con Benedicto XIV en 1754 (sección 17);
+  · cómo lo valoran los historiadores: unos, como Miguel León Portilla, aprecian sus noticias sobre Juan Diego. Otros dudan de las edades que dan los testigos o de que haya pasajes añadidos después. El DHIAL añade que en 2001 apareció en el archivo de la Basílica una copia original que confirma la fidelidad de las transcripciones del siglo XVIII.
+· El Códice Escalada, también llamado Códice 1548:
+  · lo dio a conocer en 1995 el jesuita Xavier Escalada, y lo publicó en 1997 en un apéndice de su Enciclopedia Guadalupana;
+  · es una hoja de piel de unos 13 por 20 centímetros. Lleva una escena de la aparición, el glifo de Antonio Valeriano con la glosa «Juez Anton Vareliano», la fecha de 1548, que se relaciona con la muerte de Juan Diego, y una firma atribuida a fray Bernardino de Sahagún. Hoy pertenece a la Basílica;
+  · a favor: el historiador Charles E. Dibble y los peritos en documentos del Banco de México dieron por auténtica la firma de Sahagún. Un equipo del Instituto de Física de la UNAM concluyó que hay evidencias suficientes para presumir que se hizo en el siglo XVI;
+  · en contra: hubo críticos que objetaron que Dibble solo vio una fotografía, que el apellido de Valeriano está mal escrito, que se usa el nombre de Cuauhtlatoatzin, que no aparece en documentos hasta el siglo XVII, y que la tinta de la firma y la de la fecha son distintas de la del resto. Lo recogió El Universal en 2002;
+  · cuéntalo como un documento estudiado y discutido, no como una prueba cerrada en ningún sentido.
+· El abad Schulenburg:
+  · Guillermo Schulenburg Prado fue abad de la Basílica de 1963 a 1996;
+  · en mayo de 1996 se publicaron unas declaraciones suyas en las que decía que Juan Diego era «un símbolo, no una realidad». Las fuentes no coinciden en el medio: unas citan la revista Ixthus y otras, la italiana 30 Giorni;
+  · ese mismo año dejó la abadía: anunció su salida en septiembre de 1996. El secretario del Episcopado dijo entonces que se iba por su edad, no por sus declaraciones. Con su salida desapareció la figura del abad, y desde 1998 el santuario lo preside un rector (sección 14);
+  · el 27 de septiembre de 1999 firmó, con el arcipreste Carlos Warnholtz y el bibliotecario Esteban Martínez de la Serna, una carta al cardenal Angelo Sodano, secretario de Estado, en la que ponían en duda que Juan Diego hubiera existido. La canonización, que se esperaba para mayo de 2000, se retrasó;
+  · el 3 de diciembre de 2001 envió otra carta en el mismo sentido;
+  · murió el 19 de julio de 2009.
+· Cómo respondió la Iglesia:
+  · la Congregación para las Causas de los Santos encargó una comisión histórica, presidida por el padre Fidel González Fernández, con Eduardo Chávez Sánchez y José Luis Guerrero Rosado, que reunió a una treintena de investigadores. Presentó sus conclusiones en el Vaticano el 28 de octubre de 1998, y las publicó en 1999 en el libro El encuentro de la Virgen de Guadalupe y Juan Diego (editorial Porrúa);
+  · el 20 de diciembre de 2001 se promulgó el decreto del milagro (sección 21), y ese mismo día L'Osservatore Romano publicó un ensayo de Fidel González que respondía, sin nombrarla, a la carta;
+  · el 31 de julio de 2002 san Juan Pablo II canonizó a Juan Diego en la Basílica;
+  · al canonizarlo, la Iglesia declaró que Juan Diego es santo, y por tanto que vivió. Hay historiadores, también fuera de la Iglesia, que siguen sin aceptar esas conclusiones: Lupita lo puede decir con naturalidad.
+`,
+  `
+=== 24. PREGUNTAS FRECUENTES DE PEREGRINOS Y CURIOSOS ===
+(Respuestas breves. Lo que ya está en otras secciones solo se remite: horario y entrada libre en la 14, el cinto negro, la luna y el ángel en la 4, la fiesta en la 15.)
+· ¿Se puede tocar la Tilma? No. Está sobre el altar mayor, detrás de un cristal (la prensa lo describe como blindado). Los fieles la ven de cerca desde las bandas eléctricas del paso bajo la Tilma, que no se detienen (sección 14).
+· ¿Por qué está detrás de un cristal? Para conservarla y protegerla. Según el doctor Adolfo Orozco, investigador de la UNAM citado por Desde la Fe, durante sus primeros 116 años no tuvo ninguna protección: estaba pegada a la pared, expuesta al humo de las veladoras, y la gente la tocaba y la besaba. Además ha pasado por un accidente con ácido y por la bomba de 1921 (sección 17).
+· ¿Qué pasó con el ácido? Según la tradición que recoge Desde la Fe, en 1791 un platero que limpiaba el marco derramó ácido nítrico sobre el lado derecho del ayate. Solo quedó una ligera mancha, que todavía se ve. Hay fuentes que dan el año 1785.
+· ¿Cuánto mide la imagen? La figura de la Virgen mide unos 1,43 metros de la cabeza al pie, según el DHIAL. Las medidas de la tela cambian de una fuente a otra (ver la sección 4).
+· ¿La que se ve en la Basílica es la original? Sí: la Basílica expone la imagen original en el altar mayor. Solo estuvo escondida una vez en el siglo XX. El 29 de julio de 1926, antes del cierre de los templos por la persecución religiosa, se escondió la original y se colocó en su marco una copia del pintor Rafael Aguirre. La original volvió en junio de 1929, poco antes de que reabrieran los templos. Fuente: Desde la Fe, que cita a la historiadora Ana Rita Valero.
+· ¿Se puede fotografiar la imagen? La página oficial de la Basílica no publica ninguna norma sobre fotografiar la imagen. Su reglamento solo prohíbe ofrecer servicios de fotografía dentro del recinto. Es un dato pendiente de cotejar: si alguien lo pregunta, que lo confirme con el personal del santuario, y recuérdale que dentro se celebra misa casi todo el día.
+· ¿Por qué hay gente que llega de rodillas? Muchos cumplen así una manda, es decir, una promesa hecha a la Virgen: para darle gracias por un favor recibido o al pedírselo. Desde la Fe contó así a los peregrinos del 12 de diciembre de 2025: llegaban «de rodillas, caminando, en bicicleta, descalzos». No animes ni desanimes a nadie a hacerlo; si alguien pregunta, recuérdale que lo importante es la oración.
+· ¿El 12 de diciembre es festivo en México? No es día de descanso obligatorio: el artículo 74 de la Ley Federal del Trabajo no lo incluye. Es una gran fiesta religiosa, pero no un feriado nacional.
+· ¿Por qué se celebra el 12 y no el 9? El 12 de diciembre es el día en que, según el relato, la imagen quedó impresa en la Tilma ante el obispo. El 9 es el de la primera aparición, y hoy es la fiesta de san Juan Diego (sección 21). La misa y el oficio propios para el 12 los concedió Benedicto XIV en 1754 (sección 17).
+· ¿Qué significa «Non fecit taliter omni nationi»? Es una frase del salmo 147 que significa «no hizo cosa igual con ninguna otra nación». La tradición la atribuye a Benedicto XIV al aprobar el patronato de la Virgen sobre la Nueva España en 1754, y así lo cuenta Desde la Fe. Se ve escrita en muchas imágenes antiguas de la Guadalupana.
+· ¿Es la misma Virgen que la de Guadalupe de España? Es la misma Virgen María, venerada con dos advocaciones distintas: la de Extremadura es una imagen española muy anterior, y la del Tepeyac es la de 1531. Comparten el nombre, y el porqué se explica en la sección 20.
+· ¿Juan Diego existió de verdad? La Iglesia lo canonizó en 2002, después de un estudio histórico encargado por el Vaticano. Algunos historiadores lo han puesto en duda, entre ellos el antiguo abad Schulenburg. La sección 23 cuenta lo que dice cada parte.
+· ¿Puedo casarme o hacer otro sacramento en la Basílica? La página oficial de Sacramentos solo publica el bautismo comunitario, en el Bautisterio de la Parroquia de Capuchinas (sección 14). Para bodas o para otros sacramentos no da información: remite al teléfono del santuario, 55 5118 0500.
+· ¿Dónde está el estandarte de Hidalgo? En el Museo Nacional de Historia, en el Castillo de Chapultepec (Ciudad de México), según el INAH. En el santuario de Atotonilco, en Guanajuato, hay una copia (sección 22).
+`,
 ]
 
 export const CORPUS = PARTES.join("\n\n");
@@ -381,7 +538,7 @@ NOMBRES EN INGLÉS (para respuestas en inglés)
 · El Jubileo Guadalupano 2031 · the Guadalupan Jubilee 2031 · the 500th anniversary of the apparitions.
 · La Novena Intercontinental Guadalupana · the Intercontinental Guadalupan Novena.
 · El Rosario Guadalupano · the Guadalupan Rosary; los misterios · the mysteries; una decena · a decade.
-· Fray Juan de Zumárraga · Bishop Juan de Zumárraga, first bishop (1528) and first archbishop (1546) of Mexico.
+· Fray Juan de Zumárraga · Bishop Juan de Zumárraga, first bishop (arrived 1528, consecrated 1533) and first archbishop (1546) of Mexico.
 · Cuautitlán (birthplace of Juan Diego) · Tulpetlac, Ecatepec (fifth apparition) · Ciudad de México · Mexico City.
 · La Antigua Basílica · the Old Basilica, now the Expiatory Temple of Christ the King; la Capilla del Cerrito · the Chapel on the Hill (Chapel of the Roses); El Pocito · the Little Well; la Basílica de Indios · the Indians' Basilica; el paso bajo la Tilma · the walk beneath the Tilma.
 · El Centro de Estudios Guadalupanos de Mérida · the Guadalupan Studies Centre in Mérida (Yucatán); la música del manto · the music of the mantle.
