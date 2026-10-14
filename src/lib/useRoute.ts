@@ -109,6 +109,19 @@ const aliases: Record<string, RouteId> = {
   proposito: "portada",
   transparencia: "portada",
   peregrinar: "peregrinaciones",
+  /* Los bloques a los que saltan los botones de cada héroe y el pie. Sin
+     esta lista, una dirección que no es una página caía en la portada: el
+     visitante pulsaba «Rezar el Santo Rosario» y volvía al principio. */
+  "basilica-en-vivo": "peregrinaciones",
+  "rutas-peregrinas": "peregrinaciones",
+  "paneles-acontecimiento": "acontecimiento",
+  "lienzo-milagroso": "acontecimiento",
+  "rosario-guadalupano": "voces",
+  "oratorio-veladoras": "voces",
+  "categorias-tienda": "tienda",
+  "autenticidad-relicario": "tienda",
+  "lineas-de-accion": "jubileo",
+  "coronacion-jubileo": "jubileo",
 };
 
 /** La parte útil de una dirección: "#/voces?x" -> "voces". */

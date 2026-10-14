@@ -22,12 +22,20 @@ export const site = {
     import.meta.env.VITE_CONTACT_EMAIL ||
     "info@santamariadeguadalupe500years.com",
   whatsapp: import.meta.env.VITE_WHATSAPP_NUMBER || "",
+  /** Enlace de Calendly para reservar una videollamada con Azucena. Vacío:
+      no se muestra el botón. */
+  calendly: import.meta.env.VITE_CALENDLY_URL || "",
+  /** El directo del canal de YouTube de Azucena (…/@canal/live: siempre abre
+      la emisión que esté en el aire). Vacío: no se muestra el botón. */
+  youtubeLive: import.meta.env.VITE_YOUTUBE_LIVE_URL || "",
   instagram: import.meta.env.VITE_INSTAGRAM_HANDLE || "",
   youtube: import.meta.env.VITE_YOUTUBE_HANDLE || "@inbguadalupe3618",
   nonprofitName: import.meta.env.VITE_NONPROFIT_NAME || "",
   nonprofitUrl: import.meta.env.VITE_NONPROFIT_URL || "",
   donateUrl: import.meta.env.VITE_DONATE_URL || "",
   leadsEndpoint: import.meta.env.VITE_LEADS_ENDPOINT || "",
+  /** Clave de web3forms.com: cada alta llega como correo. Ver src/lib/leads.ts. */
+  web3formsKey: import.meta.env.VITE_WEB3FORMS_KEY || "",
 };
 
 /** ─────────────────────────────────────────────
@@ -95,8 +103,10 @@ export const cameras: Camera[] = [
       es: "La fachada y la explanada",
       en: "The façade and the esplanade",
     },
-    source: "Webcams de México · Canal 11",
-    href: "https://youtu.be/gPi3ZvpX0pY",
+    source: "Webcams de México · 24 horas",
+    /* La página oficial de la cámara y no un vídeo de YouTube: Webcams de
+       México cambia el ID cada vez que reinicia la emisión. */
+    href: "https://webcamsdemexico.com/webcam/basilica-de-guadalupe/",
   },
   {
     label: {

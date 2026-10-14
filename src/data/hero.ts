@@ -71,7 +71,10 @@ export const jubilee = {
 };
 
 /** ─────────────────────────────────────────────
- *  Non-profit disclosure
+ *  Aviso de transparencia: adónde va el dinero.
+ *  Decisión del equipo (13-10-2026): todo lo recaudado va a la Iglesia,
+ *  para los más necesitados y para las peregrinaciones. Antes decía que se
+ *  destinaba al documental-serie. La entidad concreta aún no se nombra.
  *  ───────────────────────────────────────────── */
 export const disclosure = {
   badge: {
@@ -79,21 +82,21 @@ export const disclosure = {
     en: "Transparency notice",
   } satisfies Bi,
   title: {
-    es: "Todo lo recaudado se destina al documental-serie",
-    en: "Everything raised goes to the documentary series",
+    es: "Todos los donativos van directamente a la Iglesia",
+    en: "All donations go directly to the Church",
   } satisfies Bi,
   short: {
-    es: "El dinero recaudado y las donaciones para este proyecto se destinan íntegramente a producir un documental-serie sobre Santa María de Guadalupe y el Acontecimiento Guadalupano, y se gestionan a través de una entidad sin ánimo de lucro (non-profit).",
-    en: "The money raised and the donations for this project are used entirely to produce a documentary series on Saint Mary of Guadalupe and the Guadalupan Event, and are managed through a non-profit organisation.",
+    es: "Todo lo que se recauda en este proyecto —los donativos, las ganancias de la tienda y los patrocinios— va directamente a la Iglesia, para ayudar a los más necesitados y a las peregrinaciones.",
+    en: "Everything this project raises — donations, shop profits and sponsorships — goes directly to the Church, to help those most in need and to support pilgrimages.",
   } satisfies Bi,
   points: [
     {
-      es: "Las ganancias de la tienda, las donaciones y los patrocinios financian la producción del documental-serie.",
-      en: "Shop profits, donations and sponsorships fund the production of the documentary series.",
+      es: "Los donativos, las ganancias de la tienda y los patrocinios van íntegros a la Iglesia.",
+      en: "Donations, shop profits and sponsorships go in full to the Church.",
     },
     {
-      es: "La gestión económica se realiza a través de una entidad sin ánimo de lucro (non-profit).",
-      en: "All funds are administered through a non-profit organisation.",
+      es: "Se destinan a ayudar a los más necesitados y a las peregrinaciones al Tepeyac.",
+      en: "They are used to help those most in need and to support pilgrimages to Tepeyac.",
     },
     {
       es: "Ningún responsable del proyecto retiene las donaciones para fines personales.",
@@ -113,8 +116,8 @@ export const disclosure = {
     en: "Read the full notice",
   } satisfies Bi,
   promise: {
-    es: "“Promesa de Azucena a nuestra Lupita”: cada recurso se convierte en un capítulo más para compartir el Acontecimiento Guadalupano con el mundo.",
-    en: "“Azucena's promise to our Lupita”: every resource becomes one more chapter in sharing the Guadalupan Event with the world.",
+    es: "“Promesa de Azucena a nuestra Lupita”: cada donativo se convierte en ayuda para quien más lo necesita y en un paso más de un peregrino hacia el Tepeyac.",
+    en: "“Azucena's promise to our Lupita”: every donation becomes help for those most in need and one more step for a pilgrim on the way to Tepeyac.",
   } satisfies Bi,
 };
 
@@ -183,6 +186,22 @@ export const closing = {
   ctaSupport: {
     es: "Quiero apoyar el documental",
     en: "I want to support the documentary",
+  } satisfies Bi,
+  captainIntro: {
+    es: "Déjanos tu nombre y tu correo. Después, Lupita te explica cómo ser capitán y reunir tu grupo.",
+    en: "Leave us your name and email. Then Lupita will explain how to become a captain and gather your group.",
+  } satisfies Bi,
+  captainQuestion: {
+    es: "Acabo de dejar mis datos para ser capitán de peregrinación. ¿Cómo lo hago?",
+    en: "I have just left my details to become a pilgrimage captain. How do I do it?",
+  } satisfies Bi,
+  supportIntro: {
+    es: "Déjanos tu nombre y tu correo. Después, Lupita te explica cómo apoyar el documental.",
+    en: "Leave us your name and email. Then Lupita will explain how to support the documentary.",
+  } satisfies Bi,
+  supportQuestion: {
+    es: "Acabo de dejar mis datos para apoyar el documental sobre Santa María de Guadalupe. ¿Cómo puedo ayudar?",
+    en: "I have just left my details to support the documentary on Our Lady of Guadalupe. How can I help?",
   } satisfies Bi,
 };
 

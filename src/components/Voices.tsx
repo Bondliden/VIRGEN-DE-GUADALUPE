@@ -1,6 +1,7 @@
-import { ExternalLink } from "lucide-react";
+import { ChevronDown, ExternalLink } from "lucide-react";
 import { useLang } from "@/lib/lang";
-import { rosaryModes, voices, voicesSection } from "@/data/voices";
+import { nextLive, rosaryModes, voices, voicesSection } from "@/data/voices";
+import { LiveAnnouncement } from "@/components/LiveAnnouncement";
 import { Container, Coord, Dot, Eyebrow } from "@/components/Chrome";
 import { VideoHero } from "@/components/VideoHero";
 import { VirginSacredDisplay } from "@/components/VirginSacredDisplay";
@@ -20,8 +21,8 @@ export function Voices() {
         titleMain={voicesSection.title}
         titleItalic={{ es: "y el Santo Rosario Guadalupano", en: "and the Holy Guadalupan Rosary" }}
         subtitle={voicesSection.intro}
-        videoSrc="https://videos.pexels.com/video-files/5198164/5198164-hd_1920_1080_25fps.mp4"
-        posterSrc="/images/guadalupe/tilma-detail.jpg"
+        videoSrc="/videos/heroes/voces.mp4"
+        posterSrc="/videos/heroes/voces.jpg"
         pageOf="004 / 006"
         badge={{ es: "Oración Continua y Testimonios", en: "Perpetual Prayer & Testimonies" }}
         ctaPrimary={{ label: { es: "Rezar el Santo Rosario", en: "Pray the Holy Rosary" }, href: "#rosario-guadalupano" }}
@@ -42,20 +43,25 @@ export function Voices() {
           </div>
 
         {/* ── Featured testimony ── */}
-        <div className="mt-12 grid gap-8 border border-ink/20 bg-bone p-4 lg:grid-cols-[1.3fr_0.7fr] lg:p-6">
-          <div className="aspect-video w-full bg-ink/20">
-            {featured.embed ? (
-              <iframe
-                src={featured.embed}
-                title={t(featured.title)}
-                allow="autoplay"
-                allowFullScreen
-                loading="lazy"
-                className="h-full w-full"
-              />
-            ) : null}
+        <div className="mt-12 grid gap-8 border border-ink/20 bg-bone p-4 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)] lg:p-6">
+          {/* Columna del vídeo: el testimonio y, debajo, en el hueco que
+              dejaba la columna de la derecha, el próximo podcast en vivo. */}
+          <div className="flex flex-col gap-6 self-start">
+            <div className="aspect-video w-full bg-ink/20">
+              {featured.embed ? (
+                <iframe
+                  src={featured.embed}
+                  title={t(featured.title)}
+                  allow="autoplay"
+                  allowFullScreen
+                  loading="lazy"
+                  className="h-full w-full"
+                />
+              ) : null}
+            </div>
+            {nextLive ? <LiveAnnouncement live={nextLive} /> : null}
           </div>
-          <div className="flex flex-col justify-between">
+          <div className="flex flex-col">
             <div>
               <Eyebrow>{t(featured.kind)}</Eyebrow>
               <h3 className="mt-3 font-serif text-2xl italic leading-snug text-inkSoft">
@@ -63,21 +69,52 @@ export function Voices() {
               </h3>
               <p className="mt-4 text-[15px] leading-relaxed text-inkMute">{t(featured.body)}</p>
             </div>
-            <div className="mt-6 border-t border-ink/20 pt-4">
-              <p className="font-display text-base font-semibold uppercase tracking-[0.06em] text-inkSoft">
-                {featured.person}
-              </p>
-              <Coord className="mt-1 block uppercase">{t(featured.role)}</Coord>
-              <a
-                href={featured.href}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="mt-3 inline-flex items-center gap-2 text-eyebrow font-semibold uppercase tracking-eyebrow text-accentRose"
-              >
-                {t(voicesSection.openLabel)}
-                <ExternalLink className="h-3.5 w-3.5" aria-hidden />
-              </a>
-            </div>
+            {/* La imagen ocupa el hueco que quedaba entre el texto y el
+                nombre y crece con la tarjeta. El encuadre sube hasta el
+                rostro de la Virgen y deja dentro a Azucena con las rosas.
+                Va en absoluto para que su alto natural no empuje la fila:
+                si lo hiciera, el vídeo 16:9 de al lado se ensancharía con
+                ella y la tarjeta se saldría de la página. */}
+            {featured.photo ? (
+              <figure className="relative mt-6 min-h-[360px] flex-1 overflow-hidden border border-ink/15">
+                <img
+                  src={featured.photo}
+                  alt={featured.photoAlt ? t(featured.photoAlt) : featured.person}
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover object-[50%_18%]"
+                />
+              </figure>
+            ) : (
+              <div className="flex-1" />
+            )}
+            {/* Bajo la foto, quién es; su historia, desplegable con la flecha
+                (un <details> nativo: se abre con ratón, teclado y lector de
+                pantalla sin código). Sin enlace «Abrir»: llevaba al mismo
+                vídeo que se ve a la izquierda. */}
+            {featured.bio ? (
+              <details className="group mt-6 border-t border-ink/20 pt-4">
+                <summary className="flex cursor-pointer list-none items-start justify-between gap-3 [&::-webkit-details-marker]:hidden">
+                  <span>
+                    <span className="block font-display text-base font-semibold uppercase tracking-[0.06em] text-inkSoft">
+                      {featured.person}
+                    </span>
+                    <Coord className="mt-1 block uppercase">{t(featured.role)}</Coord>
+                  </span>
+                  <span className="flex flex-none items-center gap-1.5 pt-0.5 text-[13px] font-semibold text-accentRoseInk">
+                    {t({ es: "Su historia", en: "Her story" })}
+                    <ChevronDown className="h-5 w-5 transition-transform duration-300 group-open:rotate-180" aria-hidden />
+                  </span>
+                </summary>
+                <p className="mt-4 text-left text-[15px] leading-relaxed text-inkSoft">{t(featured.bio)}</p>
+              </details>
+            ) : (
+              <div className="mt-6 border-t border-ink/20 pt-4">
+                <p className="font-display text-base font-semibold uppercase tracking-[0.06em] text-inkSoft">
+                  {featured.person}
+                </p>
+                <Coord className="mt-1 block uppercase">{t(featured.role)}</Coord>
+              </div>
+            )}
           </div>
         </div>
 

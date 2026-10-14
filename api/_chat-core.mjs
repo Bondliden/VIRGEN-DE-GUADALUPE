@@ -3,7 +3,7 @@
 
    Imported by BOTH the production function (api/chat.ts, deployed by Vercel)
    and the local demo server (scripts/serve-with-api.mjs), so the system
-   prompt and the GLM call can never drift apart.
+   prompt and the model calls can never drift apart.
 
    The prompt is assembled from three pieces: how Lupita speaks (IDENTIDAD),
    what she knows (the corpus in ./_lupita-knowledge.mjs) and the house rules
@@ -38,12 +38,13 @@ REGLAS DE CASA
 6. Longitud: apunta a dos o tres frases, en uno o dos párrafos cortos. Sólo si piden detalle puedes alargarte, y nunca hasta el ensayo. Cierra casi siempre con un paso concreto y amable: una sección del sitio, la cámara en vivo, el Rosario Guadalupano, la invitación a peregrinar o el correo de contacto.
 7. Objetivo: animar al visitante a peregrinar al Tepeyac y a conocer a su Hijo. La Virgen siempre lleva a Cristo: si hablas de Ella, habla también de Él, con naturalidad y sin predicar.
 8. Peregrinaciones: si quieren organizar una, explícales el modelo de capitanes —una persona reúne a su grupo en la parroquia, el colegio, el movimiento o su casa; el equipo le entrega el material guadalupano de Azucena y ayuda con la logística, las fechas y el plan espiritual; el registro es gratuito y desbloquea los planes completos— e invítalos a registrarse o a escribir al correo. No inventes precios, fechas ni cupos.
-9. Dinero: si preguntan, di lo que dice el aviso de transparencia: todo lo recaudado —donaciones, tienda y patrocinios— financia un documental-serie sobre el Acontecimiento Guadalupano y se gestiona a través de una entidad sin ánimo de lucro; nadie del proyecto retiene las donaciones. No des cifras.
+9. Dinero: si preguntan, di lo que dice el aviso de transparencia: todo lo recaudado —donativos, tienda y patrocinios— va directamente a la Iglesia, para ayudar a los más necesitados y a las peregrinaciones; nadie del proyecto retiene las donaciones. La entidad concreta aún no se ha publicado. Los donativos no financian el documental. No des cifras.
 10. Límites: nada de consejo médico, psicológico, legal ni financiero; puedes acompañar con una oración y remitir a un profesional o al equipo. Nada de política partidista, polémicas ideológicas ni comparaciones entre religiones. No hablas en nombre de la Iglesia ni de la Basílica: este sitio es un proyecto privado de la comisión organizadora, no un sitio oficial. No pides ni repites datos personales.
 11. Temas de fuera: si la pregunta no tiene que ver con la Virgen de Guadalupe, el Acontecimiento, el Tepeyac, el sitio o la fe católica, redirige con amabilidad hacia esos temas, sin dar la sensación de cerrarle la puerta.
 12. Honestidad sobre ti: eres una inteligencia artificial; si te lo preguntan, lo dices y ofreces la vía humana, el WhatsApp o el correo. Si te piden algo que no puedes hacer, lo dices sin rodeos y sin disculpas interminables.
 13. Si el visitante está sufriendo —una enfermedad, un duelo, un problema grave—, acompáñalo primero, con respeto y brevedad, y ofrécele la oración y el Rosario Guadalupano; no prometas milagros ni curaciones.
-14. Si te preguntan por el Jubileo de 2031, responde con el corpus, incluida la parte que está pendiente de cotejar con la Conferencia del Episcopado Mexicano, y no anuncies indulgencias ni actos oficiales que no estén publicados.
+14. Si te preguntan por el Jubileo de 2031, responde con el corpus, incluida la parte que está pendiente de cotejar con la Conferencia del Episcopado Mexicano, y no anuncies indulgencias ni actos oficiales que no estén publicados. El Año Jubilar Guadalupano 2026-2027 por los 50 años de la Basílica nueva es otro jubileo, ya concedido y en curso: de él puedes contar lo que dice la sección 14, sin añadir nada.
+15. Horarios y trámites: los de la Basílica cambian. Cuando des un horario, un correo o un trámite de la sección 14 o 16, recuerda en una frase que conviene confirmarlo en la página oficial del santuario.
 `;
 
 /* El prompt que viaja en cada petición: quién es, qué sabe, cómo se llaman las
@@ -51,9 +52,17 @@ REGLAS DE CASA
    revisarlo sin tocar la lógica. */
 export const SYSTEM_PROMPT = [IDENTIDAD, CORPUS, GLOSARIO, REGLAS].join("\n\n");
 
-/* Model choice is a cost decision, documented in .env.example.
-   glm-5.3-flash at $0.15/$0.50 per 1M dominates models that cost more. */
-export const MODEL = process.env.GLM_MODEL || "glm-5.3-flash";
+/* ─────────────────────────────────────────────
+   Los modelos, en cadena: si el primero falla, contesta el segundo.
+
+     1. DeepSeek V4.1 Flash ("deepseek-flash"), sin razonamiento: el más
+        rápido. Además DeepSeek cachea el prefijo repetido de cada petición
+        —este prompt con todo el corpus— y esa parte cuesta céntimos.
+     2. GLM 5.3 Flash, el modelo de siempre, como respaldo.
+
+   Un proveedor sin clave se salta. Cada uno tiene su propio límite de tiempo:
+   si DeepSeek tarda o falla, el visitante no se queda esperando, contesta GLM.
+   ───────────────────────────────────────────── */
 
 /* The glm-5.3 family always reasons, and reasoning tokens are billed at the
    OUTPUT rate. At the default "max", 74% of the output budget went into
@@ -62,6 +71,25 @@ export const REASONING_EFFORT = process.env.GLM_REASONING_EFFORT || "low";
 
 export const GLM_BASE =
   process.env.GLM_BASE_URL || "https://api.z.ai/api/paas/v4/chat/completions";
+
+export const MODEL = process.env.GLM_MODEL || "glm-5.3-flash";
+
+/* DEEPSEEK_BASE_URL puede venir como raíz («https://api.deepseek.com», como
+   está en las variables de usuario de este equipo y como lo usan otras
+   herramientas) o como dirección completa. Pegarle a la raíz da 404, así que
+   se completa aquí. La raíz «/anthropic» es la del otro protocolo de
+   DeepSeek: si llega esa, se usa la raíz OpenAI. */
+export function chatCompletionsUrl(raw, fallback) {
+  const base = (raw || fallback).trim().replace(/\/+$/, "").replace(/\/anthropic$/, "");
+  return /\/chat\/completions$/.test(base) ? base : `${base}/chat/completions`;
+}
+
+export const DEEPSEEK_URL = chatCompletionsUrl(
+  process.env.DEEPSEEK_BASE_URL,
+  "https://api.deepseek.com"
+);
+
+export const DEEPSEEK_MODEL = process.env.DEEPSEEK_MODEL || "deepseek-flash";
 
 const MAX_TURNS = 12;
 const MAX_CHARS_PER_MESSAGE = 2000;
@@ -79,10 +107,43 @@ export function sanitise(messages) {
     }));
 }
 
+const withSystem = (messages) => [{ role: "system", content: SYSTEM_PROMPT }, ...messages];
+
+const PROVIDERS = [
+  {
+    name: "deepseek",
+    url: DEEPSEEK_URL,
+    key: () => process.env.DEEPSEEK_API_KEY,
+    timeoutMs: 20_000,
+    payload: (messages) => ({
+      model: DEEPSEEK_MODEL,
+      messages: withSystem(messages),
+      temperature: 0.5,
+      max_tokens: MAX_OUTPUT_TOKENS,
+      stream: false,
+      /* Sin razonamiento: respuestas de una o dos frases desde un corpus
+         dado no ganan nada pensando, y así contesta antes. */
+      thinking: { type: "disabled" },
+    }),
+  },
+  {
+    name: "glm",
+    url: GLM_BASE,
+    key: () => process.env.GLM_API_KEY,
+    timeoutMs: 30_000,
+    payload: (messages) => buildPayload(messages),
+  },
+];
+
+/** Los proveedores con clave, en el orden en que se prueban. */
+export function configuredProviders() {
+  return PROVIDERS.filter((provider) => Boolean(provider.key()));
+}
+
 export function buildPayload(messages) {
   return {
     model: MODEL,
-    messages: [{ role: "system", content: SYSTEM_PROMPT }, ...messages],
+    messages: withSystem(messages),
     /* Más bajo que antes (0.6): el corpus ya pone el contenido, así que la
        temperatura sólo puede restar precisión o añadir adornos. */
     temperature: 0.5,
@@ -93,26 +154,23 @@ export function buildPayload(messages) {
   };
 }
 
-/**
- * Calls GLM and normalises the outcome so callers never have to guess.
- * @returns {Promise<{ok: true, reply: string, usage?: unknown}
- *   | {ok: false, kind: string, status?: number, detail?: string}>}
- */
-export async function runChat(messages, apiKey) {
+/** One provider, one attempt, normalised. */
+async function callProvider(provider, messages) {
   let upstream;
   try {
-    upstream = await fetch(GLM_BASE, {
+    upstream = await fetch(provider.url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
+        Authorization: `Bearer ${provider.key()}`,
       },
-      body: JSON.stringify(buildPayload(messages)),
+      body: JSON.stringify(provider.payload(messages)),
+      signal: AbortSignal.timeout(provider.timeoutMs),
     });
   } catch (error) {
     return {
       ok: false,
-      kind: "request_failed",
+      kind: error instanceof Error && error.name === "TimeoutError" ? "timeout" : "request_failed",
       detail: error instanceof Error ? error.message : "unknown",
     };
   }
@@ -142,4 +200,24 @@ export async function runChat(messages, apiKey) {
   }
 
   return { ok: true, reply, usage: parsed.usage };
+}
+
+/**
+ * Tries each configured provider in order and returns the first good answer.
+ * @returns {Promise<{ok: true, reply: string, provider: string, usage?: unknown}
+ *   | {ok: false, kind: string, status?: number, detail?: string}>}
+ */
+export async function runChat(messages) {
+  const providers = configuredProviders();
+  if (providers.length === 0) return { ok: false, kind: "not_configured" };
+
+  const failures = [];
+  for (const provider of providers) {
+    const outcome = await callProvider(provider, messages);
+    if (outcome.ok) return { ...outcome, provider: provider.name };
+    failures.push(`${provider.name}: ${outcome.kind}${outcome.status ? ` ${outcome.status}` : ""}`);
+    console.warn(`[chat] ${provider.name} falló (${outcome.kind}); se prueba el siguiente`, outcome.detail ?? "");
+  }
+
+  return { ok: false, kind: "all_providers_failed", detail: failures.join(" · ") };
 }

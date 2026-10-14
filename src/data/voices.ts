@@ -31,6 +31,11 @@ export type Voice = {
   body: Bi;
   href: string;
   embed?: string;
+  /** Imagen de la persona, en /public, y su texto alternativo. */
+  photo?: string;
+  photoAlt?: Bi;
+  /** Bio breve bajo la foto. Si falta, no se muestra nada. */
+  bio?: Bi;
 };
 
 export const voices: Voice[] = [
@@ -52,6 +57,15 @@ export const voices: Voice[] = [
     },
     href: links.azucenaTestimony,
     embed: links.azucenaTestimonyEmbed,
+    photo: "/images/azucena/azucena-rezando.jpg",
+    bio: {
+      es: "Azucena Cierco ejerció el periodismo durante veinticuatro años y, en los últimos diez, participó en la conducción del programa especial que cada 12 de diciembre conmemora el aniversario del Acontecimiento Guadalupano. En 2023, al subir a la Capilla de las Rosas, tuvo un encuentro con la siempre Virgen Santa María de Guadalupe que transformó su vida. Desde entonces ha puesto su vida y su corazón en difundir el Acontecimiento que cambió la historia de América Latina.",
+      en: "Azucena Cierco worked as a journalist for twenty-four years and, in the last ten, co-hosted the special programme that commemorates the anniversary of the Guadalupan Event every 12 December. In 2023, as she climbed to the Chapel of the Roses, she had an encounter with the ever-Virgin Holy Mary of Guadalupe that transformed her life. Since then she has given her life and her heart to spreading the Event that changed the history of Latin America.",
+    },
+    photoAlt: {
+      es: "Azucena Cierco, de rodillas, ofrece un ramo de rosas ante la imagen de Santa María de Guadalupe",
+      en: "Azucena Cierco, kneeling, offers a bouquet of roses before the image of Our Lady of Guadalupe",
+    },
   },
   {
     id: "radio-maria",
@@ -96,6 +110,32 @@ export const voices: Voice[] = [
     href: links.iseg,
   },
 ];
+
+/** ─────────────────────────────────────────────
+ *  Próximo podcast en vivo de Azucena (bajo el vídeo de su testimonio).
+ *
+ *  En YouTube Live: se ve sin cuenta y sin instalar nada, sin límite de
+ *  público ni de tiempo, y la grabación queda en el canal. `startsAt` lleva
+ *  la zona horaria; la web la enseña en la hora de cada visitante. Antes de
+ *  empezar dice «Próximo», durante «En vivo ahora» y al acabar «Ver la
+ *  grabación», solo.
+ *
+ *  `null` = no hay ninguno anunciado y el bloque no se muestra.
+ *  ───────────────────────────────────────────── */
+export type LiveEvent = {
+  title: Bi;
+  /** ISO 8601 con zona, p. ej. "2026-10-22T20:00:00-04:00". Sin fecha, el
+      bloque dice «Se anunciará pronto…». */
+  startsAt?: string;
+  durationMin?: number;
+  /** Enlace de la emisión en YouTube (sirve también para la grabación). Sin
+      él, el directo del canal (VITE_YOUTUBE_LIVE_URL). */
+  url?: string;
+};
+
+export const nextLive: LiveEvent | null = {
+  title: { es: "Podcast en vivo con Azucena Cierco", en: "Live podcast with Azucena Cierco" },
+};
 
 export type RosaryMode = {
   id: string;

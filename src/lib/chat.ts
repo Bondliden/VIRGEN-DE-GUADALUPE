@@ -1,3 +1,12 @@
+/* Abre a Lupita con una pregunta ya hecha (lo escucha ChatBox). Lo usan
+   los formularios de alta: dejas tus datos y Lupita te explica el siguiente
+   paso. */
+export const LUPITA_ASK_EVENT = "lupita:ask";
+
+export function askLupita(question: string) {
+  window.dispatchEvent(new CustomEvent<string>(LUPITA_ASK_EVENT, { detail: question }));
+}
+
 /* Browser-side client for the GLM assistant.
    It never sees an API key: it only posts to the same-origin proxy
    (see /api/chat.ts), which adds the credentials server-side. */

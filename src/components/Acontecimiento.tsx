@@ -109,8 +109,8 @@ export function Acontecimiento() {
         titleMain={acontecimientoSection.title}
         titleItalic={{ es: "Las Apariciones y la Tilma", en: "The Apparitions and the Tilma" }}
         subtitle={acontecimientoSection.intro}
-        videoSrc="https://videos.pexels.com/video-files/2795400/2795400-hd_1920_1080_25fps.mp4"
-        posterSrc="/images/guadalupe/tepeyac.jpg"
+        videoSrc="/videos/heroes/acontecimiento.mp4"
+        posterSrc="/videos/heroes/acontecimiento.jpg"
         pageOf="003 / 006"
         badge={{ es: "Diciembre de 1531 · Cerro del Tepeyac", en: "December 1531 · Tepeyac Hill" }}
         ctaPrimary={{ label: { es: "Explorar los Paneles", en: "Explore the Panels" }, href: "#paneles-acontecimiento" }}

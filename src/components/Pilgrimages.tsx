@@ -18,6 +18,9 @@ import { site, links, cameras } from "@/data/links";
 import { pilgrimageSection, pilgrimages, type IconKey } from "@/data/pilgrimages";
 import { Container, Coord, Dot, Eyebrow } from "@/components/Chrome";
 import { VideoHero } from "@/components/VideoHero";
+import { LeadForm } from "@/components/LeadForm";
+import { closing } from "@/data/hero";
+import { leadsConfigured, submitLead } from "@/lib/leads";
 import { VirginSacredDisplay } from "@/components/VirginSacredDisplay";
 
 /* ─────────────────────────────────────────────
@@ -42,6 +45,7 @@ const icons: Record<IconKey, LucideIcon> = {
 export function Pilgrimages() {
   const { t } = useLang();
   const { unlocked, unlock } = usePilgrimAccess();
+  const [captainForm, setCaptainForm] = useState(false);
 
   return (
     <>
@@ -52,8 +56,8 @@ export function Pilgrimages() {
         titleMain={pilgrimageSection.title}
         titleItalic={{ es: "Caminar con Fe al Tepeyac", en: "Walking in Faith to Tepeyac" }}
         subtitle={pilgrimageSection.intro}
-        videoSrc="https://videos.pexels.com/video-files/3209828/3209828-hd_1920_1080_25fps.mp4"
-        posterSrc="/images/guadalupe/basilica-air.jpg"
+        videoSrc="/videos/heroes/peregrinaciones.mp4"
+        posterSrc="/videos/heroes/peregrinaciones.jpg"
         pageOf="002 / 006"
         badge={{ es: "Más de 12 Millones de Almas", en: "Over 12 Million Pilgrims" }}
         ctaPrimary={{ label: { es: "Ver la Basílica en Vivo", en: "Watch Basilica Live" }, href: "#basilica-en-vivo" }}
@@ -87,50 +91,45 @@ export function Pilgrimages() {
           </div>
           <div className="flex flex-col justify-between">
             <div>
-              <Eyebrow>{t({ es: "En vivo", en: "Live" })}</Eyebrow>
+              <LiveBadge />
               <h3 className="mt-3 font-serif text-2xl italic text-inkSoft">
                 {t(pilgrimageSection.liveTitle)}
               </h3>
-              <p className="mt-3 text-[15px] leading-relaxed text-inkMute">
+              <p className="mt-3 text-left text-[16px] font-semibold leading-relaxed text-inkSoft">
                 {t(pilgrimageSection.liveNote)}
               </p>
-            </div>
-            <div className="mt-6">
-              <Coord className="block uppercase">{t(pilgrimageSection.liveFallback)}</Coord>
-              <a
-                href={links.basilicaLive}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="mt-3 inline-block border border-ink/30 px-4 py-2 text-eyebrow font-semibold uppercase tracking-eyebrow text-inkSoft transition-colors hover:border-ink hover:bg-ink/5"
-              >
-                {t(pilgrimageSection.liveOpen)}
-              </a>
             </div>
           </div>
         </div>
 
-        {/* ── Other cameras around the Tepeyac ── */}
+        {/* ── Other live cameras around the Tepeyac ──
+            Letra de lectura, no de anotación: quien entra aquí busca una
+            cámara, y el rótulo de 10px no se distinguía. A la izquierda y sin
+            justificar: en una columna tan estrecha la justificación abría
+            huecos entre palabras. */}
         <div className="mt-4 grid gap-6 border border-ink/20 bg-bone p-5 lg:grid-cols-[0.55fr_1.45fr] lg:p-6">
           <div>
-            <Coord className="block uppercase">
+            <LiveBadge />
+            <h3 className="mt-3 font-serif text-2xl italic text-inkSoft">
               {t(pilgrimageSection.camerasTitle)}
-            </Coord>
-            <p className="mt-3 text-[14px] leading-relaxed text-inkMute">
+            </h3>
+            <p className="mt-3 text-left text-body font-semibold text-inkSoft">
               {t(pilgrimageSection.camerasNote)}
             </p>
           </div>
           <ul className="grid gap-px self-start border border-ink/20 bg-ink/20 sm:grid-cols-3">
             {cameras.map((camera) => (
-              <li key={camera.href} className="bg-bone p-4">
+              <li key={camera.href} className="bg-bone p-5 text-left">
                 <a
                   href={camera.href}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="gd-link-underline text-[14px] font-semibold text-inkSoft transition-colors hover:text-ink"
+                  className="gd-link-underline text-lg font-semibold leading-snug text-inkSoft transition-colors hover:text-ink sm:text-xl"
                 >
                   {t(camera.label)}
+                  <span aria-hidden> ↗</span>
                 </a>
-                <Coord className="mt-2 block">{camera.source}</Coord>
+                <span className="mt-2 block text-[15px] text-inkMute">{camera.source}</span>
               </li>
             ))}
           </ul>
@@ -228,14 +227,20 @@ export function Pilgrimages() {
             </p>
             <p className="mt-4 text-body text-inkMute">{t(pilgrimageSection.multiplier.body)}</p>
 
-            <a
-              href={`mailto:${site.contactEmail}?subject=${encodeURIComponent(
-                t({ es: "Quiero ser capitán de peregrinación", en: "I want to be a pilgrimage captain" })
-              )}`}
-              className="mt-6 inline-block bg-accentRose px-5 py-3 text-eyebrow font-semibold uppercase tracking-eyebrow text-[hsl(var(--gd-accent-on))] transition-colors hover:bg-accentRose/80"
-            >
-              {t(pilgrimageSection.multiplier.cta)}
-            </a>
+            {/* Igual que en el cierre: nombre y correo, y luego Lupita. */}
+            {captainForm ? (
+              <div className="mt-6">
+                <LeadForm source="capitan" intro={closing.captainIntro} lupitaQuestion={closing.captainQuestion} />
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setCaptainForm(true)}
+                className="mt-6 inline-block bg-accentRose px-5 py-3 text-eyebrow font-semibold uppercase tracking-eyebrow text-[hsl(var(--gd-accent-on))] transition-colors hover:bg-accentRose/80"
+              >
+                {t(pilgrimageSection.multiplier.cta)}
+              </button>
+            )}
           </div>
 
           <div className="grid gap-8 sm:grid-cols-2">
@@ -280,6 +285,21 @@ export function Pilgrimages() {
   );
 }
 
+/* «En vivo», grande y en rojo, con el punto que late de las emisiones en
+   directo: es lo primero que tiene que ver quien busca una cámara. */
+function LiveBadge() {
+  const { t } = useLang();
+  return (
+    <span className="inline-flex items-center gap-3 font-display text-[22px] font-extrabold uppercase leading-none tracking-[0.12em] text-accentRose sm:text-[26px]">
+      <span className="relative flex h-3.5 w-3.5" aria-hidden>
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accentRose opacity-60" />
+        <span className="relative inline-flex h-3.5 w-3.5 rounded-full bg-accentRose" />
+      </span>
+      {t({ es: "En vivo", en: "Live" })}
+    </span>
+  );
+}
+
 const STORAGE_KEY = "guadalupe-pilgrim-access";
 
 function usePilgrimAccess() {
@@ -316,13 +336,7 @@ function Gate({ onUnlock }: { onUnlock: () => void }) {
     event.preventDefault();
     setBusy(true);
     try {
-      if (site.leadsEndpoint) {
-        await fetch(site.leadsEndpoint, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, email, source: "peregrinaciones" }),
-        });
-      }
+      await submitLead({ name, email, source: "peregrinaciones" });
     } catch {
       /* never block the pilgrim on a network error */
     } finally {
@@ -388,7 +402,7 @@ function Gate({ onUnlock }: { onUnlock: () => void }) {
         {busy ? "…" : t(pilgrimageSection.gate.lockedCta)}
       </button>
 
-      {!site.leadsEndpoint ? (
+      {!leadsConfigured ? (
         <p className="gd-coord mt-3 uppercase">
           {t({ es: "También puedes escribirnos a", en: "You can also write to us at" })}{" "}
           {site.contactEmail}

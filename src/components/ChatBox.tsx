@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { MessageCircle, Send, Sparkles, X } from "lucide-react";
 import { useLang } from "@/lib/lang";
 import { site } from "@/data/links";
-import { askAssistant, type ChatTurn } from "@/lib/chat";
+import { askAssistant, LUPITA_ASK_EVENT, type ChatTurn } from "@/lib/chat";
 import { Coord } from "@/components/Chrome";
 
 /* Floating assistant. The model behind it is an implementation detail: the
@@ -97,6 +97,20 @@ export function ChatBox() {
       setBusy(false);
     }
   };
+
+  /* Otra parte de la página puede abrir a Lupita con la pregunta ya hecha
+     (askLupita en lib/chat): se abre el panel y la pregunta sale sola. */
+  const sendRef = useRef(send);
+  sendRef.current = send;
+  useEffect(() => {
+    const onAsk = (event: Event) => {
+      const question = (event as CustomEvent<string>).detail;
+      setOpen(true);
+      if (question) void sendRef.current(question);
+    };
+    window.addEventListener(LUPITA_ASK_EVENT, onAsk);
+    return () => window.removeEventListener(LUPITA_ASK_EVENT, onAsk);
+  }, []);
 
   if (!open) {
     return (

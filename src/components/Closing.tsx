@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { Instagram, Mail, MessageCircle, Youtube } from "lucide-react";
+import { LeadForm } from "@/components/LeadForm";
 import { useLang } from "@/lib/lang";
 import { closing } from "@/data/hero";
 import { novena } from "@/data/jubilee";
@@ -13,6 +15,7 @@ import { VirginSacredDisplay } from "@/components/VirginSacredDisplay";
 
 export function Closing() {
   const { t } = useLang();
+  const [openForm, setOpenForm] = useState<"capitan" | "documental" | null>(null);
 
   return (
     <>
@@ -23,8 +26,8 @@ export function Closing() {
         titleMain={novena.title}
         titleItalic={{ es: "Hacia el Quinto Centenario", en: "Towards the Fifth Centenary" }}
         subtitle={novena.lead}
-        videoSrc="https://videos.pexels.com/video-files/3129671/3129671-hd_1920_1080_30fps.mp4"
-        posterSrc="/images/guadalupe/tilma-hero.jpg"
+        videoSrc="/videos/heroes/jubileo.mp4"
+        posterSrc="/videos/heroes/jubileo.jpg"
         pageOf="006 / 006"
         badge={{ es: "1531 · Jubileo Guadalupano · 2031", en: "1531 · Guadalupan Jubilee · 2031" }}
         ctaPrimary={{ label: { es: "Las 5 Líneas de Acción", en: "The 5 Lines of Action" }, href: "#lineas-de-accion" }}
@@ -51,7 +54,7 @@ export function Closing() {
           </div>
 
         {/* ── Las cinco líneas de acción ── */}
-        <div className="mt-12">
+        <div id="lineas-de-accion" className="mt-12 scroll-mt-28">
           <Coord className="block uppercase">{t(novena.actionsTitle)}</Coord>
           <div className="mt-4 grid gap-px bg-ink/20 sm:grid-cols-2 lg:grid-cols-5">
             {novena.actions.map((action, index) => (
@@ -95,20 +98,31 @@ export function Closing() {
             >
               {t(closing.ctaJoin)}
             </a>
-            <a
-              href={`mailto:${site.contactEmail}?subject=${encodeURIComponent(
-                t({ es: "Quiero ser capitán de peregrinación", en: "I want to be a pilgrimage captain" })
-              )}`}
+            {/* Capitán y documental: piden nombre y correo, igual que
+                «Quiero peregrinar», y al enviar abren a Lupita con la
+                pregunta de cómo seguir. Antes abrían el programa de correo. */}
+            <button
+              type="button"
+              aria-expanded={openForm === "capitan"}
+              onClick={() => setOpenForm(openForm === "capitan" ? null : "capitan")}
               className="border border-ink/30 px-5 py-3 text-center text-eyebrow font-semibold uppercase tracking-eyebrow text-inkSoft transition-colors hover:border-ink hover:bg-ink/5"
             >
               {t(closing.ctaCaptain)}
-            </a>
-            <a
-              href={site.donateUrl || `mailto:${site.contactEmail}`}
+            </button>
+            {openForm === "capitan" ? (
+              <LeadForm source="capitan" intro={closing.captainIntro} lupitaQuestion={closing.captainQuestion} />
+            ) : null}
+            <button
+              type="button"
+              aria-expanded={openForm === "documental"}
+              onClick={() => setOpenForm(openForm === "documental" ? null : "documental")}
               className="border border-ink/30 px-5 py-3 text-center text-eyebrow font-semibold uppercase tracking-eyebrow text-inkSoft transition-colors hover:border-ink hover:bg-ink/5"
             >
               {t(closing.ctaSupport)}
-            </a>
+            </button>
+            {openForm === "documental" ? (
+              <LeadForm source="documental" intro={closing.supportIntro} lupitaQuestion={closing.supportQuestion} />
+            ) : null}
             <Coord className="mt-2 block uppercase">{t(pilgrimageSection.multiplier.lead)}</Coord>
           </div>
         </div>
@@ -185,7 +199,9 @@ export function Footer() {
 
           <div className="grid gap-8 sm:grid-cols-3">
             <nav>
-              <Coord className="block uppercase">{t({ es: "El sitio", en: "The site" })}</Coord>
+              <Coord className="block text-[12px] font-bold uppercase text-inkSoft">
+                {t({ es: "El sitio", en: "The site" })}
+              </Coord>
               <ul className="mt-3 space-y-2">
                 {[
                   { href: "#peregrinaciones", label: { es: "Peregrinaciones", en: "Pilgrimages" } },
@@ -197,7 +213,7 @@ export function Footer() {
                   <li key={item.href}>
                     <a
                       href={item.href}
-                      className="gd-link-underline text-[14px] text-inkMute transition-colors hover:text-ink"
+                      className="gd-link-underline text-[15px] font-semibold text-inkSoft transition-colors hover:text-ink"
                     >
                       {t(item.label)}
                     </a>
@@ -207,18 +223,18 @@ export function Footer() {
             </nav>
 
             <nav>
-              <Coord className="block uppercase">
+              <Coord className="block text-[12px] font-bold uppercase text-inkSoft">
                 {t({ es: "Para peregrinar", en: "To go on pilgrimage" })}
               </Coord>
               <ul className="mt-3 space-y-2">
                 <li>
+                  {/* En plural, al bloque de la página que reúne todas las
+                      cámaras, no a una sola emisión de YouTube. */}
                   <a
-                    href={links.basilicaLive}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    className="gd-link-underline text-[14px] text-inkMute transition-colors hover:text-ink"
+                    href="#basilica-en-vivo"
+                    className="gd-link-underline text-[15px] font-semibold text-inkSoft transition-colors hover:text-ink"
                   >
-                    {t({ es: "Cámara en vivo", en: "Live camera" })}
+                    {t({ es: "Cámaras en vivo", en: "Live cameras" })}
                   </a>
                 </li>
                 <li>
@@ -226,7 +242,7 @@ export function Footer() {
                     href={links.azucenaTestimony}
                     target="_blank"
                     rel="noreferrer noopener"
-                    className="gd-link-underline text-[14px] text-inkMute transition-colors hover:text-ink"
+                    className="gd-link-underline text-[15px] font-semibold text-inkSoft transition-colors hover:text-ink"
                   >
                     {t({ es: "Testimonio de Azucena", en: "Azucena's testimony" })}
                   </a>
@@ -236,7 +252,7 @@ export function Footer() {
                     href={links.fernandoOjeda}
                     target="_blank"
                     rel="noreferrer noopener"
-                    className="gd-link-underline text-[14px] text-inkMute transition-colors hover:text-ink"
+                    className="gd-link-underline text-[15px] font-semibold text-inkSoft transition-colors hover:text-ink"
                   >
                     {t({ es: "Música del manto", en: "Music of the mantle" })}
                   </a>
@@ -245,8 +261,12 @@ export function Footer() {
             </nav>
 
             <div>
-              <Coord className="block uppercase">{t({ es: "Imágenes", en: "Images" })}</Coord>
-              <p className="mt-3 text-[13px] leading-relaxed text-inkMute">
+              <Coord className="block text-[12px] font-bold uppercase text-inkSoft">
+                {t({ es: "Imágenes", en: "Images" })}
+              </Coord>
+              {/* Una lista de créditos, no prosa: sin justificar ni partir
+                  palabras ("Ni-can Mopohua"). */}
+              <p className="mt-3 text-left text-[13px] leading-relaxed text-inkMute [hyphens:none]">
                 {t({
                   es: "Fotografías de Wikimedia Commons: Janothird (Jan Zatko), CC BY-SA 3.0 · ProtoplasmaKid, CC BY / CC BY-SA 4.0 · Ramiro Ortiz Girón, CC BY-SA 4.0 · Nican Mopohua, CC0 (Biblioteca Pública de Nueva York).",
                   en: "Photographs from Wikimedia Commons: Janothird (Jan Zatko), CC BY-SA 3.0 · ProtoplasmaKid, CC BY / CC BY-SA 4.0 · Ramiro Ortiz Girón, CC BY-SA 4.0 · Nican Mopohua, CC0 (New York Public Library).",
@@ -270,6 +290,22 @@ export function Footer() {
           <Coord className="uppercase">
             {t({ es: "Tepeyac · 1531 — Jubileo · 2031", en: "Tepeyac · 1531 — Jubilee · 2031" })}
           </Coord>
+        </div>
+
+        {/* Crédito del estudio, pegado al final de la página. En el móvil
+            lleva colchón debajo: allí WhatsApp (abajo a la izquierda) y
+            Lupita (abajo a la derecha) ocupan casi todo el ancho y lo
+            taparían. En pantallas anchas quedan en las esquinas y el
+            crédito, centrado, no choca con ellos. */}
+        <div className="border-t border-ink/20 pb-24 pt-5 text-center text-[14px] text-inkMute sm:pb-6">
+          Design by <span className="font-semibold text-inkSoft">Cohabia</span>
+          {" · "}
+          <a
+            href="mailto:info@cohabia.com"
+            className="gd-link-underline font-semibold text-inkSoft transition-colors hover:text-ink"
+          >
+            info@cohabia.com
+          </a>
         </div>
       </Container>
     </footer>
