@@ -183,6 +183,16 @@ export function Shop() {
                 </dd>
               </dl>
             </div>
+            <div className="mt-4 border border-ink/30 px-5 py-4">
+              <p className="text-left text-eyebrow font-semibold uppercase tracking-eyebrow text-inkSoft">
+                {t(shopSection.zelleTitle)}
+              </p>
+              <p className="mt-2 text-[15px] leading-relaxed text-inkMute">{t(shopSection.zelleBody)}</p>
+              <dl className="mt-3 grid grid-cols-[auto_1fr] gap-x-4 text-[16px]">
+                <dt className="text-inkMute">{t(shopSection.zelleNumberLabel)}</dt>
+                <dd className="select-all text-left font-semibold text-inkSoft">{site.zelle}</dd>
+              </dl>
+            </div>
           </div>
         </div>
       </Container>

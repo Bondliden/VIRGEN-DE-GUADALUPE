@@ -33,6 +33,8 @@ export const site = {
   nonprofitName: import.meta.env.VITE_NONPROFIT_NAME || "",
   nonprofitUrl: import.meta.env.VITE_NONPROFIT_URL || "",
   donateUrl: import.meta.env.VITE_DONATE_URL || "",
+  /** Número de Zelle para los donativos que van al documental. */
+  zelle: import.meta.env.VITE_ZELLE_NUMBER || "+1 (305) 873-3904",
   leadsEndpoint: import.meta.env.VITE_LEADS_ENDPOINT || "",
   /** Clave de web3forms.com: cada alta llega como correo. Ver src/lib/leads.ts. */
   web3formsKey: import.meta.env.VITE_WEB3FORMS_KEY || "",

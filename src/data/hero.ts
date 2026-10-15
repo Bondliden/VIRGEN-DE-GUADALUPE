@@ -82,17 +82,21 @@ export const disclosure = {
     en: "Transparency notice",
   } satisfies Bi,
   title: {
-    es: "Todos los donativos van directamente a la Iglesia",
-    en: "All donations go directly to the Church",
+    es: "Adónde va tu aportación",
+    en: "Where your contribution goes",
   } satisfies Bi,
   short: {
-    es: "Todo lo que se recauda en este proyecto —los donativos, las ganancias de la tienda y los patrocinios— va directamente a la Iglesia, para ayudar a los más necesitados y a las peregrinaciones.",
-    en: "Everything this project raises — donations, shop profits and sponsorships — goes directly to the Church, to help those most in need and to support pilgrimages.",
+    es: "Lo que se recauda en este proyecto —los donativos, las ganancias de la tienda y los patrocinios— va directamente a la Iglesia, para ayudar a los más necesitados y a las peregrinaciones. La única excepción son los donativos enviados por Zelle al número indicado abajo: esos se destinan al documental.",
+    en: "What this project raises — donations, shop profits and sponsorships — goes directly to the Church, to help those most in need and to support pilgrimages. The only exception is donations sent by Zelle to the number shown below: those go to the documentary.",
   } satisfies Bi,
   points: [
     {
-      es: "Los donativos, las ganancias de la tienda y los patrocinios van íntegros a la Iglesia.",
-      en: "Donations, shop profits and sponsorships go in full to the Church.",
+      es: "Las ganancias de la tienda, los patrocinios y los donativos —salvo los enviados por Zelle— van íntegros a la Iglesia.",
+      en: "Shop profits, sponsorships and donations — except those sent by Zelle — go in full to the Church.",
+    },
+    {
+      es: "Los donativos enviados por Zelle al número indicado se destinan al documental sobre el Acontecimiento Guadalupano.",
+      en: "Donations sent by Zelle to the number shown go to the documentary about the Guadalupan Event.",
     },
     {
       es: "Se destinan a ayudar a los más necesitados y a las peregrinaciones al Tepeyac.",
@@ -107,6 +111,14 @@ export const disclosure = {
       en: "The goal is to evangelise and make the Guadalupan Event known before the 500th anniversary in 2031.",
     },
   ] as Bi[],
+  zelle: {
+    title: { es: "Donativos para el documental, por Zelle", en: "Donations for the documentary, by Zelle" } satisfies Bi,
+    body: {
+      es: "Si quieres apoyar el documental, envía tu donativo por Zelle a este número. Todo lo demás va a la Iglesia.",
+      en: "If you want to support the documentary, send your donation by Zelle to this number. Everything else goes to the Church.",
+    } satisfies Bi,
+    label: { es: "Zelle", en: "Zelle" } satisfies Bi,
+  },
   accept: {
     es: "Entendido, continuar",
     en: "Understood, continue",

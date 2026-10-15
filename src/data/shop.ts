@@ -37,10 +37,16 @@ export const shopSection = {
     en: "Before buying, helping",
   } satisfies Bi,
   donateBody: {
-    es: "Tu donativo va directamente a la Iglesia, para ayudar a los más necesitados y a las peregrinaciones. Llega más lejos que cualquier compra.",
-    en: "Your donation goes directly to the Church, to help those most in need and to support pilgrimages. It goes further than any purchase.",
+    es: "Tu donativo va directamente a la Iglesia, para ayudar a los más necesitados y a las peregrinaciones. Llega más lejos que cualquier compra. Si prefieres apoyar el documental, usa Zelle (más abajo).",
+    en: "Your donation goes directly to the Church, to help those most in need and to support pilgrimages. It goes further than any purchase. If you prefer to support the documentary, use Zelle (below).",
   } satisfies Bi,
   donateCta: { es: "Hacer un donativo", en: "Make a donation" } satisfies Bi,
+  zelleTitle: { es: "Zelle · para el documental", en: "Zelle · for the documentary" } satisfies Bi,
+  zelleBody: {
+    es: "Lo que envíes por Zelle a este número se destina al documental sobre el Acontecimiento Guadalupano (ver el aviso de transparencia).",
+    en: "What you send by Zelle to this number goes to the documentary about the Guadalupan Event (see the transparency notice).",
+  } satisfies Bi,
+  zelleNumberLabel: { es: "Número", en: "Number" } satisfies Bi,
   writeCta: { es: "Escríbenos", en: "Write to us" } satisfies Bi,
   writeEmailLabel: { es: "Email", en: "Email" } satisfies Bi,
   writeSubjectLabel: { es: "Concepto", en: "Subject" } satisfies Bi,
