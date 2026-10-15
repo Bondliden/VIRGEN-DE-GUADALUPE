@@ -3,6 +3,7 @@ import { Footprints, Mic, ShieldCheck } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { useLang } from "@/lib/lang";
 import { disclosure, purpose } from "@/data/hero";
+import { site } from "@/data/links";
 import { Container, Coord, Dot, Eyebrow, SectionRule } from "@/components/Chrome";
 
 /* Why the site exists (two objectives) + the non-profit transparency
@@ -112,6 +113,17 @@ export function Disclosure() {
                   ))}
                 </ul>
               ) : null}
+
+              <div className="mt-5 border border-ink/25 bg-paper px-5 py-4">
+                <p className="text-eyebrow font-semibold uppercase tracking-eyebrow text-inkSoft">
+                  {t(disclosure.zelle.title)}
+                </p>
+                <p className="mt-2 text-[15px] leading-relaxed text-inkMute">{t(disclosure.zelle.body)}</p>
+                <p className="mt-3 text-[16px] text-inkMute">
+                  {t(disclosure.zelle.label)}:{" "}
+                  <span className="select-all font-semibold text-inkSoft">{site.zelle}</span>
+                </p>
+              </div>
 
               <p className="mt-4 font-serif text-[17px] italic text-inkSoft">
                 {t(disclosure.promise)}
