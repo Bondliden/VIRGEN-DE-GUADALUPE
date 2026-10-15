@@ -115,7 +115,7 @@ export function Disclosure() {
               ) : null}
 
               <div className="mt-5 border border-ink/25 bg-paper px-5 py-4">
-                <p className="text-eyebrow font-semibold uppercase tracking-eyebrow text-inkSoft">
+                <p className="text-eyebrow font-extrabold uppercase tracking-eyebrow text-inkSoft">
                   {t(disclosure.zelle.title)}
                 </p>
                 <p className="mt-2 text-[15px] leading-relaxed text-inkMute">{t(disclosure.zelle.body)}</p>

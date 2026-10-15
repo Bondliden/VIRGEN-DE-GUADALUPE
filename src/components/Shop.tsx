@@ -169,7 +169,7 @@ export function Shop() {
                 vista la dirección y el concepto para escribirlos a mano o
                 copiarlos. */}
             <div className="mt-5 border border-ink/30 px-5 py-4">
-              <p className="text-left text-eyebrow font-semibold uppercase tracking-eyebrow text-inkSoft">
+              <p className="text-left text-eyebrow font-extrabold uppercase tracking-eyebrow text-inkSoft">
                 {t(shopSection.writeCta)}
               </p>
               <dl className="mt-3 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5 text-[16px]">
@@ -184,7 +184,7 @@ export function Shop() {
               </dl>
             </div>
             <div className="mt-4 border border-ink/30 px-5 py-4">
-              <p className="text-left text-eyebrow font-semibold uppercase tracking-eyebrow text-inkSoft">
+              <p className="text-left text-eyebrow font-extrabold uppercase tracking-eyebrow text-inkSoft">
                 {t(shopSection.zelleTitle)}
               </p>
               <p className="mt-2 text-[15px] leading-relaxed text-inkMute">{t(shopSection.zelleBody)}</p>
