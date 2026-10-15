@@ -86,21 +86,21 @@ export const disclosure = {
     en: "Where your contribution goes",
   } satisfies Bi,
   short: {
-    es: "Lo que se recauda en este proyecto —los donativos, las ganancias de la tienda y los patrocinios— va directamente a la Iglesia, para ayudar a los más necesitados y a las peregrinaciones. La única excepción son los donativos enviados por Zelle al número indicado abajo: esos se destinan al documental.",
-    en: "What this project raises — donations, shop profits and sponsorships — goes directly to the Church, to help those most in need and to support pilgrimages. The only exception is donations sent by Zelle to the number shown below: those go to the documentary.",
+    es: "Las ganancias de la tienda y los patrocinios van directamente a la Iglesia. Los donativos se reparten: una parte va a la Iglesia, para ayudar a los más necesitados y a las peregrinaciones, y otra parte al documental sobre el Acontecimiento Guadalupano.",
+    en: "Shop profits and sponsorships go directly to the Church. Donations are shared: one part goes to the Church, to help those most in need and to support pilgrimages, and another part to the documentary about the Guadalupan Event.",
   } satisfies Bi,
   points: [
     {
-      es: "Las ganancias de la tienda, los patrocinios y los donativos —salvo los enviados por Zelle— van íntegros a la Iglesia.",
-      en: "Shop profits, sponsorships and donations — except those sent by Zelle — go in full to the Church.",
+      es: "Las ganancias de la tienda y los patrocinios van íntegros a la Iglesia.",
+      en: "Shop profits and sponsorships go in full to the Church.",
     },
     {
-      es: "Los donativos enviados por Zelle al número indicado se destinan al documental sobre el Acontecimiento Guadalupano.",
-      en: "Donations sent by Zelle to the number shown go to the documentary about the Guadalupan Event.",
+      es: "Los donativos se reparten: una parte va a la Iglesia y otra al documental sobre el Acontecimiento Guadalupano.",
+      en: "Donations are shared: one part goes to the Church and another to the documentary about the Guadalupan Event.",
     },
     {
-      es: "Se destinan a ayudar a los más necesitados y a las peregrinaciones al Tepeyac.",
-      en: "They are used to help those most in need and to support pilgrimages to Tepeyac.",
+      es: "La parte que va a la Iglesia se destina a ayudar a los más necesitados y a las peregrinaciones al Tepeyac.",
+      en: "The part that goes to the Church is used to help those most in need and to support pilgrimages to Tepeyac.",
     },
     {
       es: "Ningún responsable del proyecto retiene las donaciones para fines personales.",
@@ -112,10 +112,10 @@ export const disclosure = {
     },
   ] as Bi[],
   zelle: {
-    title: { es: "Donativos para el documental, por Zelle", en: "Donations for the documentary, by Zelle" } satisfies Bi,
+    title: { es: "Donativos por Zelle: Iglesia y documental", en: "Donations by Zelle: Church and documentary" } satisfies Bi,
     body: {
-      es: "Si quieres apoyar el documental, envía tu donativo por Zelle a este número. Todo lo demás va a la Iglesia.",
-      en: "If you want to support the documentary, send your donation by Zelle to this number. Everything else goes to the Church.",
+      es: "Puedes enviar tu donativo por Zelle a este número. Una parte va a la Iglesia y otra parte al documental.",
+      en: "You can send your donation by Zelle to this number. One part goes to the Church and another part to the documentary.",
     } satisfies Bi,
     label: { es: "Zelle", en: "Zelle" } satisfies Bi,
   },
