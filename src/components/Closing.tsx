@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Instagram, Mail, MessageCircle, Youtube } from "lucide-react";
 import { LeadForm } from "@/components/LeadForm";
 import { useLang } from "@/lib/lang";
+import { askLupita } from "@/lib/chat";
 import { closing } from "@/data/hero";
 import { novena } from "@/data/jubilee";
 import { links, site } from "@/data/links";
@@ -12,6 +13,15 @@ import { VirginSacredDisplay } from "@/components/VirginSacredDisplay";
 
 /* Section V — the closing call to action, and the colophon footer with the
    Atelier Zero mega kicker word and the image licence attribution. */
+
+/* Los tres botones de acción: el que está abierto (o el principal, si no hay
+   ninguno abierto) se pinta de color; los demás quedan con borde. */
+const BTN_BASE =
+  "px-5 py-3 text-center text-eyebrow font-semibold uppercase tracking-eyebrow transition-colors";
+const BTN_ACTIVO =
+  "border border-accentRose bg-accentRose text-[hsl(var(--gd-accent-on))] hover:bg-accentRose/80";
+const BTN_REPOSO =
+  "border border-ink/30 text-inkSoft hover:border-ink hover:bg-ink/5";
 
 export function Closing() {
   const { t } = useLang();
@@ -94,7 +104,7 @@ export function Closing() {
           <div className="grid gap-3">
             <a
               href="#peregrinar"
-              className="bg-accentRose px-5 py-3 text-center text-eyebrow font-semibold uppercase tracking-eyebrow text-[hsl(var(--gd-accent-on))] transition-colors hover:bg-accentRose/80"
+              className={`${BTN_BASE} ${openForm === null ? BTN_ACTIVO : BTN_REPOSO}`}
             >
               {t(closing.ctaJoin)}
             </a>
@@ -104,24 +114,32 @@ export function Closing() {
             <button
               type="button"
               aria-expanded={openForm === "capitan"}
-              onClick={() => setOpenForm(openForm === "capitan" ? null : "capitan")}
-              className="border border-ink/30 px-5 py-3 text-center text-eyebrow font-semibold uppercase tracking-eyebrow text-inkSoft transition-colors hover:border-ink hover:bg-ink/5"
+              onClick={() => {
+                const abrir = openForm !== "capitan";
+                setOpenForm(abrir ? "capitan" : null);
+                if (abrir) askLupita(t(closing.captainQuestion));
+              }}
+              className={`${BTN_BASE} ${openForm === "capitan" ? BTN_ACTIVO : BTN_REPOSO}`}
             >
               {t(closing.ctaCaptain)}
             </button>
             {openForm === "capitan" ? (
-              <LeadForm source="capitan" intro={closing.captainIntro} lupitaQuestion={closing.captainQuestion} />
+              <LeadForm source="capitan" intro={closing.captainIntro} lupitaQuestion={closing.captainQuestion} lupitaYaAbierta />
             ) : null}
             <button
               type="button"
               aria-expanded={openForm === "documental"}
-              onClick={() => setOpenForm(openForm === "documental" ? null : "documental")}
-              className="border border-ink/30 px-5 py-3 text-center text-eyebrow font-semibold uppercase tracking-eyebrow text-inkSoft transition-colors hover:border-ink hover:bg-ink/5"
+              onClick={() => {
+                const abrir = openForm !== "documental";
+                setOpenForm(abrir ? "documental" : null);
+                if (abrir) askLupita(t(closing.supportQuestion));
+              }}
+              className={`${BTN_BASE} ${openForm === "documental" ? BTN_ACTIVO : BTN_REPOSO}`}
             >
               {t(closing.ctaSupport)}
             </button>
             {openForm === "documental" ? (
-              <LeadForm source="documental" intro={closing.supportIntro} lupitaQuestion={closing.supportQuestion} />
+              <LeadForm source="documental" intro={closing.supportIntro} lupitaQuestion={closing.supportQuestion} lupitaYaAbierta />
             ) : null}
             <Coord className="mt-2 block uppercase">{t(pilgrimageSection.multiplier.lead)}</Coord>
           </div>
