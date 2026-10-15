@@ -19,6 +19,7 @@ import { pilgrimageSection, pilgrimages, type IconKey } from "@/data/pilgrimages
 import { Container, Coord, Dot, Eyebrow } from "@/components/Chrome";
 import { VideoHero } from "@/components/VideoHero";
 import { LeadForm } from "@/components/LeadForm";
+import { askLupita } from "@/lib/chat";
 import { closing } from "@/data/hero";
 import { leadsConfigured, submitLead } from "@/lib/leads";
 import { VirginSacredDisplay } from "@/components/VirginSacredDisplay";
@@ -230,12 +231,15 @@ export function Pilgrimages() {
             {/* Igual que en el cierre: nombre y correo, y luego Lupita. */}
             {captainForm ? (
               <div className="mt-6">
-                <LeadForm source="capitan" intro={closing.captainIntro} lupitaQuestion={closing.captainQuestion} />
+                <LeadForm source="capitan" intro={closing.captainIntro} lupitaQuestion={closing.captainQuestion} lupitaYaAbierta />
               </div>
             ) : (
               <button
                 type="button"
-                onClick={() => setCaptainForm(true)}
+                onClick={() => {
+                  setCaptainForm(true);
+                  askLupita(t(closing.captainQuestion));
+                }}
                 className="mt-6 inline-block bg-accentRose px-5 py-3 text-eyebrow font-semibold uppercase tracking-eyebrow text-[hsl(var(--gd-accent-on))] transition-colors hover:bg-accentRose/80"
               >
                 {t(pilgrimageSection.multiplier.cta)}

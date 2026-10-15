@@ -15,10 +15,13 @@ export function LeadForm({
   source,
   intro,
   lupitaQuestion,
+  lupitaYaAbierta = false,
 }: {
   source: LeadSource;
   intro: Bi;
   lupitaQuestion: Bi;
+  /** Lupita ya se abrió al pulsar el botón: al enviar no repite la pregunta. */
+  lupitaYaAbierta?: boolean;
 }) {
   const { t } = useLang();
   const [name, setName] = useState("");
@@ -38,7 +41,7 @@ export function LeadForm({
     } finally {
       setBusy(false);
       setSent(true);
-      askLupita(question);
+      if (!lupitaYaAbierta) askLupita(question);
     }
   };
 
@@ -50,7 +53,7 @@ export function LeadForm({
         </p>
         <p className="mt-2 text-[15px] leading-relaxed text-inkMute">
           {t({
-            es: "Lupita te está explicando cómo seguir. Si se cerró, vuelve a preguntarle:",
+            es: "Lupita te explica cómo seguir. Si cerraste su ventana, vuelve a preguntarle:",
             en: "Lupita is explaining how to continue. If it closed, ask her again:",
           })}
         </p>
