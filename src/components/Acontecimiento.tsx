@@ -137,7 +137,9 @@ export function Acontecimiento() {
           className="mt-12 border-t border-ink/20"
           aria-label={t(acontecimientoSection.tabsLabel)}
         >
-          <ul className="flex flex-wrap">
+          {/* Los títulos de los paneles se leen de un vistazo: negrita, más
+              grandes y en tinta oscura; el abierto, en rosa con fondo suave. */}
+          <ul className="flex flex-wrap gap-x-1 gap-y-1 pt-2">
             {tabs.map((item) => {
               const on = item.id === active;
               return (
@@ -150,14 +152,14 @@ export function Acontecimiento() {
                     }}
                     aria-current={on ? "true" : undefined}
                     className={[
-                      "flex items-baseline gap-2 border-b-2 px-4 py-3 text-left transition-colors",
+                      "flex items-baseline gap-2 border-b-[3px] px-3 py-3 text-left transition-colors sm:px-4",
                       on
-                        ? "border-accentRose text-inkSoft"
-                        : "border-transparent text-inkFaint hover:text-inkMute",
+                        ? "border-accentRose bg-accentRose/10 text-accentRoseInk"
+                        : "border-transparent text-inkSoft hover:border-accentRose/40 hover:bg-ink/5",
                     ].join(" ")}
                   >
-                    <span className={`gd-roman ${on ? "" : "text-inkFaint"}`}>{item.roman}.</span>
-                    <span className="text-eyebrow font-semibold uppercase tracking-eyebrow">
+                    <span className="gd-roman !text-[16px] !font-semibold !text-accentRose">{item.roman}.</span>
+                    <span className="font-display text-[15px] font-bold uppercase tracking-[0.06em] sm:text-[17px]">
                       {t(item.label)}
                     </span>
                   </a>
@@ -186,7 +188,9 @@ export function Acontecimiento() {
             <div className="mt-8 space-y-6">
               {panel.blocks.map((block) => (
                 <div key={block.title.es} className="border-t border-ink/20 pt-4">
-                  <h4 className="gd-eyebrow">{t(block.title)}</h4>
+                  <h4 className="font-display text-[17px] font-bold uppercase leading-snug tracking-[0.05em] text-inkSoft">
+                    {t(block.title)}
+                  </h4>
                   <p className="mt-3 text-body leading-relaxed text-inkMute">{t(block.body)}</p>
                 </div>
               ))}
