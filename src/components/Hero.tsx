@@ -1,6 +1,6 @@
 import { useLang } from "@/lib/lang";
 import { useCountdown } from "@/lib/useCountdown";
-import { hero, jubilee, nicanQuote } from "@/data/hero";
+import { hero, jubilee, nicanQuote, tilmaStatement } from "@/data/hero";
 import { Container, Coord, Dot, Eyebrow } from "@/components/Chrome";
 import { VideoHero } from "@/components/VideoHero";
 
@@ -10,31 +10,44 @@ const stats = [
   { value: "2031", label: { es: "El Jubileo", en: "The Jubilee" } },
 ] as const;
 
+/* El reloj vive sobre el cielo del manto: azul verdoso muy hondo, estrellas
+   y oro. Es el único momento oscuro de la portada y por eso se ve: lo que
+   queda de tiempo es lo que hay que mirar. */
 function Countdown() {
   const { t } = useLang();
   const left = useCountdown();
 
   if (left.past) {
     return (
-      <p className="gd-lining-nums font-serif text-2xl italic text-inkSoft">{t(jubilee.done)}</p>
+      <p className="font-serif text-2xl italic text-[hsl(var(--gd-on-dark))]">{t(jubilee.done)}</p>
     );
   }
 
   const cells = [
-    { value: left.days, label: jubilee.units.days },
-    { value: left.hours, label: jubilee.units.hours },
-    { value: left.minutes, label: jubilee.units.minutes },
-    { value: left.seconds, label: jubilee.units.seconds },
+    { value: left.days, label: jubilee.units.days, wide: true },
+    { value: left.hours, label: jubilee.units.hours, wide: false },
+    { value: left.minutes, label: jubilee.units.minutes, wide: false },
+    { value: left.seconds, label: jubilee.units.seconds, wide: false },
   ];
 
   return (
-    <div className="grid grid-cols-4 gap-px border border-ink/20 bg-ink/20">
+    <div
+      className="grid grid-cols-4 gap-px border border-guadalupe-gold/60 bg-guadalupe-gold/40"
+      role="timer"
+      aria-label={t(jubilee.label)}
+    >
       {cells.map((cell) => (
-        <div key={cell.label.es} className="bg-bone px-3 py-4 text-center">
-          <div className="font-display text-3xl font-semibold tabular-nums text-inkSoft sm:text-4xl">
-            {String(cell.value).padStart(2, "0")}
+        <div key={cell.label.es} className="bg-[hsl(var(--gd-mantle-deep))] px-2 py-5 text-center sm:px-5 sm:py-6">
+          <div
+            className={`font-display font-semibold tabular-nums text-guadalupe-goldSoft ${
+              cell.wide ? "text-[clamp(34px,5vw,64px)]" : "text-[clamp(28px,3.6vw,46px)]"
+            }`}
+          >
+            {cell.wide ? String(cell.value) : String(cell.value).padStart(2, "0")}
           </div>
-          <div className="gd-coord mt-1 uppercase">{t(cell.label)}</div>
+          <div className="mt-1.5 text-[10px] font-semibold uppercase tracking-[0.1em] text-bone/80 sm:text-[11px] sm:tracking-[0.2em]">
+            {t(cell.label)}
+          </div>
         </div>
       ))}
     </div>
@@ -46,14 +59,13 @@ export function Hero() {
 
   return (
     <>
-      {/* ── 1. Video Hero Temático de Portada ── */}
+      {/* ── 1. La Basílica: el título y nada más ── */}
       <VideoHero
         id="inicio"
         roman="0"
         eyebrow={hero.kicker}
         titleMain={hero.titleTop}
         titleItalic={hero.titleBig}
-        subtitle={hero.subtitle}
         videoSrc="/videos/heroes/portada.mp4"
         posterSrc="/videos/heroes/portada.jpg"
         pageOf="001 / 006"
@@ -62,24 +74,47 @@ export function Hero() {
         ctaSecondary={{ label: jubilee.cta2, href: "#acontecimiento" }}
       />
 
-      {/* ── 2. Sección Editorial y Cuadro de la Virgen (Fig. 01) ── */}
-      <section className="relative overflow-hidden pb-16 pt-12 sm:pb-24" data-od-id="hero-editorial">
+      {/* ── 2. El reloj y la cita ── */}
+      <section
+        id="reloj"
+        className="gd-stars relative overflow-hidden border-b border-guadalupe-gold/50 py-14 text-bone sm:py-20"
+        data-od-id="hero-countdown"
+      >
         <Container>
-          <div className="grid items-start gap-12 lg:grid-cols-[0.78fr_1.22fr]">
+          <div className="grid items-center gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14">
+            <h2 className="font-display text-[clamp(26px,3.4vw,44px)] font-extrabold uppercase leading-[1.05] tracking-[-0.01em] text-white">
+              {t(jubilee.label)}
+              <Dot className="text-guadalupe-gold" />
+            </h2>
+            <Countdown />
+          </div>
+
+          <div className="gd-rule mx-auto mt-12 max-w-xs sm:mt-16" aria-hidden />
+
+          <blockquote className="mx-auto mt-10 max-w-4xl text-center sm:mt-12">
+            <p className="gd-quote-fit font-serif text-[clamp(26px,4vw,50px)] italic leading-[1.18] text-[hsl(var(--gd-on-dark))]">
+              <span className="text-guadalupe-gold" aria-hidden>“</span>
+              {t(nicanQuote.text)}
+              <span className="text-guadalupe-gold" aria-hidden>”</span>
+            </p>
+            <footer className="mt-5 text-[12px] font-semibold uppercase tracking-[0.22em] text-guadalupe-goldSoft">
+              — {t(nicanQuote.source)}
+            </footer>
+          </blockquote>
+        </Container>
+      </section>
+
+      {/* ── 3. La Tilma y su mensaje ── */}
+      <section className="relative overflow-hidden pb-16 pt-14 sm:pb-24 sm:pt-20" data-od-id="hero-editorial">
+        <Container>
+          <div className="grid items-center gap-12 lg:grid-cols-[1fr_1fr] lg:gap-16">
             <div className="animate-fade-up">
               <Eyebrow>{t({ es: "La Sagrada Aparición", en: "The Sacred Apparition" })}</Eyebrow>
 
-              <h2 className="mt-6 font-display text-[clamp(34px,5.4vw,68px)] font-extrabold uppercase leading-[0.96] tracking-[-0.025em] text-inkSoft">
-                {t(hero.titleTop)}{" "}
-                <span className="gd-lining-nums font-serif text-[1.06em] font-medium normal-case italic text-accentRose">
-                  {t(hero.titleBig)}
-                </span>
+              <h2 className="mt-6 font-display text-[clamp(28px,3.9vw,50px)] font-extrabold uppercase leading-[1.06] tracking-[-0.02em] text-inkSoft">
+                {t(tilmaStatement)}
                 <Dot />
               </h2>
-
-              <p className="mt-6 max-w-prose font-serif text-xl leading-relaxed text-inkMute sm:text-2xl">
-                {t(hero.subtitle)}
-              </p>
 
               <dl className="mt-12 border-t border-ink/20">
                 {stats.map((stat) => (
@@ -94,13 +129,9 @@ export function Hero() {
                   </div>
                 ))}
               </dl>
-
-              <p className="gd-coord mt-6 uppercase">
-                {t({ es: "Desliza para entrar al santuario", en: "Scroll to enter the shrine" })}
-              </p>
             </div>
 
-            {/* ── Cuadro de la Virgen en Portada: Fig. 01 con Resplandor Áureo ── */}
+            {/* ── Fig. 01 con resplandor áureo ── */}
             <figure className="relative">
               <div className="gd-rays absolute inset-x-0 -top-8 h-[120%]" aria-hidden />
               <div className="gd-glow relative">
@@ -113,10 +144,10 @@ export function Hero() {
                   width={1536}
                   height={2048}
                   loading="eager"
-                  className="gd-frame relative z-10 mx-auto w-full max-w-[30rem] shadow-[0_16px_50px_rgba(0,0,0,0.3)] transition-transform duration-700 hover:scale-[1.02]"
+                  className="gd-frame relative z-10 mx-auto w-full max-w-[28rem] shadow-[0_16px_50px_rgba(0,0,0,0.3)] transition-transform duration-700 hover:scale-[1.02]"
                 />
               </div>
-              <figcaption className="mt-6 text-center lg:text-left">
+              <figcaption className="mt-6 text-center">
                 <Coord className="block uppercase">
                   {t({
                     es: "Fig. 01 · Ayate de fibra de maguey, Tepeyac, 1531 · Basílica de Guadalupe, Ciudad de México",
@@ -125,23 +156,6 @@ export function Hero() {
                 </Coord>
               </figcaption>
             </figure>
-          </div>
-
-          {/* ── Cita Sagrada del Nican Mopohua ── */}
-          <blockquote className="mt-20 border-t border-ink/20 pt-8">
-            <p className="font-serif text-[clamp(19px,2.2vw,26px)] italic leading-relaxed text-inkSoft">
-              {t(nicanQuote.text)}
-            </p>
-            <footer className="gd-coord mt-4 uppercase">{t(nicanQuote.source)}</footer>
-          </blockquote>
-
-          {/* ── Cuenta Regresiva al 2031 ── */}
-          <div className="mt-16 grid gap-8 border-t border-ink/20 pt-8 md:grid-cols-[1fr_auto] md:items-end">
-            <div>
-              <Eyebrow>{t(jubilee.label)}</Eyebrow>
-              <p className="mt-3 max-w-prose text-body text-inkMute">{t(jubilee.sub)}</p>
-            </div>
-            <Countdown />
           </div>
         </Container>
       </section>

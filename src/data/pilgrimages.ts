@@ -36,16 +36,16 @@ export const pilgrimageSection = {
   eyebrow: { es: "Primera Sección", en: "Section One" } satisfies Bi,
   title: { es: "Peregrinaciones", en: "Pilgrimages" } satisfies Bi,
   intro: {
-    es: "El corazón de este sitio. Aquí no venimos a leer sobre la Virgen: venimos a caminar hacia Ella. Organiza tu peregrinación en tu parroquia o en tu grupo de oración, y ve al Tepeyac, donde Ella está viva y presente.",
-    en: "The heart of this site. We do not come here merely to read about Our Lady: we come to walk toward her. Organise your pilgrimage in your parish or prayer group, and go to Tepeyac, where she is alive and present.",
+    es: "Si estás aquí es porque tú la amas, ya la viste, ya conociste el acontecimiento Guadalupano, ahora quieres ir a dejarte mirar por ella. Únete a nosotros en peregrinación.",
+    en: "If you are here it is because you love her, you have already seen her, you already know the Guadalupan event, and now you want to go and let her look upon you. Join us on pilgrimage.",
   } satisfies Bi,
   liveTitle: {
     es: "Cámara en vivo de la Basílica",
     en: "Basilica live camera",
   } satisfies Bi,
   liveNote: {
-    es: "Asómate ahora mismo a la explanada de la Basílica de Guadalupe en la Ciudad de México, con la imagen de Nuestra Virgencita.",
-    en: "Look right now at the esplanade of the Basilica of Guadalupe in Mexico City, with the image of Our Lady.",
+    es: "Asómate ahora mismo al interior de la Basílica y, junto con otros hermanos que ahora mismo están visitándola, pon tu corazón en sus manos para que Ella te ayude a llegar pronto hasta allá, poder arrodillarte a sus pies y adorar a su santísimo hijo que está en su vientre.",
+    en: "Look right now inside the Basilica and, together with other brothers and sisters who are visiting her at this very moment, place your heart in her hands so that she may help you arrive there soon, kneel at her feet and adore her most holy Son who is in her womb.",
   } satisfies Bi,
   liveError: {
     es: "La emisión no está disponible ahora mismo.",
@@ -58,15 +58,10 @@ export const pilgrimageSection = {
   } satisfies Bi,
 
   multiplier: {
-    eyebrow: { es: "Modelo multiplicador", en: "A multiplying model" } satisfies Bi,
     title: { es: "Capitanes de peregrinación", en: "Pilgrimage captains" } satisfies Bi,
-    lead: {
-      es: "Una sola persona no lleva a cientos de miles al Tepeyac; mil líderes de grupo sí.",
-      en: "One person cannot bring hundreds of thousands to Tepeyac; a thousand group leaders can.",
-    } satisfies Bi,
     body: {
-      es: "Por eso creamos el programa de «líderes guadalupanos»: párrocos, catequistas, madres de familia y movimientos que organizan su propio grupo con los materiales de Azucena. Así Ella pasa de guiar peregrinaciones a multiplicarlas.",
-      en: "That is why we created the “Guadalupan leaders” programme: parish priests, catechists, mothers and movements who gather their own group using Azucena's materials. In this way she moves from leading pilgrimages to multiplying them.",
+      es: "Por eso creamos el programa de líderes guadalupanos: párrocos, catequistas, madres de familia, y movimientos que organizan su propio grupo con la guía de esta página.",
+      en: "That is why we created the programme of Guadalupan leaders: parish priests, catechists, mothers, and movements who gather their own group with the guidance of this page.",
     } satisfies Bi,
     rolesTitle: {
       es: "¿Quién puede ser capitán?",
@@ -83,8 +78,8 @@ export const pilgrimageSection = {
     stepsTitle: { es: "Cómo funciona", en: "How it works" } satisfies Bi,
     steps: [
       {
-        es: "Te registras como capitán y recibes el material guadalupano de Azucena.",
-        en: "You register as a captain and receive Azucena's Guadalupan material.",
+        es: "Te registras como capitán y recibes el material guadalupano.",
+        en: "You register as a captain and receive the Guadalupan material.",
       },
       {
         es: "Reúnes tu grupo en la parroquia, el colegio o tu casa.",
@@ -120,10 +115,6 @@ export const pilgrimageSection = {
       en: "Welcome, pilgrim! You can now see the complete plans.",
     } satisfies Bi,
     unlockedBadge: { es: "Acceso desbloqueado", en: "Access unlocked" } satisfies Bi,
-    photosSoon: {
-      es: "Fotos y videos de cada lugar: en preparación por Azucena Cierco.",
-      en: "Photos and videos of every place: in preparation by Azucena Cierco.",
-    } satisfies Bi,
     durationLabel: {
       es: "Sugerencia de duración",
       en: "Suggested duration",
@@ -334,8 +325,8 @@ export const pilgrimages: Pilgrimage[] = [
     region: { es: "México", en: "Mexico" },
     duration: { es: "Medio día", en: "Half a day" },
     summary: {
-      es: "La casa del obispo que pidió una señal. Aquí Juan Diego fue recibido, aquí volvió con las rosas, y aquí cayó la imagen sobre el ayate. Recorremos el centro histórico siguiendo los pasos del franciscano que dudó antes de creer.",
-      en: "The house of the bishop who asked for a sign. Here Juan Diego was received, here he returned with the roses, and here the image fell upon the ayate. We walk the historic centre following the footsteps of the Franciscan who doubted before he believed.",
+      es: "La casa del obispo que pidió una señal. Aquí Juan Diego fue recibido, aquí volvió con las rosas, y aquí cayó la imagen sobre el ayate. Recorremos el centro histórico siguiendo los pasos del franciscano.",
+      en: "The house of the bishop who asked for a sign. Here Juan Diego was received, here he returned with the roses, and here the image fell upon the ayate. We walk the historic centre following the footsteps of the Franciscan.",
     },
     highlights: [
       {

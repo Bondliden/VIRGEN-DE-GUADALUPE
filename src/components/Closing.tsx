@@ -6,7 +6,6 @@ import { askLupita } from "@/lib/chat";
 import { closing } from "@/data/hero";
 import { novena } from "@/data/jubilee";
 import { links, site } from "@/data/links";
-import { pilgrimageSection } from "@/data/pilgrimages";
 import { Container, Coord, Dot, Eyebrow } from "@/components/Chrome";
 import { VideoHero } from "@/components/VideoHero";
 import { VirginSacredDisplay } from "@/components/VirginSacredDisplay";
@@ -84,8 +83,6 @@ export function Closing() {
           </p>
         </div>
 
-        <p className="gd-coord mt-6 uppercase">{t(novena.note)}</p>
-
         <div className="gd-rule mt-16" aria-hidden />
 
         {/* ── El remate: la llamada a ir ── */}
@@ -141,7 +138,6 @@ export function Closing() {
             {openForm === "documental" ? (
               <LeadForm source="documental" intro={closing.supportIntro} lupitaQuestion={closing.supportQuestion} lupitaYaAbierta />
             ) : null}
-            <Coord className="mt-2 block uppercase">{t(pilgrimageSection.multiplier.lead)}</Coord>
           </div>
         </div>
 

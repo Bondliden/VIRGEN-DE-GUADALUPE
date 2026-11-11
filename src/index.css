@@ -428,6 +428,35 @@ h4 {
   -webkit-hyphens: none;
 }
 
+/* Citas grandes en pantallas estrechas: con tres o cuatro palabras por línea
+   la justificación abre huecos enormes, así que ahí vuelven al borde natural.
+   Desde 640 px, justificadas como el resto. */
+@media (max-width: 639px) {
+  .gd-quote-fit {
+    text-align: start;
+    text-align-last: start;
+  }
+}
+
+/* Titulares: las líneas se reparten parejas, sin viudas de una palabra. */
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+}
+
+/* Foco visible para quien navega con teclado: un aro del color del acento. */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid hsl(var(--gd-accent));
+  outline-offset: 3px;
+}
+
 /* Respect reduced-motion preferences */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

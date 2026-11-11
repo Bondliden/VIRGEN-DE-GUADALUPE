@@ -2,49 +2,30 @@ import type { Bi } from "@/lib/lang";
 
 /* ─────────────────────────────────────────────
    Section IV — La Tienda
-   Opening soon. No inventory is invented: the section is a preview with
-   categories and a notify-me CTA, so nothing false is advertised.
+   La tienda y el arte sacro guadalupano. Sin avisos de «próximamente»: la
+   página ya se puede compartir.
    ───────────────────────────────────────────── */
 
 export const shopSection = {
   eyebrow: { es: "Cuarta Sección", en: "Section Four" } satisfies Bi,
   title: { es: "La Tienda", en: "The Shop" } satisfies Bi,
   intro: {
-    es: "Estamos preparando un pequeño comercio para que puedas llevarte a casa la devoción al Tepeyac: libros, rosarios, estampas y objetos hechos con cuidado. No hemos querido abrirlo antes de tenerlo todo bien hecho.",
-    en: "We are preparing a small shop so that you can take devotion to Tepeyac home with you: books, rosaries, prints and objects made with care. We did not want to open it before having it done properly.",
-  } satisfies Bi,
-  badge: { es: "Abre próximamente", en: "Opening soon" } satisfies Bi,
-  notifyTitle: {
-    es: "Avísame cuando abra",
-    en: "Tell me when it opens",
-  } satisfies Bi,
-  notifyBody: {
-    es: "Déjanos tu correo y te escribimos el día que la tienda abra sus puertas. Sin ruido, sin publicidad, solo ese aviso.",
-    en: "Leave us your email and we will write to you the day the shop opens. No noise, no advertising, just that one notice.",
-  } satisfies Bi,
-  notifyCta: { es: "Quiero el aviso", en: "Notify me" } satisfies Bi,
-  notifyPlaceholder: { es: "tu@correo.com", en: "you@email.com" } satisfies Bi,
-  notifySuccess: {
-    es: "Gracias. Te escribiremos el día que abra.",
-    en: "Thank you. We will write to you the day it opens.",
-  } satisfies Bi,
-  notifyNoBackend: {
-    es: "Escríbenos a",
-    en: "Write to us at",
+    es: "Libros, rosarios, estampas y arte sacro guadalupano para llevarte a casa la devoción al Tepeyac, hechos con cuidado.",
+    en: "Books, rosaries, holy cards and sacred Guadalupan art to take the devotion of Tepeyac home with you, made with care.",
   } satisfies Bi,
   donateTitle: {
     es: "Antes que comprar, ayudar",
     en: "Before buying, helping",
   } satisfies Bi,
   donateBody: {
-    es: "Una parte de tu donativo va a la Iglesia, para ayudar a los más necesitados y a las peregrinaciones, y otra parte al documental. Llega más lejos que cualquier compra. Puedes enviarlo por Zelle (más abajo).",
-    en: "One part of your donation goes to the Church, to help those most in need and to support pilgrimages, and another part to the documentary. It goes further than any purchase. You can send it by Zelle (below).",
+    es: "Tu donativo va para los más necesitados y para el documental. Llega más lejos que cualquier compra. Puedes enviarlo por Zelle con los datos de este bloque.",
+    en: "Your donation goes to those most in need and to the documentary. It goes further than any purchase. You can send it by Zelle using the details in this block.",
   } satisfies Bi,
   donateCta: { es: "Hacer un donativo", en: "Make a donation" } satisfies Bi,
   zelleTitle: { es: "Zelle · donativos", en: "Zelle · donations" } satisfies Bi,
   zelleBody: {
-    es: "Lo que envíes por Zelle a este número se reparte: una parte va a la Iglesia y otra al documental sobre el Acontecimiento Guadalupano (ver el aviso de transparencia).",
-    en: "What you send by Zelle to this number is shared: one part goes to the Church and another to the documentary about the Guadalupan Event (see the transparency notice).",
+    es: "Lo que envíes por Zelle a este número va para los más necesitados y para el documental sobre el Acontecimiento Guadalupano (ver el aviso de transparencia).",
+    en: "What you send by Zelle to this number goes to those most in need and to the documentary about the Guadalupan Event (see the transparency notice).",
   } satisfies Bi,
   zelleNumberLabel: { es: "Número", en: "Number" } satisfies Bi,
   writeCta: { es: "Escríbenos", en: "Write to us" } satisfies Bi,
@@ -70,13 +51,13 @@ export const shopCategories: ShopCategory[] = [
     roman: "I",
     title: { es: "Libros y documentos", en: "Books and documents" } satisfies Bi,
     body: {
-      es: "El Nican Mopohua, la historia del Acontecimiento y los estudios sobre la Tilma, en ediciones cuidadas.",
-      en: "The Nican Mopohua, the history of the Event and the studies on the Tilma, in well-made editions.",
+      es: "Facilitamos el acceso a los libros del padre Monseñor Eduardo Chávez, el gran estudioso del acontecimiento guadalupano.",
+      en: "We make it easy to reach the books of Father Monsignor Eduardo Chávez, the great scholar of the Guadalupan event.",
     },
     items: [
-      { es: "Nican Mopohua en náhuatl y castellano", en: "Nican Mopohua in Nahuatl and Spanish" },
-      { es: "Guías de peregrinación al Tepeyac", en: "Guides to pilgrimage at Tepeyac" },
-      { es: "Los estudios de la Tilma, para todos", en: "The studies of the Tilma, for everyone" },
+      { es: "Monseñor Eduardo Chávez", en: "Monsignor Eduardo Chávez" },
+      { es: "Canónigo", en: "Canon" },
+      { es: "Postulador de la causa de Juan Diego", en: "Postulator of the cause of Juan Diego" },
     ] as Bi[],
   },
   {

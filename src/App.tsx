@@ -9,6 +9,7 @@ import { Acontecimiento } from "@/components/Acontecimiento";
 import { Voices } from "@/components/Voices";
 import { Shop } from "@/components/Shop";
 import { Closing, Footer } from "@/components/Closing";
+import { NextPage } from "@/components/NextPage";
 import { ChatBox } from "@/components/ChatBox";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { CalendlyButton } from "@/components/CalendlyButton";
@@ -66,6 +67,8 @@ function Pages() {
         {route === "tienda" ? <Shop /> : null}
         {route === "jubileo" ? <Closing /> : null}
       </main>
+
+      <NextPage route={route} />
 
       <Footer />
 

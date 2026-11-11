@@ -66,8 +66,4 @@ export const novena = {
     es: "Sumarme al camino",
     en: "Join the road",
   } satisfies Bi,
-  note: {
-    es: "Nota del equipo: los datos de esta sección están pendientes de cotejar con las fuentes oficiales de la Conferencia del Episcopado Mexicano.",
-    en: "Editor's note: the details in this section are pending verification against the official sources of the Mexican Bishops' Conference.",
-  } satisfies Bi,
 };

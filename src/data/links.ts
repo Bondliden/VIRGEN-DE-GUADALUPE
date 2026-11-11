@@ -67,12 +67,21 @@ export const links = {
   azucenaTestimonyEmbed:
     "https://drive.google.com/file/d/1nmGfMAeA2JkVetZ7HS1QJ9fozAByqWEH/preview",
 
+  /** Locución completa del Nican Mopohua, en la voz de Azucena. Pega aquí el
+      enlace (YouTube, Google Drive o un .mp4) y el reproductor aparece solo
+      en la pestaña «Nican Mopohua» del Acontecimiento. Vacío: no se muestra. */
+  nicanMopohuaVideo: import.meta.env.VITE_NICAN_VIDEO_URL || "",
+
+  /** Santo Rosario Guadalupano para rezar, en PDF (por ejemplo
+      "/documentos/santo-rosario-guadalupano.pdf" en /public). Vacío: no se
+      muestra el botón. */
+  rosarioPdf: import.meta.env.VITE_ROSARIO_PDF_URL || "",
+
+  /** Vídeo o reel de Instagram con el Rosario rezado. Vacío: no se muestra. */
+  rosarioInstagram: import.meta.env.VITE_ROSARIO_INSTAGRAM_URL || "",
+
   /** EWTN Español — rebroadcast stream */
   ewtnEs: "https://i.watch.ewtn.com/es/PRC/PRC23141/PRC23141.m3u8",
-
-  /** Radio María Colombia — "Hagamos radio" con Azucena Cierco */
-  radioMaria:
-    "https://music.amazon.com/podcasts/b3cc94b4-dd4f-4889-a367-2a6801caadd4/episodes/4028b78b-a58b-49b0-abb3-359d0cd5a487/radio-maria-colombia-hagamos-radio-%E2%80%93-con-azucena-cierco-embajadora-de-nuestra-se%C3%B1ora-de-guadalupe-%E2%80%93-14-de-enero-de-2026",
 
   /** Dr. Fernando Ojeda Llanes — Centro de Estudios Guadalupanos, Mérida */
   fernandoOjeda: "https://www.youtube.com/@FernandoOjedaLlanes",

@@ -13,28 +13,26 @@ export const hero = {
     en: "Saint Mary of Guadalupe",
   } satisfies Bi,
   titleBig: {
-    es: "500 Años",
-    en: "500 Years",
-  } satisfies Bi,
-  subtitle: {
-    es: "Ella está viva y presente en México, esperando a que vayamos a verla.",
-    en: "She is alive and present in Mexico, waiting for us to come and see her.",
-  } satisfies Bi,
-  scroll: {
-    es: "Desliza para entrar",
-    en: "Scroll to enter",
+    es: "Quinientos Años",
+    en: "Five Hundred Years",
   } satisfies Bi,
 };
 
-/** The words of Our Lady, as recorded in the Nican Mopohua. */
+/** El mensaje que acompaña a la imagen de la Tilma, justo bajo el reloj. */
+export const tilmaStatement = {
+  es: "Nuestra morenita del Tepeyac está viva y presente esperándote en el Tepeyac",
+  en: "Our beloved Morenita of Tepeyac is alive and present, waiting for you at Tepeyac",
+} satisfies Bi;
+
+/** La cita que va bajo el reloj: solo la cita y su fuente. */
 export const nicanQuote = {
   text: {
-    es: "…Mucho quiero, mucho deseo que aquí me levanten mi casita sagrada en donde lo mostraré, lo ensalzaré al ponerlo de manifiesto, lo entregaré a las gentes en todo mi amor personal, a Él que es mi mirada compasiva, a Él que es mi auxilio, a Él que es mi salvación, porque, en verdad, yo me honro en ser tu madre compasiva, tuya y de todos los hombres que vivís juntos en esta tierra…",
-    en: "…I greatly desire, I greatly wish that here you raise up my sacred little house, where I will show Him, exalt Him and make Him manifest, where I will give Him to all the people in all my personal love — Him who is my compassionate gaze, Him who is my help, Him who is my salvation. For in truth I honour myself in being your compassionate mother — yours, and of all the men who live together on this earth…",
+    es: "Mucho quiero, mucho deseo que aquí me levanten mi casita sagrada",
+    en: "I greatly desire, I greatly wish that here they raise up my sacred little house",
   } satisfies Bi,
   source: {
-    es: "Nican Mopohua · las palabras de Santa María de Guadalupe a San Juan Diego",
-    en: "Nican Mopohua · Our Lady's words to Saint Juan Diego",
+    es: "Nican Mopohua",
+    en: "Nican Mopohua",
   } satisfies Bi,
 };
 
@@ -45,10 +43,6 @@ export const jubilee = {
   label: {
     es: "Días para el Jubileo Guadalupano 2031",
     en: "Days to the Guadalupan Jubilee 2031",
-  } satisfies Bi,
-  sub: {
-    es: "Tiempo restante hasta el 12 de diciembre de 2031 — los 500 años de la aparición de Santa María de Guadalupe en el Tepeyac.",
-    en: "Time remaining until 12 December 2031 — 500 years since Our Lady of Guadalupe appeared at Tepeyac.",
   } satisfies Bi,
   units: {
     days: { es: "Días", en: "Days" } satisfies Bi,
@@ -72,9 +66,10 @@ export const jubilee = {
 
 /** ─────────────────────────────────────────────
  *  Aviso de transparencia: adónde va el dinero.
- *  Decisión del equipo (13-10-2026): todo lo recaudado va a la Iglesia,
- *  para los más necesitados y para las peregrinaciones. Antes decía que se
- *  destinaba al documental-serie. La entidad concreta aún no se nombra.
+ *  Las ganancias de la tienda y los patrocinios van a la Iglesia. Los
+ *  donativos van para los más necesitados y para el documental (11-11-2026:
+ *  se quita la mención a las peregrinaciones). La entidad concreta aún no
+ *  se nombra.
  *  ───────────────────────────────────────────── */
 export const disclosure = {
   badge: {
@@ -86,8 +81,8 @@ export const disclosure = {
     en: "Where your contribution goes",
   } satisfies Bi,
   short: {
-    es: "Las ganancias de la tienda y los patrocinios van directamente a la Iglesia. Los donativos se reparten: una parte va a la Iglesia, para ayudar a los más necesitados y a las peregrinaciones, y otra parte al documental sobre el Acontecimiento Guadalupano.",
-    en: "Shop profits and sponsorships go directly to the Church. Donations are shared: one part goes to the Church, to help those most in need and to support pilgrimages, and another part to the documentary about the Guadalupan Event.",
+    es: "Las ganancias de la tienda y los patrocinios van directamente a la Iglesia. Los donativos van para los más necesitados y para el documental sobre el Acontecimiento Guadalupano.",
+    en: "Shop profits and sponsorships go directly to the Church. Donations go to those most in need and to the documentary about the Guadalupan Event.",
   } satisfies Bi,
   points: [
     {
@@ -95,12 +90,8 @@ export const disclosure = {
       en: "Shop profits and sponsorships go in full to the Church.",
     },
     {
-      es: "Los donativos se reparten: una parte va a la Iglesia y otra al documental sobre el Acontecimiento Guadalupano.",
-      en: "Donations are shared: one part goes to the Church and another to the documentary about the Guadalupan Event.",
-    },
-    {
-      es: "La parte que va a la Iglesia se destina a ayudar a los más necesitados y a las peregrinaciones al Tepeyac.",
-      en: "The part that goes to the Church is used to help those most in need and to support pilgrimages to Tepeyac.",
+      es: "Los donativos van para los más necesitados y para el documental sobre el Acontecimiento Guadalupano.",
+      en: "Donations go to those most in need and to the documentary about the Guadalupan Event.",
     },
     {
       es: "Ningún responsable del proyecto retiene las donaciones para fines personales.",
@@ -112,10 +103,10 @@ export const disclosure = {
     },
   ] as Bi[],
   zelle: {
-    title: { es: "Donativos por Zelle: Iglesia y documental", en: "Donations by Zelle: Church and documentary" } satisfies Bi,
+    title: { es: "Donativos por Zelle: necesitados y documental", en: "Donations by Zelle: those in need and the documentary" } satisfies Bi,
     body: {
-      es: "Puedes enviar tu donativo por Zelle a este número. Una parte va a la Iglesia y otra parte al documental.",
-      en: "You can send your donation by Zelle to this number. One part goes to the Church and another part to the documentary.",
+      es: "Puedes enviar tu donativo por Zelle a este número. Va para los más necesitados y para el documental.",
+      en: "You can send your donation by Zelle to this number. It goes to those most in need and to the documentary.",
     } satisfies Bi,
     label: { es: "Zelle", en: "Zelle" } satisfies Bi,
   },
@@ -128,8 +119,8 @@ export const disclosure = {
     en: "Read the full notice",
   } satisfies Bi,
   promise: {
-    es: "“Promesa de Azucena a nuestra Lupita”: cada donativo se convierte en ayuda para quien más lo necesita y en un paso más de un peregrino hacia el Tepeyac.",
-    en: "“Azucena's promise to our Lupita”: every donation becomes help for those most in need and one more step for a pilgrim on the way to Tepeyac.",
+    es: "“Promesa de Azucena a nuestra Lupita”: cada donativo se convierte en ayuda para quien más lo necesita y en un paso más del documental sobre el Acontecimiento Guadalupano.",
+    en: "“Azucena's promise to our Lupita”: every donation becomes help for those most in need and one more step for the documentary about the Guadalupan Event.",
   } satisfies Bi,
 };
 
@@ -137,13 +128,13 @@ export const disclosure = {
  *  The two objectives
  *  ───────────────────────────────────────────── */
 export const purpose = {
-  eyebrow: {
-    es: "Por qué existe este sitio",
-    en: "Why this site exists",
+  statement: {
+    es: "El propósito de este sitio es invitarte a que te dejes ver por nuestra santa madre, a sus pies en el Tepeyac, y así realizar lo que pretende su compasiva mirada misericordiosa.",
+    en: "The purpose of this site is to invite you to let our holy mother see you, at her feet at Tepeyac, and so fulfil what her compassionate, merciful gaze intends.",
   } satisfies Bi,
   title: {
-    es: "Dos caminos, una sola Madre",
-    en: "Two paths, one Mother",
+    es: "Dos caminos hacia nuestra madre",
+    en: "Two paths to our mother",
   } satisfies Bi,
   items: [
     {
@@ -153,8 +144,8 @@ export const purpose = {
         en: "To go on pilgrimage",
       } satisfies Bi,
       body: {
-        es: "Estimular a los visitantes a peregrinar a la Basílica de Guadalupe en México y a los lugares donde estuvo la presencia de la Virgen, para que la vean con sus propios ojos y Ella los acerque a su Hijo.",
-        en: "To move every visitor to walk to the Basilica of Guadalupe in Mexico and to the places where Our Lady was present — to see her with their own eyes and let her bring them closer to her Son.",
+        es: "Estimular a los visitantes a peregrinar a la Basílica de Guadalupe en México y a los lugares donde estuvo la presencia de la Santa Virgen, para que la veas con tus propios ojos y Ella te acerque a su Hijo.",
+        en: "To encourage visitors to make a pilgrimage to the Basilica of Guadalupe in Mexico and to the places where the presence of the Holy Virgin has been, so that you may see her with your own eyes and she may bring you closer to her Son.",
       } satisfies Bi,
     },
     {
@@ -169,6 +160,10 @@ export const purpose = {
       } satisfies Bi,
     },
   ],
+  question: {
+    es: "¿Te has dado cuenta que la Tilma de nuestra Guadalupana es la única fotografía que la misma Virgen María nos ha dejado en la historia de sus visitas?",
+    en: "Have you realised that the Tilma of our Guadalupana is the only photograph that the Virgin Mary herself has left us in the history of her visits?",
+  } satisfies Bi,
   closer: {
     es: "Dirigir hoy nuestra mirada a Santa María de Guadalupe es comprender el gran milagro de su llegada a México. Ella no vino a fundar una devoción: vino a regalarnos su imagen y a pedirnos que adoremos a su Hijo.",
     en: "To turn our gaze to Saint Mary of Guadalupe today is to grasp the great miracle of her arrival in Mexico. She did not come to start a devotion: she came to give us her image and to ask us to adore her Son.",

@@ -11,6 +11,8 @@ import {
 import { Container, Coord, Dot, Eyebrow } from "@/components/Chrome";
 import { VideoHero } from "@/components/VideoHero";
 import { VirginSacredDisplay } from "@/components/VirginSacredDisplay";
+import { NicanVideo } from "@/components/NicanVideo";
+import { Codice } from "@/components/Codice";
 
 /* Section II — the five panels of the Guadalupan Event.
    §5: tabs are a printed contents list, not a web widget — roman numeral,
@@ -213,6 +215,12 @@ export function Acontecimiento() {
           </figure>
           </article>
           ) : null}
+
+          {/* Pestaña «Nican Mopohua»: la narración completa en vídeo. */}
+          {panel?.id === "nican" ? <NicanVideo /> : null}
+
+          {/* Pestaña «La Tilma»: el póster «Códice Santa María de Guadalupe». */}
+          {panel?.id === "tilma" ? <Codice /> : null}
 
           {/* ── VI · La imagen, descifrada ──
               The two readings are set in two typefaces on purpose: the Nahua
