@@ -16,7 +16,7 @@ import type { LucideIcon } from "lucide-react";
 import { useLang } from "@/lib/lang";
 import { site, links, cameras } from "@/data/links";
 import { pilgrimageSection, pilgrimages, type IconKey } from "@/data/pilgrimages";
-import { Container, Coord, Dot, Eyebrow } from "@/components/Chrome";
+import { Container, Coord, Dot } from "@/components/Chrome";
 import { VideoHero } from "@/components/VideoHero";
 import { LeadForm } from "@/components/LeadForm";
 import { askLupita } from "@/lib/chat";
@@ -60,26 +60,17 @@ export function Pilgrimages() {
         videoSrc="/videos/heroes/peregrinaciones.mp4"
         posterSrc="/videos/heroes/peregrinaciones.jpg"
         pageOf="002 / 006"
-        badge={{ es: "Más de 12 Millones de Almas", en: "Over 12 Million Pilgrims" }}
+        badge={{ es: "Más de 12 Millones de Almas al Año", en: "Over 12 Million Pilgrims a Year" }}
         ctaPrimary={{ label: { es: "Ver la Basílica en Vivo", en: "Watch Basilica Live" }, href: "#basilica-en-vivo" }}
         ctaSecondary={{ label: { es: "Explorar las 10 Rutas", en: "Explore 10 Routes" }, href: "#rutas-peregrinas" }}
       />
 
       <section id="peregrinaciones" className="py-16 sm:py-24" data-od-id="peregrinaciones">
         <Container>
-          <div id="basilica-en-vivo" className="grid gap-8 md:grid-cols-[1.15fr_0.85fr] md:items-end">
-            <div>
-              <Eyebrow>{t(pilgrimageSection.eyebrow)}</Eyebrow>
-              <h2 className="mt-4 font-display text-[clamp(34px,5.2vw,64px)] font-extrabold uppercase leading-[0.98] tracking-[-0.03em] text-inkSoft">
-                {t(pilgrimageSection.title)}
-                <Dot />
-              </h2>
-            </div>
-            <p className="text-body text-inkMute">{t(pilgrimageSection.intro)}</p>
-          </div>
-
-        {/* ── Live from the Basilica ── */}
-        <div className="mt-12 grid gap-6 border border-ink/20 bg-bone p-4 lg:grid-cols-[1.45fr_0.55fr] lg:p-6">
+        {/* ── Live from the Basilica ──
+            El título «Peregrinaciones» ya lo dice el héroe: repetirlo aquí
+            era la frase repetida. */}
+        <div id="basilica-en-vivo" className="grid gap-6 border border-ink/20 bg-bone p-4 lg:grid-cols-[1.45fr_0.55fr] lg:p-6">
           <div className="aspect-video w-full bg-ink/20">
             <iframe
               src={links.basilicaLiveEmbed}
@@ -208,25 +199,17 @@ export function Pilgrimages() {
 
         {/* ── The gate ── */}
         <div id="peregrinar" className="mt-12 scroll-mt-28">
-          {unlocked ? (
-            <p className="gd-coord uppercase">{t(pilgrimageSection.gate.photosSoon)}</p>
-          ) : (
-            <Gate onUnlock={unlock} />
-          )}
+          {unlocked ? null : <Gate onUnlock={unlock} />}
         </div>
 
         {/* ── The multiplying model ── */}
         <div className="mt-20 grid gap-10 border-t border-ink/20 pt-10 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
-            <Eyebrow>{t(pilgrimageSection.multiplier.eyebrow)}</Eyebrow>
-            <h3 className="mt-4 font-display text-[clamp(26px,3.4vw,44px)] font-extrabold uppercase leading-[1.02] tracking-[-0.03em] text-inkSoft">
+            <h3 className="font-display text-[clamp(26px,3.4vw,44px)] font-extrabold uppercase leading-[1.02] tracking-[-0.03em] text-inkSoft">
               {t(pilgrimageSection.multiplier.title)}
               <Dot />
             </h3>
-            <p className="mt-5 font-serif text-xl italic text-inkSoft">
-              {t(pilgrimageSection.multiplier.lead)}
-            </p>
-            <p className="mt-4 text-body text-inkMute">{t(pilgrimageSection.multiplier.body)}</p>
+            <p className="mt-5 text-body text-inkMute">{t(pilgrimageSection.multiplier.body)}</p>
 
             {/* Igual que en el cierre: nombre y correo, y luego Lupita. */}
             {captainForm ? (

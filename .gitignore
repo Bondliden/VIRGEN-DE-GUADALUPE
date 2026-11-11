@@ -42,6 +42,8 @@ portal_de_noticias_din_mico.html
 
 # Documentos personales: nunca al repositorio
 *.pdf
+# Salvo los documentos públicos que la propia web ofrece para descargar
+!public/documentos/*.pdf
 
 # Capturas de trabajo (revision en local, no forman parte del sitio)
 screenshots/

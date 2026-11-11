@@ -9,9 +9,14 @@ import { links } from "@/data/links";
 export const voicesSection = {
   eyebrow: { es: "Tercera Sección", en: "Section Three" } satisfies Bi,
   title: { es: "Voces del Tepeyac", en: "Voices of Tepeyac" } satisfies Bi,
+  quote: {
+    es: "Tú que eres mi mensajero, en ti absolutamente se deposita la confianza",
+    en: "You who are my messenger, in you absolutely is trust placed",
+  } satisfies Bi,
+  quoteSource: "Nican Mopohua",
   intro: {
-    es: "Aquí hablan quienes han hecho de la Virgen de Guadalupe su vida entera. Escuchamos su testimonio y sus conferencias, y rezamos con ellos.",
-    en: "Here speak those who have made Our Lady of Guadalupe their whole life. We listen to their testimony and their conferences, and we pray with them.",
+    es: "Este espacio está dedicado para todos los que han hecho de la Virgen de Guadalupe su vida entera. Escuchamos su testimonio y sus conferencias y rezamos con ellos.",
+    en: "This space is dedicated to all those who have made Our Lady of Guadalupe their whole life. We listen to their testimony and their conferences, and we pray with them.",
   } satisfies Bi,
   rosaryEyebrow: { es: "Oración", en: "Prayer" } satisfies Bi,
   rosaryTitle: { es: "El Rosario Guadalupano", en: "The Guadalupan Rosary" } satisfies Bi,
@@ -28,7 +33,10 @@ export type Voice = {
   title: Bi;
   person: string;
   role: Bi;
-  body: Bi;
+  /** Texto breve de la tarjeta. Si falta, la tarjeta no lo muestra. */
+  body?: Bi;
+  /** Frase que se añade al final de «nombre, cargo». */
+  more?: Bi;
   href: string;
   embed?: string;
   /** Imagen de la persona, en /public, y su texto alternativo. */
@@ -43,17 +51,17 @@ export const voices: Voice[] = [
     id: "azucena",
     kind: { es: "Testimonio", en: "Testimony" } satisfies Bi,
     title: {
-      es: "El día en que la Virgen le cambió la vida",
-      en: "The day Our Lady changed her life",
+      es: "El día en que la Virgen de Guadalupe cambió mi vida",
+      en: "The day Our Lady of Guadalupe changed my life",
     },
     person: "Azucena Cierco",
     role: {
       es: "Embajadora de Nuestra Señora de Guadalupe",
       en: "Ambassador of Our Lady of Guadalupe",
     },
-    body: {
-      es: "Azucena Cierco cuenta, en primera persona, el encuentro que la llevó a dedicar su vida a dar a conocer a la Virgen de Guadalupe y a llevar peregrinos al Tepeyac.",
-      en: "Azucena Cierco tells, in her own words, of the encounter that led her to dedicate her life to making Our Lady of Guadalupe known and to leading pilgrims to Tepeyac.",
+    more: {
+      es: "Si quieres conocer la historia completa, escucha este testimonio en el podcast.",
+      en: "If you want to hear the full story, listen to this testimony on the podcast.",
     },
     href: links.azucenaTestimony,
     embed: links.azucenaTestimonyEmbed,
@@ -66,21 +74,6 @@ export const voices: Voice[] = [
       es: "Azucena Cierco, de rodillas, ofrece un ramo de rosas ante la imagen de Santa María de Guadalupe",
       en: "Azucena Cierco, kneeling, offers a bouquet of roses before the image of Our Lady of Guadalupe",
     },
-  },
-  {
-    id: "radio-maria",
-    kind: { es: "Entrevista", en: "Interview" } satisfies Bi,
-    title: {
-      es: "«Hagamos radio» · Radio María Colombia",
-      en: "“Hagamos radio” · Radio María Colombia",
-    },
-    person: "Azucena Cierco",
-    role: { es: "Entrevista radial", en: "Radio interview" },
-    body: {
-      es: "Conversación sobre el Acontecimiento Guadalupano, la Tilma y el Jubileo de 2031, del 14 de enero de 2026.",
-      en: "A conversation about the Guadalupan Event, the Tilma and the 2031 Jubilee, from 14 January 2026.",
-    },
-    href: links.radioMaria,
   },
   {
     id: "ojeda",

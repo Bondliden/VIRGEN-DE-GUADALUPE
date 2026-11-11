@@ -26,7 +26,7 @@ export type VideoHeroProps = {
   eyebrow: Bi | string;
   titleMain: Bi | string;
   titleItalic?: Bi | string;
-  subtitle: Bi | string;
+  subtitle?: Bi | string;
   quote?: {
     text: Bi | string;
     source: Bi | string;
@@ -162,9 +162,11 @@ export function VideoHero({
               <Dot className="text-guadalupe-gold" />
             </h1>
 
-            <p className="mt-4 max-w-2xl font-serif text-[19px] leading-snug text-bone/95 [text-shadow:0_1px_10px_rgba(0,0,0,0.6)] sm:text-[22px]">
-              {resolveText(subtitle)}
-            </p>
+            {subtitle ? (
+              <p className="mt-4 max-w-2xl font-serif text-[19px] leading-snug text-bone/95 [text-shadow:0_1px_10px_rgba(0,0,0,0.6)] sm:text-[22px]">
+                {resolveText(subtitle)}
+              </p>
+            ) : null}
 
             {quote ? (
               <blockquote className="mt-6 max-w-2xl border-l-2 border-guadalupe-gold/60 pl-5 text-white/95">

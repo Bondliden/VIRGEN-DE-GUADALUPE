@@ -86,21 +86,21 @@ export function VirginSacredDisplay({ variant, className = "" }: VirginSacredDis
 
             <h3 className="mt-4 font-display text-[clamp(28px,3.8vw,44px)] font-bold uppercase leading-tight text-white">
               {t({
-                es: "Llegar a sus plantas en la Basílica",
+                es: "Llegar a sus pies en la Basílica",
                 en: "Reaching Her Feet at the Basilica",
               })}
               <Dot className="text-guadalupe-gold" />
             </h3>
 
             <blockquote className="mt-6 border-l-2 border-guadalupe-gold/60 pl-5 text-bone/95">
-              <p className="font-serif text-xl italic leading-relaxed sm:text-2xl">
+              <p className="hyphens-auto font-serif text-[18px] italic leading-relaxed sm:text-[20px]">
                 {t({
-                  es: "«No se turbe tu corazón, ni te inquiete cosa alguna: ¿Acaso no estoy yo aquí, que tengo el honor de ser tu madre?»",
-                  en: "«Let not your heart be disturbed, nor anything grieve you: Am I not here, who have the honor of being your mother?»",
+                  es: "“Escucha, ponlo en tu corazón, hijo mío el menor, que no es nada lo que te espantó, lo que te afligió; que no se perturbe tu rostro, tu corazón; no temas esta enfermedad ni ninguna otra enfermedad ni cosa punzante ni aflictiva. ¿No estoy yo aquí, que tengo el honor y la dicha de ser tu madre? ¿No estás bajo mi sombra y resguardo? ¿No soy yo la fuente de tu alegría? ¿No estás en el hueco de mi manto, en el cruce de mis brazos? ¿Acaso tienes necesidad de alguna otra cosa?”",
+                  en: "“Listen, put it in your heart, my youngest son: what frightened you, what afflicted you, is nothing; let not your face, your heart, be troubled; do not fear this illness nor any other illness, nor anything sharp or distressing. Am I not here, I who have the honour and the joy of being your mother? Are you not under my shadow and protection? Am I not the fountain of your joy? Are you not in the hollow of my mantle, in the crossing of my arms? Do you need anything else?”",
                 })}
               </p>
-              <footer className="mt-2 font-mono text-xs uppercase tracking-wider text-guadalupe-goldSoft">
-                — Nican Mopohua, v. 119
+              <footer className="mt-3 text-[12px] font-semibold uppercase tracking-[0.18em] text-guadalupe-goldSoft">
+                — Nican Mopohua
               </footer>
             </blockquote>
 

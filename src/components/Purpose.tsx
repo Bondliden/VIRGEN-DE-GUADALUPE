@@ -4,9 +4,9 @@ import type { LucideIcon } from "lucide-react";
 import { useLang } from "@/lib/lang";
 import { disclosure, purpose } from "@/data/hero";
 import { site } from "@/data/links";
-import { Container, Coord, Dot, Eyebrow, SectionRule } from "@/components/Chrome";
+import { Container, Coord, Dot } from "@/components/Chrome";
 
-/* Why the site exists (two objectives) + the non-profit transparency
+/* Por qué existe el sitio (el propósito y los dos caminos) + el aviso de transparencia
    notice. The notice is shown once and can be dismissed; it is never
    hidden permanently without the visitor having read it. */
 
@@ -21,31 +21,27 @@ export function Purpose() {
   const { t } = useLang();
 
   return (
-    <section className="py-16 sm:py-24" data-od-id="proposito">
+    <section className="pb-16 pt-6 sm:pb-24" data-od-id="proposito">
       <Container>
-        <SectionRule
-          roman="§"
-          label={t({ es: "Propósito", en: "Purpose" })}
-          page={t({ es: "Nota del editor", en: "Editor's note" })}
-        />
+        {/* El propósito, directo y lo primero que se lee. */}
+        <blockquote className="mx-auto max-w-4xl border-y border-guadalupe-gold/60 py-10 sm:py-14">
+          <p className="gd-quote-fit font-serif text-[clamp(22px,2.9vw,36px)] italic leading-[1.35] text-inkSoft">
+            {t(purpose.statement)}
+          </p>
+        </blockquote>
 
-        <div className="mt-8 grid gap-8 md:grid-cols-[1.15fr_0.85fr] md:items-end">
-          <div>
-            <Eyebrow>{t(purpose.eyebrow)}</Eyebrow>
-            <h2 className="mt-4 font-display text-[clamp(32px,4.8vw,56px)] font-extrabold uppercase leading-[1] tracking-[-0.03em] text-inkSoft">
-              {t(purpose.title)}
-              <Dot />
-            </h2>
-          </div>
-        </div>
+        <h2 className="mt-20 font-display text-[clamp(32px,4.8vw,56px)] font-extrabold uppercase leading-[1] tracking-[-0.03em] text-inkSoft">
+          {t(purpose.title)}
+          <Dot />
+        </h2>
 
-        <div className="mt-12 grid gap-px bg-ink/20 md:grid-cols-2">
+        <div className="mt-10 grid gap-px bg-ink/20 md:grid-cols-2">
           {purpose.items.map((item) => {
             const Icon = purposeIcons[item.icon] ?? Footprints;
             return (
-              <article key={item.title.es} className="bg-paper p-6 lg:p-8">
-                <Icon className="h-6 w-6 text-accentRose" aria-hidden />
-                <h3 className="mt-4 font-display text-2xl font-bold uppercase tracking-[0.02em] text-inkSoft">
+              <article key={item.title.es} className="bg-paper p-6 lg:p-9">
+                <Icon className="h-7 w-7 text-accentRose" aria-hidden />
+                <h3 className="mt-5 font-display text-2xl font-bold uppercase tracking-[0.02em] text-inkSoft">
                   {t(item.title)}
                 </h3>
                 <p className="mt-4 text-body leading-relaxed text-inkMute">{t(item.body)}</p>
@@ -54,8 +50,14 @@ export function Purpose() {
           })}
         </div>
 
+        <div className="mx-auto mt-16 max-w-3xl">
+          <p className="gd-quote-fit font-serif text-[clamp(22px,2.6vw,32px)] font-medium leading-[1.3] text-accentRoseInk">
+            {t(purpose.question)}
+          </p>
+        </div>
+
         <blockquote className="mt-12 border-l-2 border-accentRose pl-5">
-          <p className="font-serif text-[clamp(18px,2.1vw,25px)] italic leading-relaxed text-inkSoft">
+          <p className="hyphens-auto font-serif text-[clamp(18px,2.1vw,25px)] italic leading-relaxed text-inkSoft">
             {t(purpose.closer)}
           </p>
         </blockquote>

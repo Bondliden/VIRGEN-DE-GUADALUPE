@@ -67,12 +67,42 @@ export const links = {
   azucenaTestimonyEmbed:
     "https://drive.google.com/file/d/1nmGfMAeA2JkVetZ7HS1QJ9fozAByqWEH/preview",
 
+  /** Lectura del Nican Mopohua, por partes (grabaciones enviadas el
+      11-11-2026, verticales). Sobre la voz van cuadros y murales de las
+      apariciones, cada uno en el momento en que el relato habla de lo que
+      muestra. Salen en la pestaña «Nican Mopohua» del Acontecimiento. Cuando
+      llegue la tercera parte, se añade aquí y aparece sola. */
+  nicanMopohuaPartes: [
+    {
+      src: "/videos/nican/nican-mopohua-parte-1.mp4",
+      poster: "/videos/nican/nican-mopohua-parte-1.jpg",
+      minutes: "9:50",
+    },
+    {
+      src: "/videos/nican/nican-mopohua-parte-2.mp4",
+      poster: "/videos/nican/nican-mopohua-parte-2.jpg",
+      minutes: "9:54",
+    },
+  ],
+
+  /** El Nican Mopohua en español, inglés, italiano, portugués, francés y
+      náhuatl, del Instituto Superior de Estudios Guadalupanos (76 páginas). */
+  nicanMopohuaPdf: "/documentos/nican-mopohua-seis-idiomas.pdf",
+
+  /** «3 modelos del Rosario guadalupano» (Subsidio 5, Semana de Oración
+      Guadalupana por la Paz), publicado por la Basílica. Se enlaza el
+      original (16 MB) para imprimir; el librito que se hojea en Voces usa las
+      28 páginas ya cortadas en /public/images/rosario. */
+  rosarioPdf:
+    import.meta.env.VITE_ROSARIO_PDF_URL ||
+    "https://virgendeguadalupe.org.mx/wp-content/uploads/2024/10/Rosario.pdf",
+
+  /** Vídeo o reel de Instagram con el Rosario rezado. Vacío: no se muestra. */
+  rosarioInstagram:
+    import.meta.env.VITE_ROSARIO_INSTAGRAM_URL || "https://www.instagram.com/reel/DcM76rvANQK/",
+
   /** EWTN Español — rebroadcast stream */
   ewtnEs: "https://i.watch.ewtn.com/es/PRC/PRC23141/PRC23141.m3u8",
-
-  /** Radio María Colombia — "Hagamos radio" con Azucena Cierco */
-  radioMaria:
-    "https://music.amazon.com/podcasts/b3cc94b4-dd4f-4889-a367-2a6801caadd4/episodes/4028b78b-a58b-49b0-abb3-359d0cd5a487/radio-maria-colombia-hagamos-radio-%E2%80%93-con-azucena-cierco-embajadora-de-nuestra-se%C3%B1ora-de-guadalupe-%E2%80%93-14-de-enero-de-2026",
 
   /** Dr. Fernando Ojeda Llanes — Centro de Estudios Guadalupanos, Mérida */
   fernandoOjeda: "https://www.youtube.com/@FernandoOjedaLlanes",

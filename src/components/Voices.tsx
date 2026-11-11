@@ -1,10 +1,15 @@
-import { ChevronDown, ExternalLink } from "lucide-react";
+import { ChevronDown, ExternalLink, FileText } from "lucide-react";
 import { useLang } from "@/lib/lang";
 import { nextLive, rosaryModes, voices, voicesSection } from "@/data/voices";
+import { links } from "@/data/links";
 import { LiveAnnouncement } from "@/components/LiveAnnouncement";
 import { Container, Coord, Dot, Eyebrow } from "@/components/Chrome";
 import { VideoHero } from "@/components/VideoHero";
 import { VirginSacredDisplay } from "@/components/VirginSacredDisplay";
+import { lazy, Suspense } from "react";
+
+/* El librito lleva la librería de animación: se carga aparte, al llegar aquí. */
+const RosaryBook = lazy(() => import("@/components/RosaryBook").then((m) => ({ default: m.RosaryBook })));
 
 /* Section III — voices, testimonies and the Guadalupan rosary. */
 
@@ -20,7 +25,6 @@ export function Voices() {
         eyebrow={voicesSection.eyebrow}
         titleMain={voicesSection.title}
         titleItalic={{ es: "y el Santo Rosario Guadalupano", en: "and the Holy Guadalupan Rosary" }}
-        subtitle={voicesSection.intro}
         videoSrc="/videos/heroes/voces.mp4"
         posterSrc="/videos/heroes/voces.jpg"
         pageOf="004 / 006"
@@ -31,16 +35,21 @@ export function Voices() {
 
       <section id="voces" className="py-16 sm:py-24" data-od-id="voces">
         <Container>
-          <div className="grid gap-8 md:grid-cols-[1.15fr_0.85fr] md:items-end">
-            <div>
-              <Eyebrow>{t(voicesSection.eyebrow)}</Eyebrow>
-              <h2 className="mt-4 font-display text-[clamp(34px,5.2vw,64px)] font-extrabold uppercase leading-[0.98] tracking-[-0.03em] text-inkSoft">
-                {t(voicesSection.title)}
-                <Dot />
-              </h2>
-            </div>
-            <p className="text-body text-inkMute">{t(voicesSection.intro)}</p>
+          <div>
+            <Eyebrow>{t(voicesSection.eyebrow)}</Eyebrow>
+            <h2 className="mt-4 font-display text-[clamp(34px,5.2vw,64px)] font-extrabold uppercase leading-[0.98] tracking-[-0.03em] text-inkSoft">
+              {t(voicesSection.title)}
+              <Dot />
+            </h2>
           </div>
+
+          <blockquote className="mt-10 max-w-4xl border-l-2 border-accentRose pl-6">
+            <p className="gd-quote-fit font-serif text-[clamp(24px,3.2vw,40px)] italic leading-[1.2] text-inkSoft">
+              “{t(voicesSection.quote)}”
+            </p>
+            <footer className="gd-coord mt-3 uppercase">— {voicesSection.quoteSource}</footer>
+          </blockquote>
+          <p className="mt-6 max-w-3xl text-body text-inkMute">{t(voicesSection.intro)}</p>
 
         {/* ── Featured testimony ── */}
         <div className="mt-12 grid gap-8 border border-ink/20 bg-bone p-4 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)] lg:p-6">
@@ -67,7 +76,9 @@ export function Voices() {
               <h3 className="mt-3 font-serif text-2xl italic leading-snug text-inkSoft">
                 {t(featured.title)}
               </h3>
-              <p className="mt-4 text-[15px] leading-relaxed text-inkMute">{t(featured.body)}</p>
+              {featured.body ? (
+                <p className="mt-4 text-[15px] leading-relaxed text-inkMute">{t(featured.body)}</p>
+              ) : null}
             </div>
             {/* La imagen ocupa el hueco que quedaba entre el texto y el
                 nombre y crece con la tarjeta. El encuadre sube hasta el
@@ -91,42 +102,37 @@ export function Voices() {
                 (un <details> nativo: se abre con ratón, teclado y lector de
                 pantalla sin código). Sin enlace «Abrir»: llevaba al mismo
                 vídeo que se ve a la izquierda. */}
+            <p className="mt-6 border-t border-ink/20 pt-4 text-[16px] leading-relaxed text-inkSoft">
+              <span className="font-semibold">{featured.person}</span>, {t(featured.role)}.
+              {featured.more ? <> {t(featured.more)}</> : null}
+            </p>
+            {/* Su historia, desplegable con la flecha (un <details> nativo:
+                se abre con ratón, teclado y lector de pantalla sin código). */}
             {featured.bio ? (
-              <details className="group mt-6 border-t border-ink/20 pt-4">
-                <summary className="flex cursor-pointer list-none items-start justify-between gap-3 [&::-webkit-details-marker]:hidden">
-                  <span>
-                    <span className="block font-display text-base font-semibold uppercase tracking-[0.06em] text-inkSoft">
-                      {featured.person}
-                    </span>
-                    <Coord className="mt-1 block uppercase">{t(featured.role)}</Coord>
-                  </span>
-                  <span className="flex flex-none items-center gap-1.5 pt-0.5 text-[13px] font-semibold text-accentRoseInk">
-                    {t({ es: "Su historia", en: "Her story" })}
-                    <ChevronDown className="h-5 w-5 transition-transform duration-300 group-open:rotate-180" aria-hidden />
-                  </span>
+              <details className="group mt-3 border-t border-ink/10 pt-3">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-[14px] font-semibold text-accentRoseInk [&::-webkit-details-marker]:hidden">
+                  {t({ es: "Su historia", en: "Her story" })}
+                  <ChevronDown className="h-5 w-5 transition-transform duration-300 group-open:rotate-180" aria-hidden />
                 </summary>
-                <p className="mt-4 text-left text-[15px] leading-relaxed text-inkSoft">{t(featured.bio)}</p>
+                <p className="mt-3 text-[15px] leading-relaxed text-inkSoft">{t(featured.bio)}</p>
               </details>
-            ) : (
-              <div className="mt-6 border-t border-ink/20 pt-4">
-                <p className="font-display text-base font-semibold uppercase tracking-[0.06em] text-inkSoft">
-                  {featured.person}
-                </p>
-                <Coord className="mt-1 block uppercase">{t(featured.role)}</Coord>
-              </div>
-            )}
+            ) : null}
           </div>
         </div>
 
         {/* ── The rest ── */}
-        <div className="mt-8 grid gap-px bg-ink/20 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid gap-px bg-ink/20 sm:grid-cols-2">
           {rest.map((item) => (
             <article key={item.id} className="flex flex-col bg-bone p-6">
               <Coord className="uppercase">{t(item.kind)}</Coord>
               <h3 className="mt-3 font-display text-lg font-semibold leading-tight text-inkSoft">
                 {t(item.title)}
               </h3>
-              <p className="mt-3 flex-1 text-[15px] leading-relaxed text-inkMute">{t(item.body)}</p>
+              {item.body ? (
+                <p className="mt-3 flex-1 text-[15px] leading-relaxed text-inkMute">{t(item.body)}</p>
+              ) : (
+                <div className="flex-1" />
+              )}
               <div className="mt-5 border-t border-ink/20 pt-3">
                 <p className="text-[13px] font-semibold text-inkSoft">{item.person}</p>
                 <Coord className="mt-1 block uppercase">{t(item.role)}</Coord>
@@ -164,6 +170,8 @@ export function Voices() {
             </p>
           </div>
 
+          <RosaryResources />
+
           <div className="mt-10 grid gap-px bg-ink/20 lg:grid-cols-3">
             {rosaryModes.map((mode) => (
               <article key={mode.id} className="flex flex-col bg-paper p-6">
@@ -193,6 +201,93 @@ export function Voices() {
         </div>
       </Container>
     </section>
+    </>
+  );
+}
+
+/* El Rosario para rezar, como librito que se hojea (RosaryBook), y el
+   Rosario rezado por nosotros (Instagram). El reel aparece solo en cuanto
+   tiene su enlace en data/links.ts; sin él no se pinta ningún hueco vacío.
+   La tarjeta con el botón del PDF queda para el caso de cambiar el librito
+   por otro documento sin páginas preparadas (showBook = false). */
+const showBook = true;
+
+function RosaryResources() {
+  const { t } = useLang();
+  const embed = links.rosarioInstagram
+    ? `${links.rosarioInstagram.split("?")[0].replace(/\/$/, "")}/embed`
+    : "";
+  if (!showBook && !links.rosarioPdf && !embed) return null;
+
+  return (
+    <>
+    {showBook ? (
+      <Suspense fallback={<div className="mt-10 h-[40rem] border border-guadalupe-gold/50 bg-bone" aria-hidden />}>
+        <RosaryBook />
+      </Suspense>
+    ) : null}
+    <div className="mt-10 grid gap-6 lg:grid-cols-2 empty:hidden">
+      {!showBook && links.rosarioPdf ? (
+        <div className="flex flex-col justify-between border border-ink/20 bg-bone p-6">
+          <div>
+            <FileText className="h-6 w-6 text-accentRose" aria-hidden />
+            <h4 className="mt-4 font-display text-lg font-semibold uppercase tracking-[0.04em] text-inkSoft">
+              {t({ es: "Reza el Santo Rosario", en: "Pray the Holy Rosary" })}
+            </h4>
+            <p className="mt-3 text-[15px] leading-relaxed text-inkMute">
+              {t({
+                es: "El Santo Rosario Guadalupano completo, en un documento para leer, imprimir y rezar en casa o en el camino.",
+                en: "The complete Guadalupan Holy Rosary, in a document to read, print and pray at home or on the road.",
+              })}
+            </p>
+          </div>
+          <a
+            href={links.rosarioPdf}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="mt-5 inline-flex w-fit items-center gap-2 bg-accentRose px-5 py-3 text-eyebrow font-semibold uppercase tracking-eyebrow text-[hsl(var(--gd-accent-on))] transition-colors hover:bg-accentRose/80"
+          >
+            {t({ es: "Abrir el PDF", en: "Open the PDF" })}
+            <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+          </a>
+        </div>
+      ) : null}
+    </div>
+    {/* El reel de Azucena: vertical, al lado de su invitación. */}
+    {embed ? (
+      <div className="mt-10 grid items-center gap-8 border border-ink/20 bg-bone p-5 sm:p-8 md:grid-cols-[minmax(0,1fr)_minmax(0,22rem)] md:gap-12">
+        <div>
+          <Coord className="block uppercase">{t({ es: "En Instagram", en: "On Instagram" })}</Coord>
+          <h4 className="mt-3 font-serif text-[clamp(26px,3vw,38px)] font-medium italic leading-tight text-inkSoft">
+            {t({ es: "Reza conmigo este hermoso Rosario guadalupano", en: "Pray this beautiful Guadalupan Rosary with me" })}
+          </h4>
+          <p className="mt-4 text-body leading-relaxed text-inkMute">
+            {t({
+              es: "Azucena Cierco reza el Santo Rosario guadalupano. Ponlo y reza con ella, en casa o de camino.",
+              en: "Azucena Cierco prays the Guadalupan Holy Rosary. Play it and pray along with her, at home or on the road.",
+            })}
+          </p>
+          <a
+            href={links.rosarioInstagram}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="mt-6 inline-flex items-center gap-2 text-eyebrow font-semibold uppercase tracking-eyebrow text-accentRoseInk hover:underline"
+          >
+            {t({ es: "Abrir en Instagram", en: "Open on Instagram" })}
+            <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+          </a>
+        </div>
+        <div className="mx-auto w-full max-w-[22rem] overflow-hidden border border-ink/15 bg-white">
+          <iframe
+            src={embed}
+            title={t({ es: "Azucena Cierco reza el Santo Rosario guadalupano", en: "Azucena Cierco prays the Guadalupan Holy Rosary" })}
+            loading="lazy"
+            allowFullScreen
+            className="h-[760px] w-full"
+          />
+        </div>
+      </div>
+    ) : null}
     </>
   );
 }
