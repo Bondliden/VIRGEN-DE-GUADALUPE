@@ -10,8 +10,8 @@
    ───────────────────────────────────────────── */
 
 import { createServer } from "node:http";
-import { readFile } from "node:fs/promises";
-import { existsSync, readFileSync } from "node:fs";
+import { readFile, stat } from "node:fs/promises";
+import { createReadStream, existsSync, readFileSync } from "node:fs";
 import { extname, join, normalize } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -53,6 +53,12 @@ const MIME = {
   ".webp": "image/webp",
   ".ico": "image/x-icon",
   ".woff2": "font/woff2",
+  ".mp4": "video/mp4",
+  ".webm": "video/webm",
+  ".mp3": "audio/mpeg",
+  ".pdf": "application/pdf",
+  ".xml": "application/xml; charset=utf-8",
+  ".webmanifest": "application/manifest+json",
 };
 
 function sendJson(res, code, body) {
@@ -108,28 +114,80 @@ const server = createServer(async (req, res) => {
     return sendJson(res, 502, { error: outcome.kind });
   }
 
-  const path = url.pathname === "/" ? "/index.html" : url.pathname;
+  let pathname = url.pathname;
+  try {
+    pathname = decodeURIComponent(pathname);
+  } catch {
+    /* ruta mal codificada: se sirve tal cual y caerá en la portada */
+  }
+  const path = pathname === "/" ? "/index.html" : pathname;
   const file = normalize(join(DIST, path));
   if (!file.startsWith(DIST)) {
     res.writeHead(403);
     return res.end("Forbidden");
   }
 
+  /* Los archivos se envían a trozos (stream), no leídos enteros en memoria:
+     los vídeos pesan 50 MB. Y se aceptan peticiones de rango (Range), que
+     Safari en iPhone exige para reproducir un vídeo y que todos los
+     navegadores usan para adelantarlo. */
+  let info = null;
   try {
-    const data = await readFile(file);
-    res.writeHead(200, {
-      "Content-Type": MIME[extname(file).toLowerCase()] || "application/octet-stream",
-    });
-    res.end(data);
+    info = await stat(file);
   } catch {
-    try {
-      const index = await readFile(join(DIST, "index.html"));
-      res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-      res.end(index);
-    } catch {
-      res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
-      res.end("Ejecuta primero: npm run build");
+    info = null;
+  }
+
+  if (info?.isFile()) {
+    const ext = extname(file).toLowerCase();
+    const headers = {
+      "Content-Type": MIME[ext] || "application/octet-stream",
+      "Accept-Ranges": "bytes",
+      "Cache-Control": path.startsWith("/assets/")
+        ? "public, max-age=31536000, immutable"
+        : ext === ".html"
+          ? "no-cache"
+          : "public, max-age=86400",
+    };
+    const size = info.size;
+    const range = req.headers.range;
+    if (range) {
+      const m = /^bytes=(\d*)-(\d*)$/.exec(range.trim());
+      let start = m && m[1] !== "" ? Number(m[1]) : NaN;
+      let end = m && m[2] !== "" ? Number(m[2]) : NaN;
+      if (m && m[1] === "" && m[2] !== "") {
+        /* «los últimos N bytes» */
+        start = Math.max(0, size - Number(m[2]));
+        end = size - 1;
+      } else if (!Number.isNaN(start) && Number.isNaN(end)) {
+        end = size - 1;
+      }
+      if (!m || Number.isNaN(start) || Number.isNaN(end) || start > end || start >= size) {
+        res.writeHead(416, { "Content-Range": `bytes */${size}` });
+        return res.end();
+      }
+      end = Math.min(end, size - 1);
+      res.writeHead(206, {
+        ...headers,
+        "Content-Range": `bytes ${start}-${end}/${size}`,
+        "Content-Length": end - start + 1,
+      });
+      if (req.method === "HEAD") return res.end();
+      return createReadStream(file, { start, end }).pipe(res);
     }
+    res.writeHead(200, { ...headers, "Content-Length": size });
+    if (req.method === "HEAD") return res.end();
+    return createReadStream(file).pipe(res);
+  }
+
+  /* Cualquier otra ruta es la propia web (las secciones van con #). */
+  try {
+    const index = await readFile(join(DIST, "index.html"));
+    res.writeHead(200, { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-cache" });
+    res.end(index);
+  } catch {
+    res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
+    res.end("Ejecuta primero: npm run build");
   }
 });
 
