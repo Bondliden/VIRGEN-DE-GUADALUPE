@@ -37,6 +37,58 @@ export const shopSection = {
   } satisfies Bi,
 };
 
+/* Lo que ya se puede encargar. Precios dados por el equipo el 11-11-2026,
+   en dólares. Las descripciones se ciñen a lo que se ve en las fotos: no
+   añadir materiales ni medidas sin que los confirme el equipo. */
+export type ShopProduct = {
+  id: string;
+  name: Bi;
+  body: Bi;
+  priceUsd: number;
+  image: string;
+  alt: Bi;
+};
+
+export const shopProductsSection = {
+  eyebrow: { es: "Ya disponibles", en: "Available now" } satisfies Bi,
+  title: { es: "Rosarios guadalupanos", en: "Guadalupan rosaries" } satisfies Bi,
+  order: {
+    es: "Para encargarlo, escríbenos indicando el rosario que quieres.",
+    en: "To order one, write to us saying which rosary you would like.",
+  } satisfies Bi,
+};
+
+export const shopProducts: ShopProduct[] = [
+  {
+    id: "rosario-guadalupano",
+    name: { es: "Rosario guadalupano", en: "Guadalupan rosary" },
+    body: {
+      es: "Cuentas color granate, medallas con imágenes guadalupanas entre los misterios y crucifijo plateado.",
+      en: "Garnet-coloured beads, medals with Guadalupan images between the mysteries and a silver-coloured crucifix.",
+    },
+    priceUsd: 20,
+    image: "/images/guadalupe/tienda/rosario-guadalupano.webp",
+    alt: {
+      es: "Rosario de cuentas granate con medallas guadalupanas, sobre una estampa de la Virgen de Guadalupe",
+      en: "Rosary with garnet beads and Guadalupan medals, laid on a print of Our Lady of Guadalupe",
+    },
+  },
+  {
+    id: "rosario-petalos-de-rosa",
+    name: { es: "Rosario de pétalos de rosa", en: "Rose petal rosary" },
+    body: {
+      es: "Rosario de pétalos de rosas, con medalla de la Virgen de Guadalupe y crucifijo. Viene en su estuche.",
+      en: "Rosary of rose petals, with a medal of Our Lady of Guadalupe and a crucifix. It comes in its own case.",
+    },
+    priceUsd: 50,
+    image: "/images/guadalupe/tienda/rosario-petalos-de-rosa.webp",
+    alt: {
+      es: "Rosario de pétalos de rosa con medalla de la Virgen de Guadalupe, junto a su estuche, sobre una estampa de la Virgen",
+      en: "Rose petal rosary with a medal of Our Lady of Guadalupe, next to its case, on a print of Our Lady",
+    },
+  },
+];
+
 export type ShopCategory = {
   id: string;
   roman: string;

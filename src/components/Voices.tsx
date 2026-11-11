@@ -6,6 +6,10 @@ import { LiveAnnouncement } from "@/components/LiveAnnouncement";
 import { Container, Coord, Dot, Eyebrow } from "@/components/Chrome";
 import { VideoHero } from "@/components/VideoHero";
 import { VirginSacredDisplay } from "@/components/VirginSacredDisplay";
+import { lazy, Suspense } from "react";
+
+/* El librito lleva la librería de animación: se carga aparte, al llegar aquí. */
+const RosaryBook = lazy(() => import("@/components/RosaryBook").then((m) => ({ default: m.RosaryBook })));
 
 /* Section III — voices, testimonies and the Guadalupan rosary. */
 
@@ -201,19 +205,29 @@ export function Voices() {
   );
 }
 
-/* El Rosario para rezar (PDF) y el Rosario rezado por nosotros (Instagram).
-   Cada pieza aparece sola en cuanto tiene su enlace en data/links.ts; sin él
-   no se pinta ningún hueco vacío. */
+/* El Rosario para rezar, como librito que se hojea (RosaryBook), y el
+   Rosario rezado por nosotros (Instagram). El reel aparece solo en cuanto
+   tiene su enlace en data/links.ts; sin él no se pinta ningún hueco vacío.
+   La tarjeta con el botón del PDF queda para el caso de cambiar el librito
+   por otro documento sin páginas preparadas (showBook = false). */
+const showBook = true;
+
 function RosaryResources() {
   const { t } = useLang();
-  if (!links.rosarioPdf && !links.rosarioInstagram) return null;
   const embed = links.rosarioInstagram
     ? `${links.rosarioInstagram.split("?")[0].replace(/\/$/, "")}/embed`
     : "";
+  if (!showBook && !links.rosarioPdf && !embed) return null;
 
   return (
-    <div className="mt-10 grid gap-6 lg:grid-cols-2">
-      {links.rosarioPdf ? (
+    <>
+    {showBook ? (
+      <Suspense fallback={<div className="mt-10 h-[40rem] border border-guadalupe-gold/50 bg-bone" aria-hidden />}>
+        <RosaryBook />
+      </Suspense>
+    ) : null}
+    <div className="mt-10 grid gap-6 lg:grid-cols-2 empty:hidden">
+      {!showBook && links.rosarioPdf ? (
         <div className="flex flex-col justify-between border border-ink/20 bg-bone p-6">
           <div>
             <FileText className="h-6 w-6 text-accentRose" aria-hidden />
@@ -238,17 +252,42 @@ function RosaryResources() {
           </a>
         </div>
       ) : null}
-      {embed ? (
-        <div className="border border-ink/20 bg-bone p-4">
+    </div>
+    {/* El reel de Azucena: vertical, al lado de su invitación. */}
+    {embed ? (
+      <div className="mt-10 grid items-center gap-8 border border-ink/20 bg-bone p-5 sm:p-8 md:grid-cols-[minmax(0,1fr)_minmax(0,22rem)] md:gap-12">
+        <div>
+          <Coord className="block uppercase">{t({ es: "En Instagram", en: "On Instagram" })}</Coord>
+          <h4 className="mt-3 font-serif text-[clamp(26px,3vw,38px)] font-medium italic leading-tight text-inkSoft">
+            {t({ es: "Reza conmigo este hermoso Rosario guadalupano", en: "Pray this beautiful Guadalupan Rosary with me" })}
+          </h4>
+          <p className="mt-4 text-body leading-relaxed text-inkMute">
+            {t({
+              es: "Azucena Cierco reza el Santo Rosario guadalupano. Ponlo y reza con ella, en casa o de camino.",
+              en: "Azucena Cierco prays the Guadalupan Holy Rosary. Play it and pray along with her, at home or on the road.",
+            })}
+          </p>
+          <a
+            href={links.rosarioInstagram}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="mt-6 inline-flex items-center gap-2 text-eyebrow font-semibold uppercase tracking-eyebrow text-accentRoseInk hover:underline"
+          >
+            {t({ es: "Abrir en Instagram", en: "Open on Instagram" })}
+            <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+          </a>
+        </div>
+        <div className="mx-auto w-full max-w-[22rem] overflow-hidden border border-ink/15 bg-white">
           <iframe
             src={embed}
-            title={t({ es: "El Santo Rosario rezado por nosotros", en: "The Holy Rosary, prayed by us" })}
+            title={t({ es: "Azucena Cierco reza el Santo Rosario guadalupano", en: "Azucena Cierco prays the Guadalupan Holy Rosary" })}
             loading="lazy"
             allowFullScreen
-            className="h-[560px] w-full"
+            className="h-[760px] w-full"
           />
         </div>
-      ) : null}
-    </div>
+      </div>
+    ) : null}
+    </>
   );
 }

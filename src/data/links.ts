@@ -67,18 +67,39 @@ export const links = {
   azucenaTestimonyEmbed:
     "https://drive.google.com/file/d/1nmGfMAeA2JkVetZ7HS1QJ9fozAByqWEH/preview",
 
-  /** Locución completa del Nican Mopohua, en la voz de Azucena. Pega aquí el
-      enlace (YouTube, Google Drive o un .mp4) y el reproductor aparece solo
-      en la pestaña «Nican Mopohua» del Acontecimiento. Vacío: no se muestra. */
-  nicanMopohuaVideo: import.meta.env.VITE_NICAN_VIDEO_URL || "",
+  /** Lectura del Nican Mopohua, por partes (grabaciones enviadas el
+      11-11-2026, verticales). Sobre la voz van cuadros y murales de las
+      apariciones, cada uno en el momento en que el relato habla de lo que
+      muestra. Salen en la pestaña «Nican Mopohua» del Acontecimiento. Cuando
+      llegue la tercera parte, se añade aquí y aparece sola. */
+  nicanMopohuaPartes: [
+    {
+      src: "/videos/nican/nican-mopohua-parte-1.mp4",
+      poster: "/videos/nican/nican-mopohua-parte-1.jpg",
+      minutes: "9:50",
+    },
+    {
+      src: "/videos/nican/nican-mopohua-parte-2.mp4",
+      poster: "/videos/nican/nican-mopohua-parte-2.jpg",
+      minutes: "9:54",
+    },
+  ],
 
-  /** Santo Rosario Guadalupano para rezar, en PDF (por ejemplo
-      "/documentos/santo-rosario-guadalupano.pdf" en /public). Vacío: no se
-      muestra el botón. */
-  rosarioPdf: import.meta.env.VITE_ROSARIO_PDF_URL || "",
+  /** El Nican Mopohua en español, inglés, italiano, portugués, francés y
+      náhuatl, del Instituto Superior de Estudios Guadalupanos (76 páginas). */
+  nicanMopohuaPdf: "/documentos/nican-mopohua-seis-idiomas.pdf",
+
+  /** «3 modelos del Rosario guadalupano» (Subsidio 5, Semana de Oración
+      Guadalupana por la Paz), publicado por la Basílica. Se enlaza el
+      original (16 MB) para imprimir; el librito que se hojea en Voces usa las
+      28 páginas ya cortadas en /public/images/rosario. */
+  rosarioPdf:
+    import.meta.env.VITE_ROSARIO_PDF_URL ||
+    "https://virgendeguadalupe.org.mx/wp-content/uploads/2024/10/Rosario.pdf",
 
   /** Vídeo o reel de Instagram con el Rosario rezado. Vacío: no se muestra. */
-  rosarioInstagram: import.meta.env.VITE_ROSARIO_INSTAGRAM_URL || "",
+  rosarioInstagram:
+    import.meta.env.VITE_ROSARIO_INSTAGRAM_URL || "https://www.instagram.com/reel/DcM76rvANQK/",
 
   /** EWTN Español — rebroadcast stream */
   ewtnEs: "https://i.watch.ewtn.com/es/PRC/PRC23141/PRC23141.m3u8",

@@ -1,6 +1,6 @@
 import { Heart } from "lucide-react";
 import { useLang } from "@/lib/lang";
-import { shopCategories, shopSection } from "@/data/shop";
+import { shopCategories, shopProducts, shopProductsSection, shopSection } from "@/data/shop";
 import { site } from "@/data/links";
 import { Container, Dot, Eyebrow } from "@/components/Chrome";
 import { VideoHero } from "@/components/VideoHero";
@@ -23,7 +23,7 @@ export function Shop() {
         videoSrc="/videos/heroes/tienda.mp4"
         posterSrc="/videos/heroes/tienda.jpg"
         pageOf="005 / 006"
-        ctaPrimary={{ label: { es: "Ver Colección", en: "View Collection" }, href: "#categorias-tienda" }}
+        ctaPrimary={{ label: { es: "Ver los Rosarios", en: "See the Rosaries" }, href: "#rosarios" }}
         ctaSecondary={{ label: { es: "Sello de Autenticidad", en: "Authenticity Seal" }, href: "#autenticidad-relicario" }}
       />
 
@@ -35,6 +35,47 @@ export function Shop() {
               {t(shopSection.title)}
               <Dot />
             </h2>
+          </div>
+
+          {/* ── Lo que ya se puede encargar ── */}
+          <div id="rosarios" className="mt-12 scroll-mt-28 border-t-2 border-guadalupe-gold/70 pt-10">
+            <Eyebrow>{t(shopProductsSection.eyebrow)}</Eyebrow>
+            <h3 className="mt-3 font-display text-[clamp(26px,3.4vw,42px)] font-extrabold uppercase leading-[1.04] tracking-[-0.015em] text-inkSoft">
+              {t(shopProductsSection.title)}
+              <Dot />
+            </h3>
+
+            <div className="mt-8 grid max-w-4xl gap-6 sm:grid-cols-2 lg:gap-10">
+              {shopProducts.map((product) => (
+                <article key={product.id} className="flex flex-col border border-ink/20 bg-bone">
+                  <div className="aspect-[2/3] overflow-hidden bg-ink/10">
+                    <img
+                      src={product.image}
+                      alt={t(product.alt)}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col p-6">
+                    <div className="flex items-start justify-between gap-4">
+                      <h4 className="font-display text-xl font-semibold uppercase leading-tight tracking-[0.03em] text-inkSoft">
+                        {t(product.name)}
+                      </h4>
+                      <p className="flex-none text-right font-display text-[32px] font-semibold leading-none tabular-nums text-accentRose">
+                        ${product.priceUsd}
+                        <span className="ml-1 text-[13px] font-semibold tracking-[0.1em] text-inkMute">USD</span>
+                      </p>
+                    </div>
+                    <p className="mt-3 text-[16px] leading-relaxed text-inkMute">{t(product.body)}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <div className="mt-6 flex max-w-4xl flex-wrap items-baseline gap-x-4 gap-y-1 border border-ink/30 px-5 py-4 text-[16px]">
+              <span className="text-inkMute">{t(shopProductsSection.order)}</span>
+              <span className="select-all break-all font-semibold text-inkSoft">{site.contactEmail}</span>
+            </div>
           </div>
 
           {/* ── Cuadro de la Virgen: Placa y Certificado de Fidelidad Sacra ── */}
