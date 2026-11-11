@@ -107,6 +107,21 @@ export function RosaryBook() {
     setFlip({ dir: to > index ? "next" : "prev", to });
   };
 
+  /* En la vista ampliada no hay hoja que gire: se cambia de página al momento
+     y la vista vuelve arriba, al principio de la página nueva. */
+  const zoomRef = useRef<HTMLDivElement | null>(null);
+  const zoomStart = useRef<{ x: number; y: number } | null>(null);
+  const step = useCallback(
+    (dir: "next" | "prev") => {
+      const to = dir === "next" ? index + 1 : index - 1;
+      if (to < min || to > max) return;
+      setFlip(null);
+      setPage(toPage(to));
+      zoomRef.current?.scrollTo({ top: 0 });
+    },
+    [index, min, max, toPage],
+  );
+
   const done = () => {
     if (!flip) return;
     setPage(toPage(flip.to));
@@ -123,7 +138,11 @@ export function RosaryBook() {
 
   useEffect(() => {
     if (!zoom) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setZoom(false);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setZoom(false);
+      if (e.key === "ArrowRight") step("next");
+      if (e.key === "ArrowLeft") step("prev");
+    };
     window.addEventListener("keydown", onKey);
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -131,7 +150,7 @@ export function RosaryBook() {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
     };
-  }, [zoom]);
+  }, [zoom, step]);
 
   const ease = [0.645, 0.045, 0.355, 1] as const;
   const duration = wide ? 0.85 : 0.6;
@@ -297,6 +316,19 @@ export function RosaryBook() {
         </button>
       </div>
 
+      {/* ── Ampliar: lo más visible después del libro, porque la letra del
+           original es pequeña ── */}
+      <div className="mt-6 flex justify-center">
+        <button
+          type="button"
+          onClick={() => setZoom(true)}
+          className="inline-flex items-center gap-3 rounded-full bg-accentRose px-7 py-3.5 text-[14px] font-semibold uppercase tracking-[0.14em] text-[hsl(var(--gd-accent-on))] shadow-[0_10px_24px_-10px_rgba(120,30,50,0.7)] transition-transform hover:-translate-y-0.5 hover:bg-accentRose/90"
+        >
+          <Maximize2 className="h-5 w-5" aria-hidden />
+          {t({ es: "Ampliar para leer", en: "Enlarge to read" })}
+        </button>
+      </div>
+
       {/* ── Ir a una parte ── */}
       <nav aria-label={t({ es: "Partes del Rosario", en: "Parts of the Rosary" })} className="mt-6">
         <ul className="flex flex-wrap justify-center gap-2">
@@ -323,10 +355,6 @@ export function RosaryBook() {
       </nav>
 
       <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-eyebrow font-semibold uppercase tracking-eyebrow">
-        <button type="button" onClick={() => setZoom(true)} className="inline-flex items-center gap-2 font-semibold uppercase tracking-eyebrow text-accentRoseInk hover:underline">
-          <Maximize2 className="h-4 w-4" aria-hidden />
-          {t({ es: "Ampliar para leer", en: "Enlarge to read" })}
-        </button>
         {links.rosarioPdf ? (
           <a href={links.rosarioPdf} target="_blank" rel="noreferrer noopener" className="inline-flex items-center gap-2 text-inkMute hover:text-inkSoft hover:underline">
             <Download className="h-4 w-4" aria-hidden />
@@ -342,27 +370,103 @@ export function RosaryBook() {
         })}
       </p>
 
-      {/* ── A tamaño de lectura ── */}
+      {/* ── A tamaño de lectura, pasando páginas ── */}
       {zoom ? (
         <div
-          className="fixed inset-0 z-[80] overflow-y-auto bg-[rgba(30,20,20,0.88)] px-3 py-16 sm:px-8"
+          ref={zoomRef}
+          className="fixed inset-0 z-[80] overflow-y-auto bg-[rgba(24,16,18,0.97)] px-3 pb-28 pt-20 sm:px-20"
           role="dialog"
           aria-modal="true"
           aria-label={label}
           onClick={() => setZoom(false)}
+          onPointerDown={(e) => (zoomStart.current = { x: e.clientX, y: e.clientY })}
+          onPointerUp={(e) => {
+            const s0 = zoomStart.current;
+            zoomStart.current = null;
+            if (!s0) return;
+            const dx = e.clientX - s0.x;
+            const dy = e.clientY - s0.y;
+            if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) step(dx < 0 ? "next" : "prev");
+          }}
         >
-          <button
-            type="button"
-            onClick={() => setZoom(false)}
-            aria-label={t({ es: "Cerrar", en: "Close" })}
-            className="fixed right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-bone text-inkSoft shadow-lg"
+          {/* Arriba: dónde estás y cerrar */}
+          <div
+            className="fixed inset-x-0 top-0 z-10 flex items-center justify-between gap-3 bg-[rgba(30,20,20,0.85)] px-4 py-3 backdrop-blur-sm"
+            onClick={(e) => e.stopPropagation()}
           >
-            <X className="h-5 w-5" aria-hidden />
-          </button>
-          <div className="mx-auto grid max-w-[1800px] gap-4 md:grid-cols-[repeat(auto-fit,minmax(0,1fr))]">
+            <p className="font-serif text-[18px] italic text-white/90" style={{ textAlign: "left", textAlignLast: "left" }}>
+              {label}
+            </p>
+            <button
+              type="button"
+              onClick={() => setZoom(false)}
+              aria-label={t({ es: "Cerrar", en: "Close" })}
+              className="flex h-11 w-11 flex-none items-center justify-center rounded-full bg-bone text-inkSoft shadow-lg"
+            >
+              <X className="h-5 w-5" aria-hidden />
+            </button>
+          </div>
+
+          <div
+            className="mx-auto grid max-w-[1800px] gap-4 md:grid-cols-[repeat(auto-fit,minmax(0,1fr))]"
+            onClick={(e) => e.stopPropagation()}
+          >
             {visible.map((n) => (
-              <img key={n} src={src(n)} alt={t({ es: `Página ${n}`, en: `Page ${n}` })} className="mx-auto w-full max-w-[900px] bg-white shadow-2xl" />
+              <img
+                key={n}
+                src={src(n)}
+                alt={t({ es: `Página ${n}`, en: `Page ${n}` })}
+                className="mx-auto w-full max-w-[900px] select-none bg-white shadow-2xl"
+                draggable={false}
+              />
             ))}
+          </div>
+
+          {/* A los lados (pantalla ancha) */}
+          {(["prev", "next"] as const).map((dir) => {
+            const off = dir === "prev" ? index <= min : index >= max;
+            return (
+              <button
+                key={dir}
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  step(dir);
+                }}
+                disabled={off}
+                aria-label={dir === "prev" ? t({ es: "Página anterior", en: "Previous page" }) : t({ es: "Página siguiente", en: "Next page" })}
+                className={`fixed top-1/2 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full bg-accentRose text-[hsl(var(--gd-accent-on))] shadow-xl transition-opacity hover:bg-accentRose/90 disabled:pointer-events-none disabled:opacity-25 sm:flex ${
+                  dir === "prev" ? "left-3" : "right-3"
+                }`}
+              >
+                {dir === "prev" ? <ChevronLeft className="h-7 w-7" aria-hidden /> : <ChevronRight className="h-7 w-7" aria-hidden />}
+              </button>
+            );
+          })}
+
+          {/* Abajo (sobre todo en el móvil) */}
+          <div
+            className="fixed inset-x-0 bottom-0 z-10 flex items-center justify-center gap-5 bg-[rgba(30,20,20,0.85)] px-4 py-3 backdrop-blur-sm"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => step("prev")}
+              disabled={index <= min}
+              className="inline-flex items-center gap-2 rounded-full border border-white/40 px-5 py-2.5 text-[14px] font-semibold text-white transition-colors hover:bg-white/10 disabled:pointer-events-none disabled:opacity-30"
+            >
+              <ChevronLeft className="h-5 w-5" aria-hidden />
+              {t({ es: "Anterior", en: "Previous" })}
+            </button>
+            <button
+              type="button"
+              onClick={() => step("next")}
+              disabled={index >= max}
+              className="inline-flex items-center gap-2 rounded-full bg-accentRose px-5 py-2.5 text-[14px] font-semibold text-[hsl(var(--gd-accent-on))] transition-colors hover:bg-accentRose/90 disabled:pointer-events-none disabled:opacity-30"
+            >
+              {t({ es: "Siguiente", en: "Next" })}
+              <ChevronRight className="h-5 w-5" aria-hidden />
+            </button>
           </div>
         </div>
       ) : null}
